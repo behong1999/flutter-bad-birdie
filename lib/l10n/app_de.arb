@@ -1,0 +1,17 @@
+{
+  "@@locale": "de",
+  "appTitle": "Bad Birdie - App für Badminton-Nerds",
+  "homeTitle": "Bad Birdie",
+  "welcomeTitle": "Willkommen bei Bad Birdie!",
+  "welcomeDescription": "Verbessere deine Badminton-Fähigkeiten mit Beinarbeit-Training, taktischer Analyse und Lernressourcen.",
+  "trainingFeatures": "Trainings-Features",
+  "footworkTraining": "Beinarbeit-Training",
+  "footworkDescription": "Übe Übungen und verbessere deine Platzbewegung",
+  "tacticalBoard": "Taktiktafel",
+  "tacticalDescription": "Plane Strategien und analysiere Spielsituationen",
+  "learningHub": "Lern-Hub",
+  "learningDescription": "Entdecke YouTube-Kanäle und Tutorials",
+  "footworkComingSoon": "Beinarbeit-Training kommt bald!",
+  "tacticalComingSoon": "Taktiktafel kommt bald!",
+  "learningComingSoon": "Lern-Hub kommt bald!"
+}

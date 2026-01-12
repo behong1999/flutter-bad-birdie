@@ -1,4 +1,8 @@
 import 'package:flutter/material.dart';
+import '../l10n/app_localizations.dart';
+
+// Simple global helper - no extra files needed!
+AppLocalizations l10n(BuildContext context) => AppLocalizations.of(context)!;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -6,7 +10,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Bad Birdie'), centerTitle: true),
+      appBar: AppBar(title: Text(l10n(context).homeTitle), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -28,7 +32,7 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            'Welcome to Bad Birdie!',
+                            l10n(context).welcomeTitle,
                             style: Theme.of(context).textTheme.headlineSmall
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
@@ -37,7 +41,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      'Improve your badminton skills with footwork training, tactical analysis, and learning resources.',
+                      l10n(context).welcomeDescription,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -49,7 +53,7 @@ class HomeScreen extends StatelessWidget {
 
             // Features section
             Text(
-              'Training Features',
+              l10n(context).trainingFeatures,
               style: Theme.of(
                 context,
               ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -64,15 +68,14 @@ class HomeScreen extends StatelessWidget {
                   _buildFeatureCard(
                     context,
                     icon: Icons.directions_run,
-                    title: 'Footwork Training',
-                    description:
-                        'Practice drills and improve your court movement',
+                    title: l10n(context).footworkTraining,
+                    description: l10n(context).footworkDescription,
                     color: Colors.orange,
                     onTap: () {
                       // TODO: Navigate to footwork screen
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Footwork training coming soon!'),
+                        SnackBar(
+                          content: Text(l10n(context).footworkComingSoon),
                         ),
                       );
                     },
@@ -81,14 +84,14 @@ class HomeScreen extends StatelessWidget {
                   _buildFeatureCard(
                     context,
                     icon: Icons.sports,
-                    title: 'Tactical Board',
-                    description: 'Plan strategies and analyze game situations',
+                    title: l10n(context).tacticalBoard,
+                    description: l10n(context).tacticalDescription,
                     color: Colors.blue,
                     onTap: () {
                       // TODO: Navigate to tactical board
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Tactical board coming soon!'),
+                        SnackBar(
+                          content: Text(l10n(context).tacticalComingSoon),
                         ),
                       );
                     },
@@ -97,14 +100,14 @@ class HomeScreen extends StatelessWidget {
                   _buildFeatureCard(
                     context,
                     icon: Icons.school,
-                    title: 'Learning Hub',
-                    description: 'Discover YouTube channels and tutorials',
+                    title: l10n(context).learningHub,
+                    description: l10n(context).learningDescription,
                     color: Colors.purple,
                     onTap: () {
                       // TODO: Navigate to learning hub
                       ScaffoldMessenger.of(context).showSnackBar(
-                        const SnackBar(
-                          content: Text('Learning hub coming soon!'),
+                        SnackBar(
+                          content: Text(l10n(context).learningComingSoon),
                         ),
                       );
                     },

@@ -10,6 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
   
+  # Localization
+  flutter_localizations:
+    sdk: flutter
+  intl: any
+  
   google_fonts: ^6.2.1
 
 dev_dependencies:
@@ -19,3 +24,4 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true

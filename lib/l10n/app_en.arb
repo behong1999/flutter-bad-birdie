@@ -1,0 +1,59 @@
+{
+  "@@locale": "en",
+  "appTitle": "Bad Birdie - App for Badminton Nerds",
+  "@appTitle": {
+    "description": "The title of the application"
+  },
+  "homeTitle": "Bad Birdie",
+  "@homeTitle": {
+    "description": "Title shown in the home screen app bar"
+  },
+  "welcomeTitle": "Welcome to Bad Birdie!",
+  "@welcomeTitle": {
+    "description": "Welcome message title on home screen"
+  },
+  "welcomeDescription": "Improve your badminton skills with footwork training, tactical analysis, and learning resources.",
+  "@welcomeDescription": {
+    "description": "Welcome message description on home screen"
+  },
+  "trainingFeatures": "Training Features",
+  "@trainingFeatures": {
+    "description": "Section title for training features"
+  },
+  "footworkTraining": "Footwork Training",
+  "@footworkTraining": {
+    "description": "Footwork training feature title"
+  },
+  "footworkDescription": "Practice drills and improve your court movement",
+  "@footworkDescription": {
+    "description": "Description for footwork training feature"
+  },
+  "tacticalBoard": "Tactical Board",
+  "@tacticalBoard": {
+    "description": "Tactical board feature title"
+  },
+  "tacticalDescription": "Plan strategies and analyze game situations",
+  "@tacticalDescription": {
+    "description": "Description for tactical board feature"
+  },
+  "learningHub": "Learning Hub",
+  "@learningHub": {
+    "description": "Learning hub feature title"
+  },
+  "learningDescription": "Discover YouTube channels and tutorials",
+  "@learningDescription": {
+    "description": "Description for learning hub feature"
+  },
+  "footworkComingSoon": "Footwork training coming soon!",
+  "@footworkComingSoon": {
+    "description": "Message when footwork feature is not yet available"
+  },
+  "tacticalComingSoon": "Tactical board coming soon!",
+  "@tacticalComingSoon": {
+    "description": "Message when tactical board feature is not yet available"
+  },
+  "learningComingSoon": "Learning hub coming soon!",
+  "@learningComingSoon": {
+    "description": "Message when learning hub feature is not yet available"
+  }
+}
