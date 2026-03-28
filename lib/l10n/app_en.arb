@@ -55,5 +55,188 @@
   "learningComingSoon": "Learning hub coming soon!",
   "@learningComingSoon": {
     "description": "Message when learning hub feature is not yet available"
+  },
+  "chooseCornersTitle": "Choose Corners to Focus",
+  "@chooseCornersTitle": {
+    "description": "Title for corner selection section"
+  },
+  "chooseCornersDescription": "Select at least 1 corner for your footwork training",
+  "@chooseCornersDescription": {
+    "description": "Description for corner selection"
+  },
+  "frontLeft": "Front\nLeft",
+  "@frontLeft": {
+    "description": "Front left corner label"
+  },
+  "frontRight": "Front\nRight",
+  "@frontRight": {
+    "description": "Front right corner label"
+  },
+  "midLeft": "Mid\nLeft",
+  "@midLeft": {
+    "description": "Mid left corner label"
+  },
+  "midRight": "Mid\nRight",
+  "@midRight": {
+    "description": "Mid right corner label"
+  },
+  "backLeft": "Back\nLeft",
+  "@backLeft": {
+    "description": "Back left corner label"
+  },
+  "backRight": "Back\nRight",
+  "@backRight": {
+    "description": "Back right corner label"
+  },
+  "selectedCorners": "Selected {count} corner{plural}: {corners}",
+  "@selectedCorners": {
+    "description": "Shows selected corners count and list",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      },
+      "plural": {
+        "type": "String"
+      },
+      "corners": {
+        "type": "String"
+      }
+    }
+  },
+  "trainingSettings": "Training Settings",
+  "@trainingSettings": {
+    "description": "Title for training settings section"
+  },
+  "sets": "Sets",
+  "@sets": {
+    "description": "Sets slider label"
+  },
+  "setsValue": "{count} sets",
+  "@setsValue": {
+    "description": "Sets value display",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "shotsPerSet": "Shots per Set",
+  "@shotsPerSet": {
+    "description": "Shots per set slider label"
+  },
+  "shotsValue": "{count} shots",
+  "@shotsValue": {
+    "description": "Shots value display",
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "speed": "Speed",
+  "@speed": {
+    "description": "Speed slider label"
+  },
+  "speedValue": "x{speed}",
+  "@speedValue": {
+    "description": "Speed value display",
+    "placeholders": {
+      "speed": {
+        "type": "String"
+      }
+    }
+  },
+  "restBetweenSets": "Rest Between Sets",
+  "@restBetweenSets": {
+    "description": "Rest slider label"
+  },
+  "restValue": "{seconds}s",
+  "@restValue": {
+    "description": "Rest value display",
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "nextMoveNotification": "Next Move Notification",
+  "@nextMoveNotification": {
+    "description": "Notification mode section title"
+  },
+  "ringtone": "Ringtone",
+  "@ringtone": {
+    "description": "Ringtone notification mode"
+  },
+  "speech": "Speech",
+  "@speech": {
+    "description": "Speech notification mode"
+  },
+  "letsBegin": "Let's Begin! 🏸",
+  "@letsBegin": {
+    "description": "Start training button text"
+  },
+  "saveSettings": "Save Settings",
+  "@saveSettings": {
+    "description": "Save settings tooltip"
+  },
+  "help": "Help",
+  "@help": {
+    "description": "Help tooltip"
+  },
+  "readyToTrain": "Ready to Train! 🏸",
+  "@readyToTrain": {
+    "description": "Training confirmation dialog title"
+  },
+  "corners": "Corners",
+  "@corners": {
+    "description": "Corners label in summary"
+  },
+  "notification": "Notification",
+  "@notification": {
+    "description": "Notification label in summary"
+  },
+  "cancel": "Cancel",
+  "@cancel": {
+    "description": "Cancel button"
+  },
+  "startTraining": "Start Training",
+  "@startTraining": {
+    "description": "Start training button"
+  },
+  "settingsSaved": "Settings saved successfully!",
+  "@settingsSaved": {
+    "description": "Settings saved confirmation message"
+  },
+  "trainingSettingsHelp": "Training Settings Help",
+  "@trainingSettingsHelp": {
+    "description": "Help dialog title"
+  },
+  "setsHelp": "Number of training rounds you want to complete. Each set contains multiple shots.",
+  "@setsHelp": {
+    "description": "Help text for sets"
+  },
+  "shotsHelp": "How many corner movements in each set. More shots = longer training per set.",
+  "@shotsHelp": {
+    "description": "Help text for shots"
+  },
+  "speedHelp": "How fast the corner calls come:\n• 1.0x = Beginner (slow)\n• 2.5x = Intermediate\n• 5.0x = Professional (very fast)",
+  "@speedHelp": {
+    "description": "Help text for speed"
+  },
+  "restHelp": "Recovery time between each set. Use this time to catch your breath and prepare for the next set.",
+  "@restHelp": {
+    "description": "Help text for rest"
+  },
+  "notificationHelp": "• Ringtone: Simple beep sounds\n• Speech: Voice calls out corner numbers (\"Corner 1\", \"Corner 3\", etc.)",
+  "@notificationHelp": {
+    "description": "Help text for notification modes"
+  },
+  "gotIt": "Got it!",
+  "@gotIt": {
+    "description": "Help dialog close button"
+  },
+  "trainingStartingSoon": "Training session starting soon! 🏸",
+  "@trainingStartingSoon": {
+    "description": "Training start confirmation message"
   }
 }

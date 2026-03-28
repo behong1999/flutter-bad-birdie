@@ -181,6 +181,234 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Learning hub coming soon!'**
   String get learningComingSoon;
+
+  /// Title for corner selection section
+  ///
+  /// In en, this message translates to:
+  /// **'Choose Corners to Focus'**
+  String get chooseCornersTitle;
+
+  /// Description for corner selection
+  ///
+  /// In en, this message translates to:
+  /// **'Select at least 1 corner for your footwork training'**
+  String get chooseCornersDescription;
+
+  /// Front left corner label
+  ///
+  /// In en, this message translates to:
+  /// **'Front\nLeft'**
+  String get frontLeft;
+
+  /// Front right corner label
+  ///
+  /// In en, this message translates to:
+  /// **'Front\nRight'**
+  String get frontRight;
+
+  /// Mid left corner label
+  ///
+  /// In en, this message translates to:
+  /// **'Mid\nLeft'**
+  String get midLeft;
+
+  /// Mid right corner label
+  ///
+  /// In en, this message translates to:
+  /// **'Mid\nRight'**
+  String get midRight;
+
+  /// Back left corner label
+  ///
+  /// In en, this message translates to:
+  /// **'Back\nLeft'**
+  String get backLeft;
+
+  /// Back right corner label
+  ///
+  /// In en, this message translates to:
+  /// **'Back\nRight'**
+  String get backRight;
+
+  /// Shows selected corners count and list
+  ///
+  /// In en, this message translates to:
+  /// **'Selected {count} corner{plural}: {corners}'**
+  String selectedCorners(int count, String plural, String corners);
+
+  /// Title for training settings section
+  ///
+  /// In en, this message translates to:
+  /// **'Training Settings'**
+  String get trainingSettings;
+
+  /// Sets slider label
+  ///
+  /// In en, this message translates to:
+  /// **'Sets'**
+  String get sets;
+
+  /// Sets value display
+  ///
+  /// In en, this message translates to:
+  /// **'{count} sets'**
+  String setsValue(int count);
+
+  /// Shots per set slider label
+  ///
+  /// In en, this message translates to:
+  /// **'Shots per Set'**
+  String get shotsPerSet;
+
+  /// Shots value display
+  ///
+  /// In en, this message translates to:
+  /// **'{count} shots'**
+  String shotsValue(int count);
+
+  /// Speed slider label
+  ///
+  /// In en, this message translates to:
+  /// **'Speed'**
+  String get speed;
+
+  /// Speed value display
+  ///
+  /// In en, this message translates to:
+  /// **'x{speed}'**
+  String speedValue(String speed);
+
+  /// Rest slider label
+  ///
+  /// In en, this message translates to:
+  /// **'Rest Between Sets'**
+  String get restBetweenSets;
+
+  /// Rest value display
+  ///
+  /// In en, this message translates to:
+  /// **'{seconds}s'**
+  String restValue(int seconds);
+
+  /// Notification mode section title
+  ///
+  /// In en, this message translates to:
+  /// **'Next Move Notification'**
+  String get nextMoveNotification;
+
+  /// Ringtone notification mode
+  ///
+  /// In en, this message translates to:
+  /// **'Ringtone'**
+  String get ringtone;
+
+  /// Speech notification mode
+  ///
+  /// In en, this message translates to:
+  /// **'Speech'**
+  String get speech;
+
+  /// Start training button text
+  ///
+  /// In en, this message translates to:
+  /// **'Let\'s Begin! 🏸'**
+  String get letsBegin;
+
+  /// Save settings tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Save Settings'**
+  String get saveSettings;
+
+  /// Help tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Help'**
+  String get help;
+
+  /// Training confirmation dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Ready to Train! 🏸'**
+  String get readyToTrain;
+
+  /// Corners label in summary
+  ///
+  /// In en, this message translates to:
+  /// **'Corners'**
+  String get corners;
+
+  /// Notification label in summary
+  ///
+  /// In en, this message translates to:
+  /// **'Notification'**
+  String get notification;
+
+  /// Cancel button
+  ///
+  /// In en, this message translates to:
+  /// **'Cancel'**
+  String get cancel;
+
+  /// Start training button
+  ///
+  /// In en, this message translates to:
+  /// **'Start Training'**
+  String get startTraining;
+
+  /// Settings saved confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Settings saved successfully!'**
+  String get settingsSaved;
+
+  /// Help dialog title
+  ///
+  /// In en, this message translates to:
+  /// **'Training Settings Help'**
+  String get trainingSettingsHelp;
+
+  /// Help text for sets
+  ///
+  /// In en, this message translates to:
+  /// **'Number of training rounds you want to complete. Each set contains multiple shots.'**
+  String get setsHelp;
+
+  /// Help text for shots
+  ///
+  /// In en, this message translates to:
+  /// **'How many corner movements in each set. More shots = longer training per set.'**
+  String get shotsHelp;
+
+  /// Help text for speed
+  ///
+  /// In en, this message translates to:
+  /// **'How fast the corner calls come:\n• 1.0x = Beginner (slow)\n• 2.5x = Intermediate\n• 5.0x = Professional (very fast)'**
+  String get speedHelp;
+
+  /// Help text for rest
+  ///
+  /// In en, this message translates to:
+  /// **'Recovery time between each set. Use this time to catch your breath and prepare for the next set.'**
+  String get restHelp;
+
+  /// Help text for notification modes
+  ///
+  /// In en, this message translates to:
+  /// **'• Ringtone: Simple beep sounds\n• Speech: Voice calls out corner numbers (\"Corner 1\", \"Corner 3\", etc.)'**
+  String get notificationHelp;
+
+  /// Help dialog close button
+  ///
+  /// In en, this message translates to:
+  /// **'Got it!'**
+  String get gotIt;
+
+  /// Training start confirmation message
+  ///
+  /// In en, this message translates to:
+  /// **'Training session starting soon! 🏸'**
+  String get trainingStartingSoon;
 }
 
 class _AppLocalizationsDelegate

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import '../l10n/app_localizations.dart';
+import 'footwork_screen.dart';
 
 // Simple global helper - no extra files needed!
 AppLocalizations l10n(BuildContext context) => AppLocalizations.of(context)!;
@@ -72,10 +73,10 @@ class HomeScreen extends StatelessWidget {
                     description: l10n(context).footworkDescription,
                     color: Colors.orange,
                     onTap: () {
-                      // TODO: Navigate to footwork screen
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(l10n(context).footworkComingSoon),
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const FootworkScreen(),
                         ),
                       );
                     },
