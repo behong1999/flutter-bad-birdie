@@ -1,5 +1,5 @@
 name: bad_birdie
-description: "A new Flutter project."
+description: 'A Flutter app for badminton training'
 publish_to: 'none'
 version: 1.0.0
 
@@ -16,6 +16,7 @@ dependencies:
   intl: any
   
   google_fonts: ^6.2.1
+  audioplayers: ^6.6.0
 
 dev_dependencies:
   flutter_test:
@@ -25,3 +26,5 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   generate: true
+  assets:
+    - assets/sounds/

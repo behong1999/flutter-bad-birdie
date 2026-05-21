@@ -68,6 +68,10 @@
   "@frontLeft": {
     "description": "Front left corner label"
   },
+  "frontCenter": "Front\nCenter",
+  "@frontCenter": {
+    "description": "Front center corner label"
+  },
   "frontRight": "Front\nRight",
   "@frontRight": {
     "description": "Front right corner label"
@@ -76,6 +80,10 @@
   "@midLeft": {
     "description": "Mid left corner label"
   },
+  "midCenter": "Mid\nCenter",
+  "@midCenter": {
+    "description": "Mid center corner label"
+  },
   "midRight": "Mid\nRight",
   "@midRight": {
     "description": "Mid right corner label"
@@ -83,6 +91,10 @@
   "backLeft": "Back\nLeft",
   "@backLeft": {
     "description": "Back left corner label"
+  },
+  "backCenter": "Back\nCenter",
+  "@backCenter": {
+    "description": "Back center corner label"
   },
   "backRight": "Back\nRight",
   "@backRight": {
@@ -238,5 +250,69 @@
   "trainingStartingSoon": "Training session starting soon! 🏸",
   "@trainingStartingSoon": {
     "description": "Training start confirmation message"
+  },
+  "shotsLabel": "Shots",
+  "@shotsLabel": {
+    "description": "Top-left label for current shot progress"
+  },
+  "stopLabel": "Stop",
+  "@stopLabel": {
+    "description": "Stop training button label"
+  },
+  "pauseLabel": "Pause",
+  "@pauseLabel": {
+    "description": "Pause training button label"
+  },
+  "resumeLabel": "Resume",
+  "@resumeLabel": {
+    "description": "Resume training button label"
+  },
+  "againLabel": "Again",
+  "@againLabel": {
+    "description": "Restart training button label"
+  },
+  "exitLabel": "Exit",
+  "@exitLabel": {
+    "description": "Exit training button label"
+  },
+  "directionLabel": "Direction",
+  "@directionLabel": {
+    "description": "Direction label shown under current shot name"
+  },
+  "trainingCompletedLabel": "Training Completed",
+  "@trainingCompletedLabel": {
+    "description": "Label shown when all shots are done"
+  },
+  "trainingStoppedLabel": "Training Stopped",
+  "@trainingStoppedLabel": {
+    "description": "Label shown when user stops training"
+  },
+  "shotClear": "Clear",
+  "@shotClear": {
+    "description": "Back-court shot type clear"
+  },
+  "shotDrop": "Drop",
+  "@shotDrop": {
+    "description": "Back-court shot type drop"
+  },
+  "shotSmash": "Smash",
+  "@shotSmash": {
+    "description": "Back-court shot type smash"
+  },
+  "shotLift": "Lift",
+  "@shotLift": {
+    "description": "Front-court shot type lift"
+  },
+  "shotBlock": "Block",
+  "@shotBlock": {
+    "description": "Front-court shot type block"
+  },
+  "shotKill": "Kill",
+  "@shotKill": {
+    "description": "Front-court shot type kill"
+  },
+  "skipLabel": "Skip",
+  "@skipLabel": {
+    "description": "Skip rest dialog button label"
   }
 }

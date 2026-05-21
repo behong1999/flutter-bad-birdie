@@ -200,6 +200,12 @@ abstract class AppLocalizations {
   /// **'Front\nLeft'**
   String get frontLeft;
 
+  /// Front center corner label
+  ///
+  /// In en, this message translates to:
+  /// **'Front\nCenter'**
+  String get frontCenter;
+
   /// Front right corner label
   ///
   /// In en, this message translates to:
@@ -212,6 +218,12 @@ abstract class AppLocalizations {
   /// **'Mid\nLeft'**
   String get midLeft;
 
+  /// Mid center corner label
+  ///
+  /// In en, this message translates to:
+  /// **'Mid\nCenter'**
+  String get midCenter;
+
   /// Mid right corner label
   ///
   /// In en, this message translates to:
@@ -223,6 +235,12 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Back\nLeft'**
   String get backLeft;
+
+  /// Back center corner label
+  ///
+  /// In en, this message translates to:
+  /// **'Back\nCenter'**
+  String get backCenter;
 
   /// Back right corner label
   ///
@@ -409,6 +427,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Training session starting soon! 🏸'**
   String get trainingStartingSoon;
+
+  /// Top-left label for current shot progress
+  ///
+  /// In en, this message translates to:
+  /// **'Shots'**
+  String get shotsLabel;
+
+  /// Stop training button label
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get stopLabel;
+
+  /// Pause training button label
+  ///
+  /// In en, this message translates to:
+  /// **'Pause'**
+  String get pauseLabel;
+
+  /// Resume training button label
+  ///
+  /// In en, this message translates to:
+  /// **'Resume'**
+  String get resumeLabel;
+
+  /// Restart training button label
+  ///
+  /// In en, this message translates to:
+  /// **'Again'**
+  String get againLabel;
+
+  /// Exit training button label
+  ///
+  /// In en, this message translates to:
+  /// **'Exit'**
+  String get exitLabel;
+
+  /// Direction label shown under current shot name
+  ///
+  /// In en, this message translates to:
+  /// **'Direction'**
+  String get directionLabel;
+
+  /// Label shown when all shots are done
+  ///
+  /// In en, this message translates to:
+  /// **'Training Completed'**
+  String get trainingCompletedLabel;
+
+  /// Label shown when user stops training
+  ///
+  /// In en, this message translates to:
+  /// **'Training Stopped'**
+  String get trainingStoppedLabel;
+
+  /// Back-court shot type clear
+  ///
+  /// In en, this message translates to:
+  /// **'Clear'**
+  String get shotClear;
+
+  /// Back-court shot type drop
+  ///
+  /// In en, this message translates to:
+  /// **'Drop'**
+  String get shotDrop;
+
+  /// Back-court shot type smash
+  ///
+  /// In en, this message translates to:
+  /// **'Smash'**
+  String get shotSmash;
+
+  /// Front-court shot type lift
+  ///
+  /// In en, this message translates to:
+  /// **'Lift'**
+  String get shotLift;
+
+  /// Front-court shot type block
+  ///
+  /// In en, this message translates to:
+  /// **'Block'**
+  String get shotBlock;
+
+  /// Front-court shot type kill
+  ///
+  /// In en, this message translates to:
+  /// **'Kill'**
+  String get shotKill;
+
+  /// Skip rest dialog button label
+  ///
+  /// In en, this message translates to:
+  /// **'Skip'**
+  String get skipLabel;
 }
 
 class _AppLocalizationsDelegate

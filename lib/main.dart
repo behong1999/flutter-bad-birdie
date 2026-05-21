@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/theme/app_theme.dart';
-import 'screens/home_screen.dart';
+import 'features/home/presentation/screens/home_screen.dart';
 import 'l10n/app_localizations.dart';
 
 void main() {
@@ -14,7 +14,7 @@ class BadBirdieApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Bad Birdie - App for Badminton Nerds',
+    title: 'Bad Birdie - App for Badminton Nerds',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
       themeMode: ThemeMode.system,
@@ -28,8 +28,8 @@ class BadBirdieApp extends StatelessWidget {
         GlobalCupertinoLocalizations.delegate,
       ],
       supportedLocales: const [
-        Locale('en'), // English
-        Locale('de'), // German
+        Locale('en'),
+        Locale('de'),
       ],
 
       home: const HomeScreen(),

@@ -64,16 +64,25 @@ class AppLocalizationsEn extends AppLocalizations {
   String get frontLeft => 'Front\nLeft';
 
   @override
+  String get frontCenter => 'Front\nCenter';
+
+  @override
   String get frontRight => 'Front\nRight';
 
   @override
   String get midLeft => 'Mid\nLeft';
 
   @override
+  String get midCenter => 'Mid\nCenter';
+
+  @override
   String get midRight => 'Mid\nRight';
 
   @override
   String get backLeft => 'Back\nLeft';
+
+  @override
+  String get backCenter => 'Back\nCenter';
 
   @override
   String get backRight => 'Back\nRight';
@@ -182,4 +191,52 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get trainingStartingSoon => 'Training session starting soon! 🏸';
+
+  @override
+  String get shotsLabel => 'Shots';
+
+  @override
+  String get stopLabel => 'Stop';
+
+  @override
+  String get pauseLabel => 'Pause';
+
+  @override
+  String get resumeLabel => 'Resume';
+
+  @override
+  String get againLabel => 'Again';
+
+  @override
+  String get exitLabel => 'Exit';
+
+  @override
+  String get directionLabel => 'Direction';
+
+  @override
+  String get trainingCompletedLabel => 'Training Completed';
+
+  @override
+  String get trainingStoppedLabel => 'Training Stopped';
+
+  @override
+  String get shotClear => 'Clear';
+
+  @override
+  String get shotDrop => 'Drop';
+
+  @override
+  String get shotSmash => 'Smash';
+
+  @override
+  String get shotLift => 'Lift';
+
+  @override
+  String get shotBlock => 'Block';
+
+  @override
+  String get shotKill => 'Kill';
+
+  @override
+  String get skipLabel => 'Skip';
 }

@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import '../l10n/app_localizations.dart';
-import 'footwork_screen.dart';
+import '../../../../l10n/app_localizations.dart';
+import '../../../footwork/presentation/screens/setup_screen.dart';
 
 // Simple global helper - no extra files needed!
 AppLocalizations l10n(BuildContext context) => AppLocalizations.of(context)!;
@@ -76,7 +76,7 @@ class HomeScreen extends StatelessWidget {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (context) => const FootworkScreen(),
+                          builder: (context) => const SetupScreen(),
                         ),
                       );
                     },
@@ -142,7 +142,7 @@ class HomeScreen extends StatelessWidget {
               Container(
                 padding: const EdgeInsets.all(12),
                 decoration: BoxDecoration(
-                  color: color.withOpacity(0.1),
+                  color: color.withValues(alpha: 0.1),
                   borderRadius: BorderRadius.circular(12),
                 ),
                 child: Icon(icon, color: color, size: 28),
