@@ -238,5 +238,8 @@ class AppLocalizationsEn extends AppLocalizations {
   String get shotKill => 'Kill';
 
   @override
+  String get shotDrive => 'Drive';
+
+  @override
   String get skipLabel => 'Skip';
 }

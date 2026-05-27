@@ -70,5 +70,6 @@
   "shotLift": "Lift",
   "shotBlock": "Block",
   "shotKill": "Kill",
+  "shotDrive": "Drive",
   "skipLabel": "Überspringen"
 }

@@ -518,6 +518,12 @@ abstract class AppLocalizations {
   /// **'Kill'**
   String get shotKill;
 
+  /// Mid-court shot type drive
+  ///
+  /// In en, this message translates to:
+  /// **'Drive'**
+  String get shotDrive;
+
   /// Skip rest dialog button label
   ///
   /// In en, this message translates to:

@@ -311,6 +311,10 @@
   "@shotKill": {
     "description": "Front-court shot type kill"
   },
+  "shotDrive": "Drive",
+  "@shotDrive": {
+    "description": "Mid-court shot type drive"
+  },
   "skipLabel": "Skip",
   "@skipLabel": {
     "description": "Skip rest dialog button label"
