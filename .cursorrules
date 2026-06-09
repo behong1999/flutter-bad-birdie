@@ -1,0 +1,28 @@
+# bad_birdie cursor rules
+
+Stack: Flutter 3 / Dart, Material 3, flutter_localizations (ARB), audioplayers, google_fonts. Android-first.
+
+## Output
+- Targeted diffs only — never full widget tree rewrites
+- Show changed widget/method + minimal surrounding context
+
+## Dart / Flutter
+- Effective Dart style; prefer const constructors everywhere
+- Material 3 widgets and theming only — no custom paint unless unavoidable
+- All user-facing strings via l10n (app_en.arb / app_de.arb) — never hardcode text
+- Check existing ARB keys before adding new ones
+- Run `flutter gen-l10n` after any ARB change
+- No heavy state management packages without justification; keep it simple
+
+## Structure
+- lib/features/<feature>/ — one folder per feature
+- lib/core/ — shared utilities and base classes
+- lib/assets/sounds/ — audio assets
+
+## Commands
+```
+flutter pub get
+flutter gen-l10n
+flutter run
+flutter build appbundle --release
+```
