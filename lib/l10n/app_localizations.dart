@@ -251,8 +251,8 @@ abstract class AppLocalizations {
   /// Shows selected corners count and list
   ///
   /// In en, this message translates to:
-  /// **'Selected {count} corner{plural}: {corners}'**
-  String selectedCorners(int count, String plural, String corners);
+  /// **'{count, plural, =1{Selected {count} corner: {corners}} other{Selected {count} corners: {corners}}}'**
+  String selectedCorners(num count, String corners);
 
   /// Title for training settings section
   ///

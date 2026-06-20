@@ -25,7 +25,7 @@
   "backLeft": "Hinten\nLinks",
   "backCenter": "Hinten\nMitte",
   "backRight": "Hinten\nRechts",
-  "selectedCorners": "{count} Ecke{plural} ausgewählt: {corners}",
+  "selectedCorners": "{count, plural, =1{{count} Ecke ausgewählt: {corners}} other{{count} Ecken ausgewählt: {corners}}}",
   "trainingSettings": "Trainings-Einstellungen",
   "sets": "Sätze",
   "setsValue": "{count} Sätze",

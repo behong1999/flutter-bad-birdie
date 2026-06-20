@@ -1,15 +1,14 @@
 import 'dart:async';
 import 'dart:math';
 
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import '../../../../l10n/app_localizations.dart';
+import '../../../../core/extensions/l10n_extension.dart';
 import '../../domain/direction.dart';
 import '../widgets/direction_flow_pad.dart';
 import '../widgets/training_controls.dart';
 import '../widgets/training_header.dart';
 import '../widgets/training_settings_panel.dart';
-
-AppLocalizations loc(BuildContext context) => AppLocalizations.of(context)!;
 
 class TrainingScreen extends StatefulWidget {
   const TrainingScreen({
@@ -35,10 +34,10 @@ class TrainingScreen extends StatefulWidget {
 
 class _TrainingScreenState extends State<TrainingScreen> {
   final Random _random = Random();
+  final AudioPlayer _audioPlayer = AudioPlayer();
   Timer? _timer;
   Timer? _returnToCenterTimer;
   Timer? _startCountdownTimer;
-  bool _isStarted = false;
   bool _isStarting = false;
   bool _isResting = false;
   bool _isPaused = false;
@@ -55,13 +54,13 @@ class _TrainingScreenState extends State<TrainingScreen> {
   late double _speed;
   late bool _useRingtone;
 
-  String _shotClear() => loc(context).shotClear;
-  String _shotDrop() => loc(context).shotDrop;
-  String _shotSmash() => loc(context).shotSmash;
-  String _shotLift() => loc(context).shotLift;
-  String _shotBlock() => loc(context).shotBlock;
-  String _shotKill() => loc(context).shotKill;
-  String _shotDrive() => loc(context).shotDrive;
+  String _shotClear() => context.l10n.shotClear;
+  String _shotDrop() => context.l10n.shotDrop;
+  String _shotSmash() => context.l10n.shotSmash;
+  String _shotLift() => context.l10n.shotLift;
+  String _shotBlock() => context.l10n.shotBlock;
+  String _shotKill() => context.l10n.shotKill;
+  String _shotDrive() => context.l10n.shotDrive;
 
   @override
   void initState() {
@@ -70,14 +69,10 @@ class _TrainingScreenState extends State<TrainingScreen> {
     _currentShotName = '';
     _speed = widget.speed;
     _useRingtone = widget.useRingtone;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-    if (_isStarted) return;
-    _isStarted = true;
-    _startTrainingFlow();
+    unawaited(_audioPlayer.setReleaseMode(ReleaseMode.stop));
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      if (mounted) _startTrainingFlow();
+    });
   }
 
   @override
@@ -85,6 +80,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
     _timer?.cancel();
     _returnToCenterTimer?.cancel();
     _startCountdownTimer?.cancel();
+    unawaited(_audioPlayer.dispose());
     super.dispose();
   }
 
@@ -98,8 +94,8 @@ class _TrainingScreenState extends State<TrainingScreen> {
           child: Column(
             children: [
               TrainingHeader(
-                shotsText: '${loc(context).shotsLabel}: $_currentShot/$_totalShots',
-                exitTooltip: loc(context).exitLabel,
+                shotsText: '${context.l10n.shotsLabel}: $_currentShot/$_totalShots',
+                exitTooltip: context.l10n.exitLabel,
                 onExit: () => Navigator.of(context).pop(),
               ),
               Expanded(
@@ -107,7 +103,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                 child: completed
                     ? Center(
                         child: Text(
-                          loc(context).trainingCompletedLabel,
+                          context.l10n.trainingCompletedLabel,
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.headlineSmall
                               ?.copyWith(fontWeight: FontWeight.bold),
@@ -117,7 +113,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                     : _isStopped
                     ? Center(
                         child: Text(
-                          loc(context).trainingStoppedLabel,
+                          context.l10n.trainingStoppedLabel,
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.headlineSmall
                               ?.copyWith(fontWeight: FontWeight.bold),
@@ -132,7 +128,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                             const SizedBox(height: 20),
                             if (_isStarting) ...[
                               Text(
-                                loc(context).trainingStartingSoon,
+                                context.l10n.trainingStartingSoon,
                                 textAlign: TextAlign.center,
                                 style: Theme.of(context).textTheme.titleLarge
                                     ?.copyWith(fontWeight: FontWeight.w700),
@@ -190,9 +186,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
               ),
               TrainingSettingsPanel(
                 speed: _speed,
-                speedLabel: loc(context).speedValue(_speed.toStringAsFixed(1)),
-                ringtoneLabel: loc(context).ringtone,
-                speechLabel: loc(context).speech,
+                speedLabel: context.l10n.speedValue(_speed.toStringAsFixed(1)),
+                ringtoneLabel: context.l10n.ringtone,
+                speechLabel: context.l10n.speech,
                 useRingtone: _useRingtone,
                 onSpeedChanged: (v) {
                   setState(() => _speed = v);
@@ -204,10 +200,10 @@ class _TrainingScreenState extends State<TrainingScreen> {
               const SizedBox(height: 20),
               TrainingControls(
                 isPaused: _isPaused,
-                stopTooltip: loc(context).stopLabel,
-                pauseTooltip: loc(context).pauseLabel,
-                resumeTooltip: loc(context).resumeLabel,
-                againTooltip: loc(context).againLabel,
+                stopTooltip: context.l10n.stopLabel,
+                pauseTooltip: context.l10n.pauseLabel,
+                resumeTooltip: context.l10n.resumeLabel,
+                againTooltip: context.l10n.againLabel,
                 onStop: _onStopPressed,
                 onPauseToggle: _onPausePressed,
                 onAgain: _onAgainPressed,
@@ -284,6 +280,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
       _currentShotName = _pickShotNameForCorner(corner);
       _pulseIn = !_pulseIn;
     });
+    unawaited(_playMoveNotification());
 
     final strikeDuration = _strikeDurationFromSpeed(_speed);
     _returnToCenterTimer = Timer(strikeDuration, () {
@@ -340,6 +337,17 @@ class _TrainingScreenState extends State<TrainingScreen> {
     _returnToCenterTimer?.cancel();
     _startCountdownTimer?.cancel();
     _isStarting = false;
+    unawaited(_audioPlayer.stop());
+  }
+
+  Future<void> _playMoveNotification() async {
+    if (!_useRingtone || _isPaused || _isStopped || _isResting) return;
+    try {
+      await _audioPlayer.stop();
+      await _audioPlayer.play(
+        AssetSource('lib/assets/sounds/shuttles_hit.mp3'),
+      );
+    } catch (_) {}
   }
 
   void _onPausePressed() {
@@ -365,30 +373,18 @@ class _TrainingScreenState extends State<TrainingScreen> {
   }
 
 
-  DirectionCue _cueForCorner(int corner) {
-    switch (corner) {
-      case 1:
-        return DirectionCue.upLeft;
-      case 2:
-        return DirectionCue.up;
-      case 3:
-        return DirectionCue.upRight;
-      case 4:
-        return DirectionCue.left;
-      case 5:
-        return DirectionCue.center;
-      case 6:
-        return DirectionCue.right;
-      case 7:
-        return DirectionCue.downLeft;
-      case 8:
-        return DirectionCue.down;
-      case 9:
-        return DirectionCue.downRight;
-      default:
-        return DirectionCue.none;
-    }
-  }
+  DirectionCue _cueForCorner(int corner) => switch (corner) {
+    1 => DirectionCue.upLeft,
+    2 => DirectionCue.up,
+    3 => DirectionCue.upRight,
+    4 => DirectionCue.left,
+    5 => DirectionCue.center,
+    6 => DirectionCue.right,
+    7 => DirectionCue.downLeft,
+    8 => DirectionCue.down,
+    9 => DirectionCue.downRight,
+    _ => DirectionCue.none,
+  };
 
   Future<void> _showRestDialog() async {
     if (!mounted) return;
@@ -416,9 +412,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
             });
 
             return AlertDialog(
-              title: Text(loc(context).restBetweenSets),
+              title: Text(context.l10n.restBetweenSets),
               content: Text(
-                loc(context).restValue(remaining),
+                context.l10n.restValue(remaining),
                 style: Theme.of(context).textTheme.headlineSmall?.copyWith(
                   fontWeight: FontWeight.bold,
                 ),
@@ -427,7 +423,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
               actions: [
                 TextButton(
                   onPressed: () => Navigator.of(ctx).pop(),
-                  child: Text(loc(context).skipLabel),
+                  child: Text(context.l10n.skipLabel),
                 ),
               ],
             );

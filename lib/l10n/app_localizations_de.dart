@@ -88,8 +88,18 @@ class AppLocalizationsDe extends AppLocalizations {
   String get backRight => 'Hinten\nRechts';
 
   @override
-  String selectedCorners(int count, String plural, String corners) {
-    return '$count Ecke$plural ausgewählt: $corners';
+  String selectedCorners(num count, String corners) {
+    final intl.NumberFormat countNumberFormat =
+        intl.NumberFormat.decimalPattern(localeName);
+    final String countString = countNumberFormat.format(count);
+
+    String _temp0 = intl.Intl.pluralLogic(
+      count,
+      locale: localeName,
+      other: '$countString Ecken ausgewählt: $corners',
+      one: '$countString Ecke ausgewählt: $corners',
+    );
+    return '$_temp0';
   }
 
   @override

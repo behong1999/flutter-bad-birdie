@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
-import '../../../../l10n/app_localizations.dart';
+import '../../../../core/extensions/l10n_extension.dart';
 import '../../../footwork/presentation/screens/setup_screen.dart';
-
-// Simple global helper - no extra files needed!
-AppLocalizations l10n(BuildContext context) => AppLocalizations.of(context)!;
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -11,7 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(l10n(context).homeTitle), centerTitle: true),
+      appBar: AppBar(title: Text(context.l10n.homeTitle), centerTitle: true),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
@@ -33,7 +30,7 @@ class HomeScreen extends StatelessWidget {
                         const SizedBox(width: 12),
                         Expanded(
                           child: Text(
-                            l10n(context).welcomeTitle,
+                            context.l10n.welcomeTitle,
                             style: Theme.of(context).textTheme.headlineSmall
                                 ?.copyWith(fontWeight: FontWeight.bold),
                           ),
@@ -42,7 +39,7 @@ class HomeScreen extends StatelessWidget {
                     ),
                     const SizedBox(height: 12),
                     Text(
-                      l10n(context).welcomeDescription,
+                      context.l10n.welcomeDescription,
                       style: Theme.of(context).textTheme.bodyMedium,
                     ),
                   ],
@@ -54,7 +51,7 @@ class HomeScreen extends StatelessWidget {
 
             // Features section
             Text(
-              l10n(context).trainingFeatures,
+              context.l10n.trainingFeatures,
               style: Theme.of(
                 context,
               ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
@@ -69,9 +66,9 @@ class HomeScreen extends StatelessWidget {
                   _buildFeatureCard(
                     context,
                     icon: Icons.directions_run,
-                    title: l10n(context).footworkTraining,
-                    description: l10n(context).footworkDescription,
-                    color: Colors.orange,
+                    title: context.l10n.footworkTraining,
+                    description: context.l10n.footworkDescription,
+                    color: Theme.of(context).colorScheme.primary,
                     onTap: () {
                       Navigator.push(
                         context,
@@ -85,14 +82,14 @@ class HomeScreen extends StatelessWidget {
                   _buildFeatureCard(
                     context,
                     icon: Icons.sports,
-                    title: l10n(context).tacticalBoard,
-                    description: l10n(context).tacticalDescription,
-                    color: Colors.blue,
+                    title: context.l10n.tacticalBoard,
+                    description: context.l10n.tacticalDescription,
+                    color: Theme.of(context).colorScheme.secondary,
                     onTap: () {
                       // TODO: Navigate to tactical board
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(l10n(context).tacticalComingSoon),
+                          content: Text(context.l10n.tacticalComingSoon),
                         ),
                       );
                     },
@@ -101,14 +98,14 @@ class HomeScreen extends StatelessWidget {
                   _buildFeatureCard(
                     context,
                     icon: Icons.school,
-                    title: l10n(context).learningHub,
-                    description: l10n(context).learningDescription,
-                    color: Colors.purple,
+                    title: context.l10n.learningHub,
+                    description: context.l10n.learningDescription,
+                    color: Theme.of(context).colorScheme.tertiary,
                     onTap: () {
                       // TODO: Navigate to learning hub
                       ScaffoldMessenger.of(context).showSnackBar(
                         SnackBar(
-                          content: Text(l10n(context).learningComingSoon),
+                          content: Text(context.l10n.learningComingSoon),
                         ),
                       );
                     },
@@ -161,14 +158,14 @@ class HomeScreen extends StatelessWidget {
                     const SizedBox(height: 4),
                     Text(
                       description,
-                      style: Theme.of(
-                        context,
-                      ).textTheme.bodySmall?.copyWith(color: Colors.grey[600]),
+                      style: Theme.of(context).textTheme.bodySmall?.copyWith(
+                        color: Theme.of(context).colorScheme.onSurfaceVariant,
+                      ),
                     ),
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios, color: Colors.grey[400], size: 16),
+              Icon(Icons.arrow_forward_ios, color: Theme.of(context).colorScheme.onSurfaceVariant, size: 16),
             ],
           ),
         ),

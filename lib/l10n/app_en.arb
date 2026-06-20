@@ -100,15 +100,13 @@
   "@backRight": {
     "description": "Back right corner label"
   },
-  "selectedCorners": "Selected {count} corner{plural}: {corners}",
+  "selectedCorners": "{count, plural, =1{Selected {count} corner: {corners}} other{Selected {count} corners: {corners}}}",
   "@selectedCorners": {
     "description": "Shows selected corners count and list",
     "placeholders": {
       "count": {
-        "type": "int"
-      },
-      "plural": {
-        "type": "String"
+        "type": "num",
+        "format": "decimalPattern"
       },
       "corners": {
         "type": "String"
