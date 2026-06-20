@@ -4,10 +4,10 @@ import '../../domain/direction.dart';
 
 class DirectionFlowPad extends StatelessWidget {
   const DirectionFlowPad({
-    super.key,
     required this.activeCue,
     required this.currentShot,
     required this.pulseIn,
+    super.key,
   });
 
   final DirectionCue activeCue;
@@ -168,7 +168,10 @@ class DirectionFlowPad extends StatelessWidget {
                 child: Container(
                   width: 12,
                   height: 12,
-                  decoration: BoxDecoration(color: primary, shape: BoxShape.circle),
+                  decoration: BoxDecoration(
+                    color: primary,
+                    shape: BoxShape.circle,
+                  ),
                 ),
               ),
             ),
@@ -212,7 +215,9 @@ class DirectionFlowPad extends StatelessWidget {
     final primary = Theme.of(context).colorScheme.primary;
     final strength = cueStrength.clamp(0.0, 1.0);
     return AnimatedScale(
-      scale: active ? (1.05 + (pulseIn ? 0.05 : 0.02) + (0.20 * strength)) : 1.0,
+      scale: active
+          ? (1.05 + (pulseIn ? 0.05 : 0.02) + (0.20 * strength))
+          : 1.0,
       duration: const Duration(milliseconds: 220),
       curve: Curves.easeOut,
       child: AnimatedContainer(

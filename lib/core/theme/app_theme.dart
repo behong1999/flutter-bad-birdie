@@ -20,7 +20,6 @@ class AppTheme {
       useMaterial3: true,
       colorScheme: ColorScheme.fromSeed(
         seedColor: primaryColor,
-        brightness: Brightness.light,
         primary: primaryColor,
         secondary: secondaryColor,
         surface: surfaceColor,
@@ -107,7 +106,7 @@ class AppTheme {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
         color: darkSurfaceColor,
       ),
-      bottomNavigationBarTheme: BottomNavigationBarThemeData(
+      bottomNavigationBarTheme: const BottomNavigationBarThemeData(
         backgroundColor: darkSurfaceColor,
         selectedItemColor: darkPrimaryColor,
         unselectedItemColor: Colors.grey,

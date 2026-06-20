@@ -17,7 +17,6 @@ class BadBirdieApp extends StatelessWidget {
     title: 'Bad Birdie - App for Badminton Nerds',
       theme: AppTheme.lightTheme,
       darkTheme: AppTheme.darkTheme,
-      themeMode: ThemeMode.system,
       debugShowCheckedModeBanner: false,
 
       // Localization support

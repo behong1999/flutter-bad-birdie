@@ -12,13 +12,13 @@ import '../widgets/training_settings_panel.dart';
 
 class TrainingScreen extends StatefulWidget {
   const TrainingScreen({
-    super.key,
     required this.selectedCorners,
     required this.sets,
     required this.shotsPerSet,
     required this.speed,
     required this.restSeconds,
     required this.useRingtone,
+    super.key,
   });
 
   final Set<int> selectedCorners;
@@ -94,7 +94,8 @@ class _TrainingScreenState extends State<TrainingScreen> {
           child: Column(
             children: [
               TrainingHeader(
-                shotsText: '${context.l10n.shotsLabel}: $_currentShot/$_totalShots',
+                shotsText:
+                    '${context.l10n.shotsLabel}: $_currentShot/$_totalShots',
                 exitTooltip: context.l10n.exitLabel,
                 onExit: () => Navigator.of(context).pop(),
               ),
@@ -123,7 +124,6 @@ class _TrainingScreenState extends State<TrainingScreen> {
                     : Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
-                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             const SizedBox(height: 20),
                             if (_isStarting) ...[
@@ -342,12 +342,8 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
   Future<void> _playMoveNotification() async {
     if (!_useRingtone || _isPaused || _isStopped || _isResting) return;
-    try {
-      await _audioPlayer.stop();
-      await _audioPlayer.play(
-        AssetSource('lib/assets/sounds/shuttles_hit.mp3'),
-      );
-    } catch (_) {}
+    await _audioPlayer.stop();
+    await _audioPlayer.play(AssetSource('sounds/shuttles_hit.mp3'));
   }
 
   void _onPausePressed() {
@@ -372,7 +368,6 @@ class _TrainingScreenState extends State<TrainingScreen> {
     });
   }
 
-
   DirectionCue _cueForCorner(int corner) => switch (corner) {
     1 => DirectionCue.upLeft,
     2 => DirectionCue.up,
@@ -390,12 +385,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
     if (!mounted) return;
     _isResting = true;
 
-    int remaining = widget.restSeconds;
+    var remaining = widget.restSeconds;
     Timer? countdown;
 
     await showDialog<void>(
       context: context,
-      barrierDismissible: true,
       builder: (ctx) {
         return StatefulBuilder(
           builder: (context, setDialogState) {

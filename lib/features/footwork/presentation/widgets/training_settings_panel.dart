@@ -4,7 +4,6 @@ import 'indicator_chip.dart';
 
 class TrainingSettingsPanel extends StatelessWidget {
   const TrainingSettingsPanel({
-    super.key,
     required this.speed,
     required this.speedLabel,
     required this.ringtoneLabel,
@@ -13,6 +12,7 @@ class TrainingSettingsPanel extends StatelessWidget {
     required this.onSpeedChanged,
     required this.onRingtoneSelected,
     required this.onSpeechSelected,
+    super.key,
   });
 
   final double speed;

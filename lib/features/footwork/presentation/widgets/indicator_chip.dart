@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 
 class IndicatorChip extends StatelessWidget {
   const IndicatorChip({
-    super.key,
     required this.icon,
     required this.label,
     required this.selected,
     required this.onTap,
+    super.key,
   });
 
   final IconData icon;

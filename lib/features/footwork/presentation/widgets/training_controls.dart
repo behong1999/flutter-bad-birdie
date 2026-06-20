@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 class TrainingControls extends StatelessWidget {
   const TrainingControls({
-    super.key,
     required this.isPaused,
     required this.stopTooltip,
     required this.pauseTooltip,
@@ -11,6 +10,7 @@ class TrainingControls extends StatelessWidget {
     required this.onStop,
     required this.onPauseToggle,
     required this.onAgain,
+    super.key,
   });
 
   final bool isPaused;

@@ -177,7 +177,6 @@ class _SetupScreenState extends State<SetupScreen> {
       child: Stack(
         children: [
           Align(
-            alignment: Alignment.center,
             child: Container(width: 3, color: cs.outline),
           ),
           Padding(

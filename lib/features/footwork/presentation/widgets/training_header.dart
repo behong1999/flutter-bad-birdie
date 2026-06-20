@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 
 class TrainingHeader extends StatelessWidget {
   const TrainingHeader({
-    super.key,
     required this.shotsText,
     required this.exitTooltip,
     required this.onExit,
+    super.key,
   });
 
   final String shotsText;
@@ -18,9 +18,10 @@ class TrainingHeader extends StatelessWidget {
       children: [
         Text(
           shotsText,
-          style: Theme.of(
-            context,
-          ).textTheme.titleMedium?.copyWith(fontSize: 20, fontWeight: FontWeight.w700),
+          style: Theme.of(context).textTheme.titleMedium?.copyWith(
+            fontSize: 20,
+            fontWeight: FontWeight.w700,
+          ),
         ),
         const Spacer(),
         IconButton(
