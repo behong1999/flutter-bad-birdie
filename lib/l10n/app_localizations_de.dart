@@ -252,4 +252,68 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get skipLabel => 'Überspringen';
+
+  @override
+  String get savePreset => 'Voreinstellung speichern';
+
+  @override
+  String get loadPreset => 'Voreinstellung laden';
+
+  @override
+  String get presets => 'Voreinstellungen';
+
+  @override
+  String get noPresetsYet =>
+      'Noch keine Voreinstellungen gespeichert. Tippe auf das Speichern-Symbol, um eine hinzuzufügen.';
+
+  @override
+  String get presetNameLabel => 'Name der Voreinstellung';
+
+  @override
+  String get save => 'Speichern';
+
+  @override
+  String get delete => 'Löschen';
+
+  @override
+  String defaultPresetName(int number) {
+    return 'Voreinstellung $number';
+  }
+
+  @override
+  String presetSummary(int sets, int shots, String speed, int rest) {
+    return '$sets×$shots Schläge · x$speed · ${rest}s Pause';
+  }
+
+  @override
+  String presetSaved(String name) {
+    return 'Voreinstellung \"$name\" gespeichert';
+  }
+
+  @override
+  String presetDeleted(String name) {
+    return 'Voreinstellung \"$name\" gelöscht';
+  }
+
+  @override
+  String get selectCornersFirst =>
+      'Wähle vor dem Speichern mindestens eine Ecke aus';
+
+  @override
+  String get settings => 'Einstellungen';
+
+  @override
+  String get appearance => 'Erscheinungsbild';
+
+  @override
+  String get language => 'Sprache';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Hell';
+
+  @override
+  String get themeDark => 'Dunkel';
 }

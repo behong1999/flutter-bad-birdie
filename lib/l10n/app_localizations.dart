@@ -529,6 +529,114 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Skip'**
   String get skipLabel;
+
+  /// Save preset button/tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Save Preset'**
+  String get savePreset;
+
+  /// Load preset button/tooltip
+  ///
+  /// In en, this message translates to:
+  /// **'Load Preset'**
+  String get loadPreset;
+
+  /// Presets list title
+  ///
+  /// In en, this message translates to:
+  /// **'Presets'**
+  String get presets;
+
+  /// Empty state in presets list
+  ///
+  /// In en, this message translates to:
+  /// **'No saved presets yet. Tap the save icon to add one.'**
+  String get noPresetsYet;
+
+  /// Input label for preset name
+  ///
+  /// In en, this message translates to:
+  /// **'Preset name'**
+  String get presetNameLabel;
+
+  /// Save button
+  ///
+  /// In en, this message translates to:
+  /// **'Save'**
+  String get save;
+
+  /// Delete button
+  ///
+  /// In en, this message translates to:
+  /// **'Delete'**
+  String get delete;
+
+  /// Default suggested preset name
+  ///
+  /// In en, this message translates to:
+  /// **'Preset {number}'**
+  String defaultPresetName(int number);
+
+  /// Subtitle summary for a saved preset
+  ///
+  /// In en, this message translates to:
+  /// **'{sets}×{shots} shots · x{speed} · {rest}s rest'**
+  String presetSummary(int sets, int shots, String speed, int rest);
+
+  /// Snackbar after saving a preset
+  ///
+  /// In en, this message translates to:
+  /// **'Preset \"{name}\" saved'**
+  String presetSaved(String name);
+
+  /// Snackbar after deleting a preset
+  ///
+  /// In en, this message translates to:
+  /// **'Preset \"{name}\" deleted'**
+  String presetDeleted(String name);
+
+  /// Validation message when saving without corners
+  ///
+  /// In en, this message translates to:
+  /// **'Select at least one corner before saving'**
+  String get selectCornersFirst;
+
+  /// Settings screen title and entry point
+  ///
+  /// In en, this message translates to:
+  /// **'Settings'**
+  String get settings;
+
+  /// Appearance section header in settings
+  ///
+  /// In en, this message translates to:
+  /// **'Appearance'**
+  String get appearance;
+
+  /// Language section header in settings
+  ///
+  /// In en, this message translates to:
+  /// **'Language'**
+  String get language;
+
+  /// Theme mode option: follow system
+  ///
+  /// In en, this message translates to:
+  /// **'System'**
+  String get themeSystem;
+
+  /// Theme mode option: light
+  ///
+  /// In en, this message translates to:
+  /// **'Light'**
+  String get themeLight;
+
+  /// Theme mode option: dark
+  ///
+  /// In en, this message translates to:
+  /// **'Dark'**
+  String get themeDark;
 }
 
 class _AppLocalizationsDelegate

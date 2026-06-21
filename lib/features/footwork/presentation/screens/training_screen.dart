@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_tts/flutter_tts.dart';
 import '../../../../core/extensions/l10n_extension.dart';
 import '../../domain/direction.dart';
 import '../widgets/direction_flow_pad.dart';
@@ -35,6 +36,7 @@ class TrainingScreen extends StatefulWidget {
 class _TrainingScreenState extends State<TrainingScreen> {
   final Random _random = Random();
   final AudioPlayer _audioPlayer = AudioPlayer();
+  final FlutterTts _tts = FlutterTts();
   Timer? _timer;
   Timer? _returnToCenterTimer;
   Timer? _startCountdownTimer;
@@ -68,8 +70,13 @@ class _TrainingScreenState extends State<TrainingScreen> {
     _totalShots = widget.sets * widget.shotsPerSet;
     _currentShotName = '';
     _speed = widget.speed;
+
+    // Ringtone or Speech
     _useRingtone = widget.useRingtone;
     unawaited(_audioPlayer.setReleaseMode(ReleaseMode.stop));
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    unawaited(_tts.setLanguage(locale));
+
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) _startTrainingFlow();
     });
@@ -81,6 +88,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
     _returnToCenterTimer?.cancel();
     _startCountdownTimer?.cancel();
     unawaited(_audioPlayer.dispose());
+    unawaited(_tts.stop());
     super.dispose();
   }
 
@@ -338,12 +346,18 @@ class _TrainingScreenState extends State<TrainingScreen> {
     _startCountdownTimer?.cancel();
     _isStarting = false;
     unawaited(_audioPlayer.stop());
+    unawaited(_tts.stop());
   }
 
   Future<void> _playMoveNotification() async {
-    if (!_useRingtone || _isPaused || _isStopped || _isResting) return;
-    await _audioPlayer.stop();
-    await _audioPlayer.play(AssetSource('sounds/shuttles_hit.mp3'));
+    if (_isPaused || _isStopped || _isResting) return;
+    if (_useRingtone) {
+      await _audioPlayer.stop();
+      await _audioPlayer.play(AssetSource('sounds/shuttles_hit.mp3'));
+    } else {
+      await _tts.stop();
+      await _tts.speak(_currentShotName);
+    }
   }
 
   void _onPausePressed() {

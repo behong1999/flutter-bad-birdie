@@ -316,5 +316,92 @@
   "skipLabel": "Skip",
   "@skipLabel": {
     "description": "Skip rest dialog button label"
+  },
+  "savePreset": "Save Preset",
+  "@savePreset": {
+    "description": "Save preset button/tooltip"
+  },
+  "loadPreset": "Load Preset",
+  "@loadPreset": {
+    "description": "Load preset button/tooltip"
+  },
+  "presets": "Presets",
+  "@presets": {
+    "description": "Presets list title"
+  },
+  "noPresetsYet": "No saved presets yet. Tap the save icon to add one.",
+  "@noPresetsYet": {
+    "description": "Empty state in presets list"
+  },
+  "presetNameLabel": "Preset name",
+  "@presetNameLabel": {
+    "description": "Input label for preset name"
+  },
+  "save": "Save",
+  "@save": {
+    "description": "Save button"
+  },
+  "delete": "Delete",
+  "@delete": {
+    "description": "Delete button"
+  },
+  "defaultPresetName": "Preset {number}",
+  "@defaultPresetName": {
+    "description": "Default suggested preset name",
+    "placeholders": {
+      "number": { "type": "int" }
+    }
+  },
+  "presetSummary": "{sets}×{shots} shots · x{speed} · {rest}s rest",
+  "@presetSummary": {
+    "description": "Subtitle summary for a saved preset",
+    "placeholders": {
+      "sets": { "type": "int" },
+      "shots": { "type": "int" },
+      "speed": { "type": "String" },
+      "rest": { "type": "int" }
+    }
+  },
+  "presetSaved": "Preset \"{name}\" saved",
+  "@presetSaved": {
+    "description": "Snackbar after saving a preset",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "presetDeleted": "Preset \"{name}\" deleted",
+  "@presetDeleted": {
+    "description": "Snackbar after deleting a preset",
+    "placeholders": {
+      "name": { "type": "String" }
+    }
+  },
+  "selectCornersFirst": "Select at least one corner before saving",
+  "@selectCornersFirst": {
+    "description": "Validation message when saving without corners"
+  },
+  "settings": "Settings",
+  "@settings": {
+    "description": "Settings screen title and entry point"
+  },
+  "appearance": "Appearance",
+  "@appearance": {
+    "description": "Appearance section header in settings"
+  },
+  "language": "Language",
+  "@language": {
+    "description": "Language section header in settings"
+  },
+  "themeSystem": "System",
+  "@themeSystem": {
+    "description": "Theme mode option: follow system"
+  },
+  "themeLight": "Light",
+  "@themeLight": {
+    "description": "Theme mode option: light"
+  },
+  "themeDark": "Dark",
+  "@themeDark": {
+    "description": "Theme mode option: dark"
   }
 }

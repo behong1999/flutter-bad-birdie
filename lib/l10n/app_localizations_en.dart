@@ -252,4 +252,67 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get skipLabel => 'Skip';
+
+  @override
+  String get savePreset => 'Save Preset';
+
+  @override
+  String get loadPreset => 'Load Preset';
+
+  @override
+  String get presets => 'Presets';
+
+  @override
+  String get noPresetsYet =>
+      'No saved presets yet. Tap the save icon to add one.';
+
+  @override
+  String get presetNameLabel => 'Preset name';
+
+  @override
+  String get save => 'Save';
+
+  @override
+  String get delete => 'Delete';
+
+  @override
+  String defaultPresetName(int number) {
+    return 'Preset $number';
+  }
+
+  @override
+  String presetSummary(int sets, int shots, String speed, int rest) {
+    return '$sets×$shots shots · x$speed · ${rest}s rest';
+  }
+
+  @override
+  String presetSaved(String name) {
+    return 'Preset \"$name\" saved';
+  }
+
+  @override
+  String presetDeleted(String name) {
+    return 'Preset \"$name\" deleted';
+  }
+
+  @override
+  String get selectCornersFirst => 'Select at least one corner before saving';
+
+  @override
+  String get settings => 'Settings';
+
+  @override
+  String get appearance => 'Appearance';
+
+  @override
+  String get language => 'Language';
+
+  @override
+  String get themeSystem => 'System';
+
+  @override
+  String get themeLight => 'Light';
+
+  @override
+  String get themeDark => 'Dark';
 }

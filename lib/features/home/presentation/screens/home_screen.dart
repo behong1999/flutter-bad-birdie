@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../../../../core/extensions/l10n_extension.dart';
 import '../../../footwork/presentation/screens/setup_screen.dart';
+import '../../../settings/presentation/screens/settings_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -8,7 +9,21 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(context.l10n.homeTitle), centerTitle: true),
+      appBar: AppBar(
+        title: Text(context.l10n.homeTitle),
+        centerTitle: true,
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            tooltip: context.l10n.settings,
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute<void>(
+                builder: (_) => const SettingsScreen(),
+              ),
+            ),
+          ),
+        ],
+      ),
       body: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -85,14 +100,8 @@ class HomeScreen extends StatelessWidget {
                     title: context.l10n.tacticalBoard,
                     description: context.l10n.tacticalDescription,
                     color: Theme.of(context).colorScheme.secondary,
-                    onTap: () {
-                      // TODO: Navigate to tactical board
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(context.l10n.tacticalComingSoon),
-                        ),
-                      );
-                    },
+                    onTap: () =>
+                        _showComingSoon(context, context.l10n.tacticalComingSoon),
                   ),
 
                   _buildFeatureCard(
@@ -101,14 +110,8 @@ class HomeScreen extends StatelessWidget {
                     title: context.l10n.learningHub,
                     description: context.l10n.learningDescription,
                     color: Theme.of(context).colorScheme.tertiary,
-                    onTap: () {
-                      // TODO: Navigate to learning hub
-                      ScaffoldMessenger.of(context).showSnackBar(
-                        SnackBar(
-                          content: Text(context.l10n.learningComingSoon),
-                        ),
-                      );
-                    },
+                    onTap: () =>
+                        _showComingSoon(context, context.l10n.learningComingSoon),
                   ),
                 ],
               ),
@@ -117,6 +120,12 @@ class HomeScreen extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void _showComingSoon(BuildContext context, String message) {
+    ScaffoldMessenger.of(context)
+      ..removeCurrentSnackBar()
+      ..showSnackBar(SnackBar(content: Text(message)));
   }
 
   Widget _buildFeatureCard(

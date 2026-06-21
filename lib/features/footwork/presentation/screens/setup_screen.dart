@@ -1,5 +1,12 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:uuid/uuid.dart';
 import '../../../../core/extensions/l10n_extension.dart';
+import '../../data/preset_repository.dart';
+import '../../domain/training_preset.dart';
+import '../widgets/preset_list_sheet.dart';
+import '../widgets/save_preset_dialog.dart';
 import 'training_screen.dart';
 
 class SetupScreen extends StatefulWidget {
@@ -17,6 +24,37 @@ class _SetupScreenState extends State<SetupScreen> {
   double rest = 30;
   bool useRingtone = true;
 
+  final PresetRepository _repository = PresetRepository();
+  final Uuid _uuid = const Uuid();
+  List<TrainingPreset> _presets = [];
+
+  @override
+  void initState() {
+    super.initState();
+    _loadInitialState();
+  }
+
+  Future<void> _loadInitialState() async {
+    final presets = await _repository.loadPresets();
+    final lastUsed = await _repository.loadLastUsed();
+    if (!mounted) return;
+    setState(() {
+      _presets = presets;
+      if (lastUsed != null) _applyPresetValues(lastUsed);
+    });
+  }
+
+  void _applyPresetValues(TrainingPreset preset) {
+    selectedCorners
+      ..clear()
+      ..addAll(preset.selectedCorners);
+    sets = preset.sets.toDouble();
+    shots = preset.shotsPerSet.toDouble();
+    speed = preset.speed;
+    rest = preset.restSeconds.toDouble();
+    useRingtone = preset.useRingtone;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -26,17 +64,13 @@ class _SetupScreenState extends State<SetupScreen> {
         actions: [
           IconButton(
             icon: const Icon(Icons.bookmark_outline),
-            tooltip: context.l10n.saveSettings,
-            onPressed: () {
-              ScaffoldMessenger.of(context).showSnackBar(
-                SnackBar(content: Text(context.l10n.settingsSaved)),
-              );
-            },
+            tooltip: context.l10n.loadPreset,
+            onPressed: _openPresetList,
           ),
           IconButton(
-            icon: const Icon(Icons.help_outline),
-            tooltip: context.l10n.help,
-            onPressed: _showHelp,
+            icon: const Icon(Icons.save_outlined),
+            tooltip: context.l10n.savePreset,
+            onPressed: _openSaveDialog,
           ),
         ],
       ),
@@ -52,9 +86,7 @@ class _SetupScreenState extends State<SetupScreen> {
           const SizedBox(height: 8),
           Text(
             context.l10n.chooseCornersDescription,
-            style: Theme.of(
-              context,
-            ).textTheme.bodyMedium?.copyWith(
+            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
               color: Theme.of(context).colorScheme.onSurfaceVariant,
             ),
           ),
@@ -73,11 +105,20 @@ class _SetupScreenState extends State<SetupScreen> {
               ),
             ),
             const SizedBox(height: 24),
-            Text(
-              context.l10n.trainingSettings,
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+            Row(
+              children: [
+                Text(
+                  context.l10n.trainingSettings,
+                  style: Theme.of(
+                    context,
+                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+                ),
+                IconButton(
+                  icon: const Icon(Icons.help_outline),
+                  tooltip: context.l10n.help,
+                  onPressed: _showHelp,
+                ),
+              ],
             ),
             const SizedBox(height: 8),
             Text(context.l10n.setsValue(sets.round())),
@@ -176,9 +217,7 @@ class _SetupScreenState extends State<SetupScreen> {
       ),
       child: Stack(
         children: [
-          Align(
-            child: Container(width: 3, color: cs.outline),
-          ),
+          Align(child: Container(width: 3, color: cs.outline)),
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 12),
             child: Column(
@@ -272,9 +311,7 @@ class _SetupScreenState extends State<SetupScreen> {
           alignment: Alignment.center,
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(12),
-            border: Border.all(
-              color: selected ? cs.primary : cs.outline,
-            ),
+            border: Border.all(color: selected ? cs.primary : cs.outline),
           ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -314,7 +351,11 @@ class _SetupScreenState extends State<SetupScreen> {
               _helpLine(ctx, context.l10n.sets, context.l10n.setsHelp),
               _helpLine(ctx, context.l10n.shotsPerSet, context.l10n.shotsHelp),
               _helpLine(ctx, context.l10n.speed, context.l10n.speedHelp),
-              _helpLine(ctx, context.l10n.restBetweenSets, context.l10n.restHelp),
+              _helpLine(
+                ctx,
+                context.l10n.restBetweenSets,
+                context.l10n.restHelp,
+              ),
               _helpLine(
                 ctx,
                 context.l10n.nextMoveNotification,
@@ -340,13 +381,77 @@ class _SetupScreenState extends State<SetupScreen> {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
-          Text(body, style: TextStyle(color: Theme.of(context).colorScheme.onSurfaceVariant, height: 1.3)),
+          Text(
+            body,
+            style: TextStyle(
+              color: Theme.of(context).colorScheme.onSurfaceVariant,
+              height: 1.3,
+            ),
+          ),
         ],
       ),
     );
   }
 
+  TrainingPreset _currentPreset({String? id, String? name}) => TrainingPreset(
+    id: id ?? _uuid.v4(),
+    name: name ?? '',
+    selectedCorners: Set<int>.from(selectedCorners),
+    sets: sets.round(),
+    shotsPerSet: shots.round(),
+    speed: speed,
+    restSeconds: rest.round(),
+    useRingtone: useRingtone,
+  );
+
+  Future<void> _openSaveDialog() async {
+    if (selectedCorners.isEmpty) {
+      ScaffoldMessenger.of(
+        context,
+      ).showSnackBar(SnackBar(content: Text(context.l10n.selectCornersFirst)));
+      return;
+    }
+    final suggested = context.l10n.defaultPresetName(_presets.length + 1);
+    final name = await showDialog<String>(
+      context: context,
+      builder: (_) => SavePresetDialog(suggestedName: suggested),
+    );
+    if (name == null || !mounted) return;
+    final preset = _currentPreset(name: name);
+    await _repository.savePreset(preset);
+    if (!mounted) return;
+    setState(() => _presets = [..._presets, preset]);
+    ScaffoldMessenger.of(
+      context,
+    ).showSnackBar(SnackBar(content: Text(context.l10n.presetSaved(name))));
+  }
+
+  Future<void> _openPresetList() async {
+    await showModalBottomSheet<void>(
+      context: context,
+      showDragHandle: true,
+      builder: (ctx) => PresetListSheet(
+        presets: _presets,
+        onSelect: (p) {
+          Navigator.of(ctx).pop();
+          setState(() => _applyPresetValues(p));
+        },
+        onDelete: (p) async {
+          await _repository.deletePreset(p.id);
+          if (!mounted) return;
+          setState(
+            () => _presets = _presets.where((e) => e.id != p.id).toList(),
+          );
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(content: Text(context.l10n.presetDeleted(p.name))),
+          );
+        },
+      ),
+    );
+  }
+
   void _onBeginTraining() {
+    unawaited(_repository.saveLastUsed(_currentPreset(name: 'last_used')));
     Navigator.of(context).push(
       MaterialPageRoute(
         builder: (ctx) => TrainingScreen(
