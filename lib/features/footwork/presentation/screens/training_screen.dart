@@ -5,7 +5,8 @@ import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_tts/flutter_tts.dart';
 import '../../../../core/extensions/l10n_extension.dart';
-import '../../domain/direction.dart';
+import '../../domain/enums/direction.dart';
+import '../../domain/enums/shot_type.dart';
 import '../widgets/direction_flow_pad.dart';
 import '../widgets/training_controls.dart';
 import '../widgets/training_header.dart';
@@ -19,10 +20,12 @@ class TrainingScreen extends StatefulWidget {
     required this.speed,
     required this.restSeconds,
     required this.useRingtone,
+    this.selectedShots = const {},
     super.key,
   });
 
   final Set<int> selectedCorners;
+  final Set<ShotType> selectedShots;
   final int sets;
   final int shotsPerSet;
   final double speed;
@@ -43,7 +46,6 @@ class _TrainingScreenState extends State<TrainingScreen> {
   bool _isStarting = false;
   bool _isResting = false;
   bool _isPaused = false;
-  bool _isStopped = false;
   bool _pulseIn = false;
 
   int _startCountdown = 0;
@@ -74,12 +76,17 @@ class _TrainingScreenState extends State<TrainingScreen> {
     // Ringtone or Speech
     _useRingtone = widget.useRingtone;
     unawaited(_audioPlayer.setReleaseMode(ReleaseMode.stop));
-    final locale = Localizations.localeOf(context).toLanguageTag();
-    unawaited(_tts.setLanguage(locale));
 
     WidgetsBinding.instance.addPostFrameCallback((_) {
       if (mounted) _startTrainingFlow();
     });
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+    final locale = Localizations.localeOf(context).toLanguageTag();
+    unawaited(_tts.setLanguage(locale));
   }
 
   @override
@@ -113,16 +120,6 @@ class _TrainingScreenState extends State<TrainingScreen> {
                     ? Center(
                         child: Text(
                           context.l10n.trainingCompletedLabel,
-                          textAlign: TextAlign.center,
-                          style: Theme.of(context).textTheme.headlineSmall
-                              ?.copyWith(fontWeight: FontWeight.bold),
-                        ),
-                      )
-                    // Stopped
-                    : _isStopped
-                    ? Center(
-                        child: Text(
-                          context.l10n.trainingStoppedLabel,
                           textAlign: TextAlign.center,
                           style: Theme.of(context).textTheme.headlineSmall
                               ?.copyWith(fontWeight: FontWeight.bold),
@@ -177,7 +174,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
                                     textAlign: TextAlign.center,
                                     style: Theme.of(context)
                                         .textTheme
-                                        .displayMedium
+                                        .displayLarge
                                         ?.copyWith(
                                           fontWeight: FontWeight.bold,
                                           color: Theme.of(
@@ -208,11 +205,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
               const SizedBox(height: 20),
               TrainingControls(
                 isPaused: _isPaused,
-                stopTooltip: context.l10n.stopLabel,
                 pauseTooltip: context.l10n.pauseLabel,
                 resumeTooltip: context.l10n.resumeLabel,
                 againTooltip: context.l10n.againLabel,
-                onStop: _onStopPressed,
                 onPauseToggle: _onPausePressed,
                 onAgain: _onAgainPressed,
               ),
@@ -228,7 +223,6 @@ class _TrainingScreenState extends State<TrainingScreen> {
     _returnToCenterTimer?.cancel();
     _startCountdownTimer?.cancel();
     _isPaused = false;
-    _isStopped = false;
     _isStarting = true;
     _startCountdown = 3;
     _currentCorner = 5;
@@ -240,14 +234,14 @@ class _TrainingScreenState extends State<TrainingScreen> {
         timer.cancel();
         return;
       }
-      if (_isPaused || _isStopped || _isResting) return;
+      if (_isPaused || _isResting) return;
       if (_startCountdown <= 1) {
         timer.cancel();
         _isStarting = false;
         _startCountdown = 0;
         _emitNextMove();
         _timer = Timer.periodic(_intervalFromSpeed(_speed), (_) {
-          if (_isPaused || _isStopped || _isResting || _isStarting) return;
+          if (_isPaused || _isResting || _isStarting) return;
           _emitNextMove();
         });
         setState(() {});
@@ -268,11 +262,11 @@ class _TrainingScreenState extends State<TrainingScreen> {
         _currentShot < _totalShots) {
       _timer?.cancel();
       await _showRestDialog();
-      if (!mounted || _isPaused || _isStopped) return;
+      if (!mounted || _isPaused) return;
       await Future.delayed(const Duration(milliseconds: 500));
-      if (!mounted || _isPaused || _isStopped) return;
+      if (!mounted || _isPaused) return;
       _timer = Timer.periodic(_intervalFromSpeed(_speed), (_) {
-        if (_isPaused || _isStopped || _isResting || _isStarting) return;
+        if (_isPaused || _isResting || _isStarting) return;
         _emitNextMove();
       });
     }
@@ -292,7 +286,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
     final strikeDuration = _strikeDurationFromSpeed(_speed);
     _returnToCenterTimer = Timer(strikeDuration, () {
-      if (!mounted || _isPaused || _isStopped || _isResting) return;
+      if (!mounted || _isPaused || _isResting) return;
       setState(() {
         // Recovery only: center is never counted as a strike.
         _currentCorner = 5;
@@ -308,17 +302,23 @@ class _TrainingScreenState extends State<TrainingScreen> {
   }
 
   String _pickShotNameForCorner(int corner) {
-    final frontCourt = [_shotLift(), _shotBlock(), _shotKill()];
-    final backCourt = [_shotClear(), _shotDrop(), _shotSmash()];
-    final midCourt = [_shotBlock(), _shotKill(), _shotDrive()];
-    final shots = switch (corner) {
-      1 || 2 || 3 => frontCourt,
-      4 || 5 || 6 => midCourt,
-      7 || 8 || 9 => backCourt,
-      _ => frontCourt,
-    };
-    return shots[_random.nextInt(shots.length)];
+    final zoneAllowed = ShotType.zoneAllowed(corner);
+    final candidates = widget.selectedShots.isEmpty
+        ? zoneAllowed
+        : zoneAllowed.intersection(widget.selectedShots);
+    final pool = (candidates.isEmpty ? zoneAllowed : candidates).toList();
+    return _localizedShotName(pool[_random.nextInt(pool.length)]);
   }
+
+  String _localizedShotName(ShotType shot) => switch (shot) {
+    ShotType.clear => _shotClear(),
+    ShotType.drop => _shotDrop(),
+    ShotType.smash => _shotSmash(),
+    ShotType.lift => _shotLift(),
+    ShotType.block => _shotBlock(),
+    ShotType.kill => _shotKill(),
+    ShotType.drive => _shotDrive(),
+  };
 
   //
   // Returns the interval between moves in milliseconds.
@@ -339,18 +339,8 @@ class _TrainingScreenState extends State<TrainingScreen> {
     return Duration(milliseconds: strikeMs);
   }
 
-  void _onStopPressed() {
-    setState(() => _isStopped = true);
-    _timer?.cancel();
-    _returnToCenterTimer?.cancel();
-    _startCountdownTimer?.cancel();
-    _isStarting = false;
-    unawaited(_audioPlayer.stop());
-    unawaited(_tts.stop());
-  }
-
   Future<void> _playMoveNotification() async {
-    if (_isPaused || _isStopped || _isResting) return;
+    if (_isPaused || _isResting) return;
     if (_useRingtone) {
       await _audioPlayer.stop();
       await _audioPlayer.play(AssetSource('sounds/shuttles_hit.mp3'));
@@ -375,9 +365,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
 
   void _restartTimer() {
     _timer?.cancel();
-    if (_isPaused || _isStopped || _isStarting) return;
+    if (_isPaused || _isStarting) return;
     _timer = Timer.periodic(_intervalFromSpeed(_speed), (_) {
-      if (_isPaused || _isStopped || _isResting || _isStarting) return;
+      if (_isPaused || _isResting || _isStarting) return;
       _emitNextMove();
     });
   }

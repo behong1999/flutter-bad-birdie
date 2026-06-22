@@ -20,15 +20,37 @@ dependencies:
   google_fonts: ^6.2.1
   provider: ^6.1.2
   shared_preferences: ^2.3.3
+  sleek_circular_slider: ^2.0.1
   uuid: ^4.5.1
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   very_good_analysis: ^6.0.0
+  flutter_native_splash: ^2.4.5
+  flutter_launcher_icons: ^0.14.3
 
 flutter:
   uses-material-design: true
   generate: true
   assets:
     - assets/sounds/
+    - assets/images/
+
+flutter_launcher_icons:
+  android: true
+  ios: true
+  image_path: "assets/images/logo.png"
+  min_sdk_android: 21
+  adaptive_icon_background: "#0c0c11"
+  adaptive_icon_foreground: "assets/images/logo.png"
+
+flutter_native_splash:
+  color: "#0c0c11"
+  image: assets/images/logo_full.png
+  color_dark: "#0c0c11"
+  image_dark: assets/images/logo_full.png
+  android_12:
+    color: "#0c0c11"
+    image: assets/images/logo_full.png
+  web: false

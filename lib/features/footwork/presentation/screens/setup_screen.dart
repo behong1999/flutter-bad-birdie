@@ -1,9 +1,11 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../core/extensions/l10n_extension.dart';
 import '../../data/preset_repository.dart';
+import '../../domain/enums/shot_type.dart';
 import '../../domain/training_preset.dart';
 import '../widgets/preset_list_sheet.dart';
 import '../widgets/save_preset_dialog.dart';
@@ -18,6 +20,7 @@ class SetupScreen extends StatefulWidget {
 
 class _SetupScreenState extends State<SetupScreen> {
   final Set<int> selectedCorners = {};
+  final Set<ShotType> selectedShots = {};
   double sets = 3;
   double shots = 10;
   double speed = 2.5;
@@ -48,6 +51,9 @@ class _SetupScreenState extends State<SetupScreen> {
     selectedCorners
       ..clear()
       ..addAll(preset.selectedCorners);
+    selectedShots
+      ..clear()
+      ..addAll(preset.selectedShots);
     sets = preset.sets.toDouble();
     shots = preset.shotsPerSet.toDouble();
     speed = preset.speed;
@@ -120,43 +126,47 @@ class _SetupScreenState extends State<SetupScreen> {
                 ),
               ],
             ),
-            const SizedBox(height: 8),
-            Text(context.l10n.setsValue(sets.round())),
-            Slider(
-              value: sets,
-              min: 1,
-              max: 10,
-              divisions: 9,
-              label: '${sets.round()}',
-              onChanged: (v) => setState(() => sets = v),
+            const SizedBox(height: 16),
+            Wrap(
+              spacing: 12,
+              alignment: WrapAlignment.spaceEvenly,
+              children: [
+                _CircularStat(
+                  label: context.l10n.sets,
+                  valueLabel: '${sets.round()}',
+                  value: sets,
+                  min: 1,
+                  max: 10,
+                  onChanged: (v) => setState(() => sets = v.roundToDouble()),
+                ),
+                _CircularStat(
+                  label: context.l10n.shotsPerSet,
+                  valueLabel: '${shots.round()}',
+                  value: shots,
+                  min: 5,
+                  max: 50,
+                  onChanged: (v) => setState(() => shots = v.roundToDouble()),
+                ),
+                _CircularStat(
+                  label: context.l10n.speed,
+                  valueLabel: 'x${speed.toStringAsFixed(1)}',
+                  value: speed,
+                  min: 1,
+                  max: 5,
+                  onChanged: (v) =>
+                      setState(() => speed = (v * 10).round() / 10),
+                ),
+                _CircularStat(
+                  label: context.l10n.restBetweenSets,
+                  valueLabel: '${rest.round()}s',
+                  value: rest,
+                  min: 10,
+                  max: 120,
+                  onChanged: (v) => setState(() => rest = v.roundToDouble()),
+                ),
+              ],
             ),
-            Text(context.l10n.shotsValue(shots.round())),
-            Slider(
-              value: shots,
-              min: 5,
-              max: 50,
-              divisions: 45,
-              label: '${shots.round()}',
-              onChanged: (v) => setState(() => shots = v),
-            ),
-            Text(context.l10n.speedValue(speed.toStringAsFixed(1))),
-            Slider(
-              value: speed,
-              min: 1,
-              max: 5,
-              divisions: 40,
-              label: speed.toStringAsFixed(1),
-              onChanged: (v) => setState(() => speed = v),
-            ),
-            Text(context.l10n.restValue(rest.round())),
-            Slider(
-              value: rest,
-              min: 10,
-              max: 120,
-              divisions: 22,
-              label: '${rest.round()}',
-              onChanged: (v) => setState(() => rest = v),
-            ),
+            _shotSelectionSection(context),
             const SizedBox(height: 8),
             Text(
               context.l10n.nextMoveNotification,
@@ -204,6 +214,63 @@ class _SetupScreenState extends State<SetupScreen> {
       ),
     );
   }
+
+  Widget _shotSelectionSection(BuildContext context) {
+    final available = ShotType.availableForCorners(selectedCorners).toList();
+    if (available.isEmpty) return const SizedBox.shrink();
+    return Theme(
+      // ExpansionTile shows a divider by default; remove its visual clutter.
+      data: Theme.of(context).copyWith(dividerColor: Colors.transparent),
+      child: ExpansionTile(
+        title: Text.rich(
+          TextSpan(
+            style: Theme.of(context).textTheme.titleMedium,
+            children: [
+              TextSpan(
+                text: context.l10n.shotSelection,
+                style: const TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextSpan(text: ' (${context.l10n.optional})'),
+            ],
+          ),
+        ),
+        tilePadding: EdgeInsets.zero,
+        childrenPadding: const EdgeInsets.only(top: 8, bottom: 8),
+        children: [
+          Wrap(
+            spacing: 8,
+            runSpacing: 5,
+            children: available
+                .map(
+                  (shot) => FilterChip(
+                    label: Text(_shotName(shot)),
+                    selected: selectedShots.contains(shot),
+                    showCheckmark: false,
+                    onSelected: (sel) => setState(() {
+                      if (sel) {
+                        selectedShots.add(shot);
+                      } else {
+                        selectedShots.remove(shot);
+                      }
+                    }),
+                  ),
+                )
+                .toList(),
+          ),
+        ],
+      ),
+    );
+  }
+
+  String _shotName(ShotType shot) => switch (shot) {
+    ShotType.clear => context.l10n.shotClear,
+    ShotType.drop => context.l10n.shotDrop,
+    ShotType.smash => context.l10n.shotSmash,
+    ShotType.lift => context.l10n.shotLift,
+    ShotType.block => context.l10n.shotBlock,
+    ShotType.kill => context.l10n.shotKill,
+    ShotType.drive => context.l10n.shotDrive,
+  };
 
   Widget _court() {
     final cs = Theme.of(context).colorScheme;
@@ -358,6 +425,11 @@ class _SetupScreenState extends State<SetupScreen> {
               ),
               _helpLine(
                 ctx,
+                context.l10n.shotSelection,
+                context.l10n.shotSelectionHelp,
+              ),
+              _helpLine(
+                ctx,
                 context.l10n.nextMoveNotification,
                 context.l10n.notificationHelp,
               ),
@@ -397,6 +469,7 @@ class _SetupScreenState extends State<SetupScreen> {
     id: id ?? _uuid.v4(),
     name: name ?? '',
     selectedCorners: Set<int>.from(selectedCorners),
+    selectedShots: Set<ShotType>.from(selectedShots),
     sets: sets.round(),
     shotsPerSet: shots.round(),
     speed: speed,
@@ -414,7 +487,10 @@ class _SetupScreenState extends State<SetupScreen> {
     final suggested = context.l10n.defaultPresetName(_presets.length + 1);
     final name = await showDialog<String>(
       context: context,
-      builder: (_) => SavePresetDialog(suggestedName: suggested),
+      builder: (_) => SavePresetDialog(
+        suggestedName: suggested,
+        existingNames: _presets.map((p) => p.name).toList(),
+      ),
     );
     if (name == null || !mounted) return;
     final preset = _currentPreset(name: name);
@@ -456,11 +532,66 @@ class _SetupScreenState extends State<SetupScreen> {
       MaterialPageRoute(
         builder: (ctx) => TrainingScreen(
           selectedCorners: selectedCorners,
+          selectedShots: selectedShots,
           sets: sets.round(),
           shotsPerSet: shots.round(),
           speed: speed,
           restSeconds: rest.round(),
           useRingtone: useRingtone,
+        ),
+      ),
+    );
+  }
+}
+
+class _CircularStat extends StatelessWidget {
+  const _CircularStat({
+    required this.label,
+    required this.valueLabel,
+    required this.value,
+    required this.min,
+    required this.max,
+    required this.onChanged,
+  });
+
+  final String label;
+  final String valueLabel;
+  final double value;
+  final double min;
+  final double max;
+  final ValueChanged<double> onChanged;
+
+  @override
+  Widget build(BuildContext context) {
+    final cs = Theme.of(context).colorScheme;
+    return SleekCircularSlider(
+      min: min,
+      max: max,
+      initialValue: value,
+      onChange: onChanged,
+      appearance: CircularSliderAppearance(
+        size: 160,
+        customWidths: CustomSliderWidths(
+          trackWidth: 6,
+          progressBarWidth: 10,
+          handlerSize: 8,
+        ),
+        customColors: CustomSliderColors(
+          trackColor: cs.surfaceContainerHighest,
+          progressBarColor: cs.primary,
+          dotColor: cs.onSurface,
+          hideShadow: true,
+        ),
+        infoProperties: InfoProperties(
+          mainLabelStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
+            fontWeight: FontWeight.bold,
+            color: cs.primary,
+          ),
+          topLabelStyle: Theme.of(
+            context,
+          ).textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
+          topLabelText: label,
+          modifier: (_) => valueLabel,
         ),
       ),
     );

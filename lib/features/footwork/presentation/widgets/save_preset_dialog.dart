@@ -2,9 +2,14 @@ import 'package:flutter/material.dart';
 import '../../../../core/extensions/l10n_extension.dart';
 
 class SavePresetDialog extends StatefulWidget {
-  const SavePresetDialog({required this.suggestedName, super.key});
+  const SavePresetDialog({
+    required this.suggestedName,
+    required this.existingNames,
+    super.key,
+  });
 
   final String suggestedName;
+  final List<String> existingNames;
 
   @override
   State<SavePresetDialog> createState() => _SavePresetDialogState();
@@ -12,6 +17,7 @@ class SavePresetDialog extends StatefulWidget {
 
 class _SavePresetDialogState extends State<SavePresetDialog> {
   late final TextEditingController _controller;
+  String? _errorText;
 
   @override
   void initState() {
@@ -32,6 +38,13 @@ class _SavePresetDialogState extends State<SavePresetDialog> {
   void _submit() {
     final name = _controller.text.trim();
     if (name.isEmpty) return;
+    final exists = widget.existingNames.any(
+      (n) => n.toLowerCase() == name.toLowerCase(),
+    );
+    if (exists) {
+      setState(() => _errorText = context.l10n.presetNameExists);
+      return;
+    }
     Navigator.of(context).pop(name);
   }
 
@@ -42,7 +55,13 @@ class _SavePresetDialogState extends State<SavePresetDialog> {
       content: TextField(
         controller: _controller,
         autofocus: true,
-        decoration: InputDecoration(labelText: context.l10n.presetNameLabel),
+        decoration: InputDecoration(
+          labelText: context.l10n.presetNameLabel,
+          errorText: _errorText,
+        ),
+        onChanged: (_) {
+          if (_errorText != null) setState(() => _errorText = null);
+        },
         onSubmitted: (_) => _submit(),
       ),
       actions: [

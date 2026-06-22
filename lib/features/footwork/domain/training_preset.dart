@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'enums/shot_type.dart';
 
 class TrainingPreset {
   const TrainingPreset({
@@ -10,6 +11,7 @@ class TrainingPreset {
     required this.speed,
     required this.restSeconds,
     required this.useRingtone,
+    this.selectedShots = const {},
   });
 
   factory TrainingPreset.fromJson(Map<String, dynamic> json) => TrainingPreset(
@@ -23,6 +25,10 @@ class TrainingPreset {
     speed: (json['speed'] as num).toDouble(),
     restSeconds: json['restSeconds'] as int,
     useRingtone: json['useRingtone'] as bool,
+    selectedShots: (json['selectedShots'] as List<dynamic>?)
+            ?.map((e) => ShotType.values.byName(e as String))
+            .toSet() ??
+        const {},
   );
 
   factory TrainingPreset.decode(String raw) =>
@@ -36,6 +42,7 @@ class TrainingPreset {
   final double speed;
   final int restSeconds;
   final bool useRingtone;
+  final Set<ShotType> selectedShots;
 
   Map<String, dynamic> toJson() => {
     'id': id,
@@ -46,6 +53,7 @@ class TrainingPreset {
     'speed': speed,
     'restSeconds': restSeconds,
     'useRingtone': useRingtone,
+    'selectedShots': selectedShots.map((s) => s.name).toList(),
   };
 
   String encode() => jsonEncode(toJson());

@@ -637,6 +637,30 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Dark'**
   String get themeDark;
+
+  /// Title of optional shot filter section
+  ///
+  /// In en, this message translates to:
+  /// **'Shot selection'**
+  String get shotSelection;
+
+  /// Lowercase qualifier appended to optional section titles
+  ///
+  /// In en, this message translates to:
+  /// **'optional'**
+  String get optional;
+
+  /// Validation error when saving a preset with a duplicate name
+  ///
+  /// In en, this message translates to:
+  /// **'Already exists. Try a different name.'**
+  String get presetNameExists;
+
+  /// No description provided for @shotSelectionHelp.
+  ///
+  /// In en, this message translates to:
+  /// **'Pick which shot types to call during training. Leave empty to use all shots available for the selected corners.'**
+  String get shotSelectionHelp;
 }
 
 class _AppLocalizationsDelegate

@@ -403,5 +403,18 @@
   "themeDark": "Dark",
   "@themeDark": {
     "description": "Theme mode option: dark"
-  }
+  },
+  "shotSelection": "Shot selection",
+  "@shotSelection": {
+    "description": "Title of optional shot filter section"
+  },
+  "optional": "optional",
+  "@optional": {
+    "description": "Lowercase qualifier appended to optional section titles"
+  },
+  "presetNameExists": "Already exists. Try a different name.",
+  "@presetNameExists": {
+    "description": "Validation error when saving a preset with a duplicate name"
+  },
+  "shotSelectionHelp": "Pick which shot types to call during training. Leave empty to use all shots available for the selected corners."
 }

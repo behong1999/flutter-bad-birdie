@@ -316,4 +316,18 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get themeDark => 'Dunkel';
+
+  @override
+  String get shotSelection => 'Schlagauswahl';
+
+  @override
+  String get optional => 'optional';
+
+  @override
+  String get presetNameExists =>
+      'Existiert bereits. Wähle einen anderen Namen.';
+
+  @override
+  String get shotSelectionHelp =>
+      'Wähle, welche Schlagarten während des Trainings gerufen werden. Lass die Auswahl leer, um alle für die gewählten Ecken verfügbaren Schläge zu nutzen.';
 }

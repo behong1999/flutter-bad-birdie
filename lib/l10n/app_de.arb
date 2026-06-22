@@ -89,5 +89,9 @@
   "language": "Sprache",
   "themeSystem": "System",
   "themeLight": "Hell",
-  "themeDark": "Dunkel"
+  "themeDark": "Dunkel",
+  "shotSelection": "Schlagauswahl",
+  "optional": "optional",
+  "presetNameExists": "Existiert bereits. Wähle einen anderen Namen.",
+  "shotSelectionHelp": "Wähle, welche Schlagarten während des Trainings gerufen werden. Lass die Auswahl leer, um alle für die gewählten Ecken verfügbaren Schläge zu nutzen."
 }

@@ -3,22 +3,18 @@ import 'package:flutter/material.dart';
 class TrainingControls extends StatelessWidget {
   const TrainingControls({
     required this.isPaused,
-    required this.stopTooltip,
     required this.pauseTooltip,
     required this.resumeTooltip,
     required this.againTooltip,
-    required this.onStop,
     required this.onPauseToggle,
     required this.onAgain,
     super.key,
   });
 
   final bool isPaused;
-  final String stopTooltip;
   final String pauseTooltip;
   final String resumeTooltip;
   final String againTooltip;
-  final VoidCallback onStop;
   final VoidCallback onPauseToggle;
   final VoidCallback onAgain;
 
@@ -27,12 +23,6 @@ class TrainingControls extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       children: [
-        IconButton(
-          iconSize: 40,
-          onPressed: onStop,
-          tooltip: stopTooltip,
-          icon: const Icon(Icons.stop_circle_outlined),
-        ),
         IconButton(
           iconSize: 40,
           onPressed: onPauseToggle,

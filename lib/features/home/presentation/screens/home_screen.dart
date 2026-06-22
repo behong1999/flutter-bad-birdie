@@ -24,100 +24,84 @@ class HomeScreen extends StatelessWidget {
           ),
         ],
       ),
-      body: Padding(
+      body: ListView(
         padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.all(20),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Row(
-                      children: [
-                        Icon(
-                          Icons.sports_tennis,
-                          size: 32,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                        const SizedBox(width: 12),
-                        Expanded(
-                          child: Text(
-                            context.l10n.welcomeTitle,
-                            style: Theme.of(context).textTheme.headlineSmall
-                                ?.copyWith(fontWeight: FontWeight.bold),
-                          ),
-                        ),
-                      ],
-                    ),
-                    const SizedBox(height: 12),
-                    Text(
-                      context.l10n.welcomeDescription,
-                      style: Theme.of(context).textTheme.bodyMedium,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-
-            const SizedBox(height: 24),
-
-            // Features section
-            Text(
-              context.l10n.trainingFeatures,
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-            ),
-
-            const SizedBox(height: 16),
-
-            // Feature cards
-            Expanded(
-              child: ListView(
+        physics: const ClampingScrollPhysics(),
+        children: [
+          Card(
+            child: Padding(
+              padding: const EdgeInsets.all(20),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  _buildFeatureCard(
-                    context,
-                    icon: Icons.directions_run,
-                    title: context.l10n.footworkTraining,
-                    description: context.l10n.footworkDescription,
-                    color: Theme.of(context).colorScheme.primary,
-                    onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const SetupScreen(),
+                  Row(
+                    children: [
+                      Icon(
+                        Icons.sports_tennis,
+                        size: 32,
+                        color: Theme.of(context).colorScheme.primary,
+                      ),
+                      const SizedBox(width: 12),
+                      Expanded(
+                        child: Text(
+                          context.l10n.welcomeTitle,
+                          style: Theme.of(context).textTheme.headlineSmall
+                              ?.copyWith(fontWeight: FontWeight.bold),
                         ),
-                      );
-                    },
+                      ),
+                    ],
                   ),
-
-                  _buildFeatureCard(
-                    context,
-                    icon: Icons.sports,
-                    title: context.l10n.tacticalBoard,
-                    description: context.l10n.tacticalDescription,
-                    color: Theme.of(context).colorScheme.secondary,
-                    onTap: () =>
-                        _showComingSoon(context, context.l10n.tacticalComingSoon),
-                  ),
-
-                  _buildFeatureCard(
-                    context,
-                    icon: Icons.school,
-                    title: context.l10n.learningHub,
-                    description: context.l10n.learningDescription,
-                    color: Theme.of(context).colorScheme.tertiary,
-                    onTap: () =>
-                        _showComingSoon(context, context.l10n.learningComingSoon),
+                  const SizedBox(height: 12),
+                  Text(
+                    context.l10n.welcomeDescription,
+                    style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ],
               ),
             ),
-          ],
-        ),
+          ),
+          const SizedBox(height: 24),
+          Text(
+            context.l10n.trainingFeatures,
+            style: Theme.of(
+              context,
+            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 16),
+          _buildFeatureCard(
+            context,
+            icon: Icons.directions_run,
+            title: context.l10n.footworkTraining,
+            description: context.l10n.footworkDescription,
+            color: Theme.of(context).colorScheme.primary,
+            onTap: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute<void>(
+                  builder: (context) => const SetupScreen(),
+                ),
+              );
+            },
+          ),
+          _buildFeatureCard(
+            context,
+            icon: Icons.messenger_outline_sharp,
+            title: context.l10n.tacticalBoard,
+            description: context.l10n.tacticalDescription,
+            color: Theme.of(context).colorScheme.secondary,
+            onTap: () =>
+                _showComingSoon(context, context.l10n.tacticalComingSoon),
+          ),
+          _buildFeatureCard(
+            context,
+            icon: Icons.school,
+            title: context.l10n.learningHub,
+            description: context.l10n.learningDescription,
+            color: Theme.of(context).colorScheme.tertiary,
+            onTap: () =>
+                _showComingSoon(context, context.l10n.learningComingSoon),
+          ),
+        ],
       ),
     );
   }

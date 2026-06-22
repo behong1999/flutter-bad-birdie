@@ -315,4 +315,17 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get themeDark => 'Dark';
+
+  @override
+  String get shotSelection => 'Shot selection';
+
+  @override
+  String get optional => 'optional';
+
+  @override
+  String get presetNameExists => 'Already exists. Try a different name.';
+
+  @override
+  String get shotSelectionHelp =>
+      'Pick which shot types to call during training. Leave empty to use all shots available for the selected corners.';
 }

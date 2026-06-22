@@ -19,7 +19,7 @@ class TrainingHeader extends StatelessWidget {
         Text(
           shotsText,
           style: Theme.of(context).textTheme.titleMedium?.copyWith(
-            fontSize: 20,
+            fontSize: 25,
             fontWeight: FontWeight.w700,
           ),
         ),

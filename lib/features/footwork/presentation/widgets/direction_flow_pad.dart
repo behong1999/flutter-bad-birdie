@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../../domain/direction.dart';
+import '../../domain/enums/direction.dart';
 
 class DirectionFlowPad extends StatelessWidget {
   const DirectionFlowPad({
