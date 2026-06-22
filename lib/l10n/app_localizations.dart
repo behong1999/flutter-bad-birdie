@@ -515,7 +515,7 @@ abstract class AppLocalizations {
   /// Front-court shot type kill
   ///
   /// In en, this message translates to:
-  /// **'Kill'**
+  /// **'Tap'**
   String get shotKill;
 
   /// Mid-court shot type drive

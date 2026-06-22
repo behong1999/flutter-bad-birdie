@@ -245,7 +245,7 @@ class AppLocalizationsDe extends AppLocalizations {
   String get shotBlock => 'Block';
 
   @override
-  String get shotKill => 'Kill';
+  String get shotKill => 'Tap';
 
   @override
   String get shotDrive => 'Drive';

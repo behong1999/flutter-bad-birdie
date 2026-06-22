@@ -305,7 +305,7 @@
   "@shotBlock": {
     "description": "Front-court shot type block"
   },
-  "shotKill": "Kill",
+  "shotKill": "Tap",
   "@shotKill": {
     "description": "Front-court shot type kill"
   },

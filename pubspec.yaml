@@ -42,7 +42,7 @@ flutter_launcher_icons:
   ios: true
   image_path: "assets/images/birdie_dark.png"
   min_sdk_android: 21
-  adaptive_icon_background: "#0c0c11"
+  adaptive_icon_background: "#582c82"
   adaptive_icon_foreground: "assets/images/birdie.png"
 
 flutter_native_splash:
