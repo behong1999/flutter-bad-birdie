@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+#
+# Runs before `git commit` finalizes. Exits non-zero to abort the commit.
+# Bypass once with `git commit --no-verify` if you really need to.
+
+set -e
+
+echo "→ Checking Dart format on staged files..."
+STAGED_DART=$(git diff --cached --name-only --diff-filter=ACM | grep '\.dart$' || true)
+if [ -n "$STAGED_DART" ]; then
+  if ! dart format --set-exit-if-changed --output=none $STAGED_DART; then
+    echo "✗ Format issues found. Run: dart format ." >&2
+    exit 1
+  fi
+fi
+
+echo "→ Running flutter analyze..."
+if ! flutter analyze --no-pub; then
+  echo "✗ Analyzer found issues. Fix them before committing." >&2
+  exit 1
+fi
+
+echo "✓ All checks passed."

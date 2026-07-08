@@ -1,34 +1,31 @@
 name: bad_birdie
 description: 'A Flutter app for badminton training'
 publish_to: 'none'
-version: 1.0.0
+version: 1.0.0+2
 
 environment:
   sdk: ^3.10.4
 
 dependencies:
+  audioplayers: ^6.6.0
   flutter:
     sdk: flutter
-  
-  # Localization
   flutter_localizations:
     sdk: flutter
-  intl: any
-  
-  audioplayers: ^6.6.0
   flutter_tts: ^4.2.2
   google_fonts: ^6.2.1
+  intl: any
   provider: ^6.1.2
   shared_preferences: ^2.3.3
   sleek_circular_slider: ^2.0.1
   uuid: ^4.5.1
 
 dev_dependencies:
+  flutter_launcher_icons: ^0.14.3
+  flutter_native_splash: ^2.4.5
   flutter_test:
     sdk: flutter
   very_good_analysis: ^6.0.0
-  flutter_native_splash: ^2.4.5
-  flutter_launcher_icons: ^0.14.3
 
 flutter:
   uses-material-design: true
@@ -48,9 +45,12 @@ flutter_launcher_icons:
 flutter_native_splash:
   color: "#0c0c11"
   image: assets/images/logo.png
+  image_android: assets/images/birdie.png
   color_dark: "#0c0c11"
   image_dark: assets/images/logo.png
+  image_dark_android: assets/images/birdie.png
   android_12:
     color: "#0c0c11"
-    image: assets/images/logo.png
+    image: assets/images/birdie.png
+    icon_background_color: "#0c0c11"
   web: false

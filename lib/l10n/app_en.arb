@@ -44,17 +44,9 @@
   "@learningDescription": {
     "description": "Description for learning hub feature"
   },
-  "footworkComingSoon": "Footwork training coming soon!",
-  "@footworkComingSoon": {
-    "description": "Message when footwork feature is not yet available"
-  },
-  "tacticalComingSoon": "Tactical board coming soon!",
-  "@tacticalComingSoon": {
-    "description": "Message when tactical board feature is not yet available"
-  },
-  "learningComingSoon": "Learning hub coming soon!",
-  "@learningComingSoon": {
-    "description": "Message when learning hub feature is not yet available"
+  "comingSoon": "Coming Soon",
+  "@comingSoon": {
+    "description": "Badge shown on feature cards that are not yet implemented"
   },
   "chooseCornersTitle": "Choose Corners to Focus",
   "@chooseCornersTitle": {
@@ -229,7 +221,7 @@
   "@shotsHelp": {
     "description": "Help text for shots"
   },
-  "speedHelp": "How fast the corner calls come:\n• 1.0x = Beginner (slow)\n• 2.5x = Intermediate\n• 5.0x = Professional (very fast)",
+  "speedHelp": "How fast the corner calls come:\n• 1.0x = Beginner (slow)\n• 2.5x = Intermediate\n• 4.0x = Professional (very fast)",
   "@speedHelp": {
     "description": "Help text for speed"
   },

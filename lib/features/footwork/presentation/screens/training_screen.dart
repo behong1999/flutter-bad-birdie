@@ -71,7 +71,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
     super.initState();
     _totalShots = widget.sets * widget.shotsPerSet;
     _currentShotName = '';
-    _speed = widget.speed;
+    _speed = widget.speed.clamp(1.0, 4.0);
 
     // Ringtone or Speech
     _useRingtone = widget.useRingtone;
@@ -263,7 +263,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
       _timer?.cancel();
       await _showRestDialog();
       if (!mounted || _isPaused) return;
-      await Future.delayed(const Duration(milliseconds: 500));
+      await Future<void>.delayed(const Duration(milliseconds: 500));
       if (!mounted || _isPaused) return;
       _timer = Timer.periodic(_intervalFromSpeed(_speed), (_) {
         if (_isPaused || _isResting || _isStarting) return;

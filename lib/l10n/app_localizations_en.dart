@@ -45,13 +45,7 @@ class AppLocalizationsEn extends AppLocalizations {
   String get learningDescription => 'Discover YouTube channels and tutorials';
 
   @override
-  String get footworkComingSoon => 'Footwork training coming soon!';
-
-  @override
-  String get tacticalComingSoon => 'Tactical board coming soon!';
-
-  @override
-  String get learningComingSoon => 'Learning hub coming soon!';
+  String get comingSoon => 'Coming Soon';
 
   @override
   String get chooseCornersTitle => 'Choose Corners to Focus';
@@ -186,7 +180,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get speedHelp =>
-      'How fast the corner calls come:\n• 1.0x = Beginner (slow)\n• 2.5x = Intermediate\n• 5.0x = Professional (very fast)';
+      'How fast the corner calls come:\n• 1.0x = Beginner (slow)\n• 2.5x = Intermediate\n• 4.0x = Professional (very fast)';
 
   @override
   String get restHelp =>

@@ -9,7 +9,7 @@ plugins {
 }
 
 android {
-    namespace = "com.badbirdie.app"
+    namespace = "de.honghuynh.badbirdie"
     compileSdk = flutter.compileSdkVersion
     ndkVersion = flutter.ndkVersion
 
@@ -39,8 +39,7 @@ android {
     }
 
     defaultConfig {
-        // TODO: Specify your own unique Application ID (https://developer.android.com/studio/build/application-id.html).
-        applicationId = "com.badbirdie.app"
+        applicationId = "de.honghuynh.badbirdie"
         // You can update the following values to match your application needs.
         // For more information, see: https://flutter.dev/to/review-gradle-config.
         minSdk = flutter.minSdkVersion

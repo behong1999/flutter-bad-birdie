@@ -45,8 +45,8 @@ class TrainingSettingsPanel extends StatelessWidget {
               child: Slider(
                 value: speed,
                 min: 1,
-                max: 5,
-                divisions: 40,
+                max: 4,
+                divisions: 30,
                 label: speed.toStringAsFixed(1),
                 onChanged: onSpeedChanged,
               ),

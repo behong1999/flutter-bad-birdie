@@ -1,11 +1,11 @@
 {
-    "name": "bad_birdie",
-    "short_name": "bad_birdie",
+    "name": "Bad Birdie",
+    "short_name": "Bad Birdie",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#0c0c11",
+    "theme_color": "#0c0c11",
+    "description": "Train your badminton footwork with random corner drills and timed sets.",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [

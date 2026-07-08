@@ -56,7 +56,7 @@ class _SetupScreenState extends State<SetupScreen> {
       ..addAll(preset.selectedShots);
     sets = preset.sets.toDouble();
     shots = preset.shotsPerSet.toDouble();
-    speed = preset.speed;
+    speed = preset.speed.clamp(1.0, 4.0);
     rest = preset.restSeconds.toDouble();
     useRingtone = preset.useRingtone;
   }
@@ -127,9 +127,11 @@ class _SetupScreenState extends State<SetupScreen> {
               ],
             ),
             const SizedBox(height: 16),
-            Wrap(
-              spacing: 12,
-              alignment: WrapAlignment.spaceEvenly,
+            GridView.count(
+              crossAxisCount: 2,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              childAspectRatio: 1.3,
               children: [
                 _CircularStat(
                   label: context.l10n.sets,
@@ -152,7 +154,7 @@ class _SetupScreenState extends State<SetupScreen> {
                   valueLabel: 'x${speed.toStringAsFixed(1)}',
                   value: speed,
                   min: 1,
-                  max: 5,
+                  max: 4,
                   onChanged: (v) =>
                       setState(() => speed = (v * 10).round() / 10),
                 ),
@@ -174,7 +176,7 @@ class _SetupScreenState extends State<SetupScreen> {
                 context,
               ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
             ),
-            const SizedBox(height: 8),
+            const SizedBox(height: 14),
             Row(
               children: [
                 Expanded(
@@ -529,7 +531,7 @@ class _SetupScreenState extends State<SetupScreen> {
   void _onBeginTraining() {
     unawaited(_repository.saveLastUsed(_currentPreset(name: 'last_used')));
     Navigator.of(context).push(
-      MaterialPageRoute(
+      MaterialPageRoute<void>(
         builder: (ctx) => TrainingScreen(
           selectedCorners: selectedCorners,
           selectedShots: selectedShots,
@@ -564,36 +566,61 @@ class _CircularStat extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final cs = Theme.of(context).colorScheme;
-    return SleekCircularSlider(
-      min: min,
-      max: max,
-      initialValue: value,
-      onChange: onChanged,
-      appearance: CircularSliderAppearance(
-        size: 160,
-        customWidths: CustomSliderWidths(
-          trackWidth: 6,
-          progressBarWidth: 10,
-          handlerSize: 8,
-        ),
-        customColors: CustomSliderColors(
-          trackColor: cs.surfaceContainerHighest,
-          progressBarColor: cs.primary,
-          dotColor: cs.onSurface,
-          hideShadow: true,
-        ),
-        infoProperties: InfoProperties(
-          mainLabelStyle: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-            color: cs.primary,
-          ),
-          topLabelStyle: Theme.of(
-            context,
-          ).textTheme.bodyMedium?.copyWith(color: cs.onSurfaceVariant),
-          topLabelText: label,
-          modifier: (_) => valueLabel,
-        ),
-      ),
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final dim = constraints.biggest.shortestSide.clamp(110.0, 140.0);
+        return Stack(
+          alignment: Alignment.center,
+          children: [
+            SleekCircularSlider(
+              min: min,
+              max: max,
+              initialValue: value,
+              onChange: onChanged,
+              appearance: CircularSliderAppearance(
+                size: dim,
+                startAngle: 130,
+                angleRange: 280,
+                customWidths: CustomSliderWidths(
+                  trackWidth: 6,
+                  progressBarWidth: 10,
+                  handlerSize: 8,
+                ),
+                customColors: CustomSliderColors(
+                  trackColor: cs.surfaceContainerHighest,
+                  progressBarColor: cs.primary,
+                  dotColor: cs.onSurface,
+                  hideShadow: true,
+                ),
+                infoProperties: InfoProperties(
+                  topLabelText: '',
+                  modifier: (_) => '',
+                ),
+              ),
+            ),
+            IgnorePointer(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  Text(
+                    label,
+                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                      color: cs.onSurfaceVariant,
+                    ),
+                  ),
+                  Text(
+                    valueLabel,
+                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
+                      fontWeight: FontWeight.bold,
+                      color: cs.primary,
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        );
+      },
     );
   }
 }

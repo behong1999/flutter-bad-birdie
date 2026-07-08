@@ -17,9 +17,7 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.settings_outlined),
             tooltip: context.l10n.settings,
             onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(
-                builder: (_) => const SettingsScreen(),
-              ),
+              MaterialPageRoute<void>(builder: (_) => const SettingsScreen()),
             ),
           ),
         ],
@@ -89,8 +87,7 @@ class HomeScreen extends StatelessWidget {
             title: context.l10n.tacticalBoard,
             description: context.l10n.tacticalDescription,
             color: Theme.of(context).colorScheme.secondary,
-            onTap: () =>
-                _showComingSoon(context, context.l10n.tacticalComingSoon),
+            comingSoon: true,
           ),
           _buildFeatureCard(
             context,
@@ -98,18 +95,11 @@ class HomeScreen extends StatelessWidget {
             title: context.l10n.learningHub,
             description: context.l10n.learningDescription,
             color: Theme.of(context).colorScheme.tertiary,
-            onTap: () =>
-                _showComingSoon(context, context.l10n.learningComingSoon),
+            comingSoon: true,
           ),
         ],
       ),
     );
-  }
-
-  void _showComingSoon(BuildContext context, String message) {
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(SnackBar(content: Text(message)));
   }
 
   Widget _buildFeatureCard(
@@ -118,12 +108,13 @@ class HomeScreen extends StatelessWidget {
     required String title,
     required String description,
     required Color color,
-    required VoidCallback onTap,
+    VoidCallback? onTap,
+    bool comingSoon = false,
   }) {
-    return Card(
+    final card = Card(
       margin: const EdgeInsets.only(bottom: 12),
       child: InkWell(
-        onTap: onTap,
+        onTap: comingSoon ? null : onTap,
         borderRadius: BorderRadius.circular(12),
         child: Padding(
           padding: const EdgeInsets.all(16),
@@ -158,15 +149,41 @@ class HomeScreen extends StatelessWidget {
                   ],
                 ),
               ),
-              Icon(
-                Icons.arrow_forward_ios,
-                color: Theme.of(context).colorScheme.onSurfaceVariant,
-                size: 16,
-              ),
+              if (!comingSoon)
+                Icon(
+                  Icons.arrow_forward_ios,
+                  color: Theme.of(context).colorScheme.onSurfaceVariant,
+                  size: 16,
+                ),
             ],
           ),
         ),
       ),
+    );
+
+    if (!comingSoon) return card;
+    return Stack(
+      children: [
+        Opacity(opacity: 0.55, child: card),
+        Positioned(
+          top: 4,
+          right: 4,
+          child: Container(
+            padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+            decoration: BoxDecoration(
+              color: Theme.of(context).colorScheme.secondaryContainer,
+              borderRadius: BorderRadius.circular(8),
+            ),
+            child: Text(
+              context.l10n.comingSoon,
+              style: Theme.of(context).textTheme.labelSmall?.copyWith(
+                color: Theme.of(context).colorScheme.onSecondaryContainer,
+                fontWeight: FontWeight.w600,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }

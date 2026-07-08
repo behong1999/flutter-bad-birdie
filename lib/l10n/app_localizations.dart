@@ -164,23 +164,11 @@ abstract class AppLocalizations {
   /// **'Discover YouTube channels and tutorials'**
   String get learningDescription;
 
-  /// Message when footwork feature is not yet available
+  /// Badge shown on feature cards that are not yet implemented
   ///
   /// In en, this message translates to:
-  /// **'Footwork training coming soon!'**
-  String get footworkComingSoon;
-
-  /// Message when tactical board feature is not yet available
-  ///
-  /// In en, this message translates to:
-  /// **'Tactical board coming soon!'**
-  String get tacticalComingSoon;
-
-  /// Message when learning hub feature is not yet available
-  ///
-  /// In en, this message translates to:
-  /// **'Learning hub coming soon!'**
-  String get learningComingSoon;
+  /// **'Coming Soon'**
+  String get comingSoon;
 
   /// Title for corner selection section
   ///
@@ -401,7 +389,7 @@ abstract class AppLocalizations {
   /// Help text for speed
   ///
   /// In en, this message translates to:
-  /// **'How fast the corner calls come:\n• 1.0x = Beginner (slow)\n• 2.5x = Intermediate\n• 5.0x = Professional (very fast)'**
+  /// **'How fast the corner calls come:\n• 1.0x = Beginner (slow)\n• 2.5x = Intermediate\n• 4.0x = Professional (very fast)'**
   String get speedHelp;
 
   /// Help text for rest
