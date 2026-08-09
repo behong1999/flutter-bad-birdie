@@ -50,9 +50,21 @@ flutter pub get
 # Generate localization files
 flutter gen-l10n
 
+# Enable git hooks (format + analyze before each commit)
+./.githooks/install.sh
+
 # Run the app
 flutter run
 ```
+
+### Git hooks (optional but recommended)
+
+After cloning, run `./.githooks/install.sh` once. It configures Git to run checks before each commit:
+
+- `dart format` on staged Dart files
+- `flutter analyze`
+
+If a commit is blocked, run `dart format .`, stage the changes, and commit again. Skip checks once with `git commit --no-verify` (use sparingly).
 
 ### Building for Release
 ```bash
