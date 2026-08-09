@@ -16,9 +16,11 @@ A comprehensive badminton training app built with Flutter, designed to help badm
 - 🔄 **Learning Hub** - Curated YouTube channels and tutorials
 - 🔄 **Progress Tracking** - Statistics and improvement metrics
 
-## 🚀 Download
+## 🚀 Try the app
 
-📱 **Get it on Google Play Store**: [Coming Soon]
+- **Android:** [Google Play](https://play.google.com/store/apps/details?id=de.honghuynh.badbirdie)
+- **Web (browser):** [bad-birdie-hong.web.app](https://bad-birdie-hong.web.app) — works on iPhone and desktop browsers
+- **iPhone:** Use the web link above (native iOS app coming soon)
 
 ## 🛠️ Tech Stack
 
@@ -27,7 +29,7 @@ A comprehensive badminton training app built with Flutter, designed to help badm
 - **Design**: Material 3
 - **Localization**: Flutter i18n
 - **State Management**: Simple & Clean approach
-- **Platform**: Android (iOS coming soon)
+- **Platform**: Android app, Flutter web (iOS native coming soon)
 
 ## 🏗️ Development Setup
 
