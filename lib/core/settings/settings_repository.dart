@@ -5,8 +5,7 @@ class SettingsRepository {
   static const String _themeModeKey = 'app_theme_mode';
   static const String _localeKey = 'app_locale';
 
-  late final Future<SharedPreferences> _prefs =
-      SharedPreferences.getInstance();
+  late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<ThemeMode> loadThemeMode() async {
     final prefs = await _prefs;

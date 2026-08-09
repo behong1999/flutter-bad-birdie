@@ -5,8 +5,7 @@ class PresetRepository {
   static const String _presetsKey = 'training_presets';
   static const String _lastUsedKey = 'training_last_used';
 
-  late final Future<SharedPreferences> _prefs =
-      SharedPreferences.getInstance();
+  late final Future<SharedPreferences> _prefs = SharedPreferences.getInstance();
 
   Future<List<TrainingPreset>> loadPresets() async {
     final prefs = await _prefs;
@@ -17,13 +16,15 @@ class PresetRepository {
 
   Future<void> savePreset(TrainingPreset preset) async {
     final prefs = await _prefs;
-    final current = await loadPresets()..add(preset);
+    final current = await loadPresets()
+      ..add(preset);
     await prefs.setString(_presetsKey, TrainingPreset.encodeList(current));
   }
 
   Future<void> deletePreset(String id) async {
     final prefs = await _prefs;
-    final current = await loadPresets()..removeWhere((p) => p.id == id);
+    final current = await loadPresets()
+      ..removeWhere((p) => p.id == id);
     await prefs.setString(_presetsKey, TrainingPreset.encodeList(current));
   }
 

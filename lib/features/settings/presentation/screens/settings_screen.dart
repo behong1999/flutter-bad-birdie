@@ -10,10 +10,7 @@ class SettingsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final settings = context.watch<AppSettings>();
     return Scaffold(
-      appBar: AppBar(
-        title: Text(context.l10n.settings),
-        centerTitle: true,
-      ),
+      appBar: AppBar(title: Text(context.l10n.settings), centerTitle: true),
       body: ListView(
         padding: const EdgeInsets.symmetric(vertical: 12),
         children: [

@@ -649,6 +649,102 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Pick which shot types to call during training. Leave empty to use all shots available for the selected corners.'**
   String get shotSelectionHelp;
+
+  /// Singles court mode toggle label
+  ///
+  /// In en, this message translates to:
+  /// **'Singles'**
+  String get singlesLabel;
+
+  /// Doubles court mode toggle label
+  ///
+  /// In en, this message translates to:
+  /// **'Doubles'**
+  String get doublesLabel;
+
+  /// Undo last action
+  ///
+  /// In en, this message translates to:
+  /// **'Undo'**
+  String get undoLabel;
+
+  /// Reset tactical board by removing all drawings
+  ///
+  /// In en, this message translates to:
+  /// **'Reset to default'**
+  String get clearBoard;
+
+  /// Title of the rename player marker dialog
+  ///
+  /// In en, this message translates to:
+  /// **'Rename player'**
+  String get renamePlayerTitle;
+
+  /// Freehand drawing tool
+  ///
+  /// In en, this message translates to:
+  /// **'Pencil'**
+  String get toolPencil;
+
+  /// Arrow drawing tool
+  ///
+  /// In en, this message translates to:
+  /// **'Arrow'**
+  String get toolArrow;
+
+  /// Player marker placement tool
+  ///
+  /// In en, this message translates to:
+  /// **'Add player'**
+  String get toolMarker;
+
+  /// Help title for player markers
+  ///
+  /// In en, this message translates to:
+  /// **'Player markers'**
+  String get tacticalBoardHelpMarkersTitle;
+
+  /// Help text for player markers
+  ///
+  /// In en, this message translates to:
+  /// **'Drag a marker to move it. Press and hold for about 1 second without moving to rename it. Blue and red markers represent each team.'**
+  String get tacticalBoardHelpMarkers;
+
+  /// Help text for pencil tool
+  ///
+  /// In en, this message translates to:
+  /// **'Draw freehand lines to show paths or areas.'**
+  String get tacticalBoardHelpPencil;
+
+  /// Help text for arrow tool
+  ///
+  /// In en, this message translates to:
+  /// **'Drag on the court to draw an arrow showing direction or movement.'**
+  String get tacticalBoardHelpArrow;
+
+  /// Help title for stroke color picker
+  ///
+  /// In en, this message translates to:
+  /// **'Colors'**
+  String get tacticalBoardHelpColorsTitle;
+
+  /// Help text for stroke color picker
+  ///
+  /// In en, this message translates to:
+  /// **'Tap a color to choose the stroke color for pencil and arrow tools.'**
+  String get tacticalBoardHelpColors;
+
+  /// Help text for undo button
+  ///
+  /// In en, this message translates to:
+  /// **'Undo the last drawing or marker change.'**
+  String get tacticalBoardHelpUndo;
+
+  /// Help text for clear board button
+  ///
+  /// In en, this message translates to:
+  /// **'Reset the court to default by removing all drawings.'**
+  String get tacticalBoardHelpClear;
 }
 
 class _AppLocalizationsDelegate

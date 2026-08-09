@@ -322,4 +322,57 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get shotSelectionHelp =>
       'Pick which shot types to call during training. Leave empty to use all shots available for the selected corners.';
+
+  @override
+  String get singlesLabel => 'Singles';
+
+  @override
+  String get doublesLabel => 'Doubles';
+
+  @override
+  String get undoLabel => 'Undo';
+
+  @override
+  String get clearBoard => 'Reset to default';
+
+  @override
+  String get renamePlayerTitle => 'Rename player';
+
+  @override
+  String get toolPencil => 'Pencil';
+
+  @override
+  String get toolArrow => 'Arrow';
+
+  @override
+  String get toolMarker => 'Add player';
+
+  @override
+  String get tacticalBoardHelpMarkersTitle => 'Player markers';
+
+  @override
+  String get tacticalBoardHelpMarkers =>
+      'Drag a marker to move it. Press and hold for about 1 second without moving to rename it. Blue and red markers represent each team.';
+
+  @override
+  String get tacticalBoardHelpPencil =>
+      'Draw freehand lines to show paths or areas.';
+
+  @override
+  String get tacticalBoardHelpArrow =>
+      'Drag on the court to draw an arrow showing direction or movement.';
+
+  @override
+  String get tacticalBoardHelpColorsTitle => 'Colors';
+
+  @override
+  String get tacticalBoardHelpColors =>
+      'Tap a color to choose the stroke color for pencil and arrow tools.';
+
+  @override
+  String get tacticalBoardHelpUndo => 'Undo the last drawing or marker change.';
+
+  @override
+  String get tacticalBoardHelpClear =>
+      'Reset the court to default by removing all drawings.';
 }

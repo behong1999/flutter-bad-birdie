@@ -91,5 +91,21 @@
   "shotSelection": "Schlagauswahl",
   "optional": "optional",
   "presetNameExists": "Existiert bereits. Wähle einen anderen Namen.",
-  "shotSelectionHelp": "Wähle, welche Schlagarten während des Trainings gerufen werden. Lass die Auswahl leer, um alle für die gewählten Ecken verfügbaren Schläge zu nutzen."
+  "shotSelectionHelp": "Wähle, welche Schlagarten während des Trainings gerufen werden. Lass die Auswahl leer, um alle für die gewählten Ecken verfügbaren Schläge zu nutzen.",
+  "singlesLabel": "Einzel",
+  "doublesLabel": "Doppel",
+  "undoLabel": "Rückgängig",
+  "clearBoard": "Standard wiederherstellen",
+  "renamePlayerTitle": "Spieler umbenennen",
+  "toolPencil": "Stift",
+  "toolArrow": "Pfeil",
+  "toolMarker": "Spieler hinzufügen",
+  "tacticalBoardHelpMarkersTitle": "Spielermarkierungen",
+  "tacticalBoardHelpMarkers": "Markierung ziehen zum Verschieben. Etwa 1 Sekunde gedrückt halten (ohne zu bewegen) zum Umbenennen. Blaue und rote Markierungen stehen für jedes Team.",
+  "tacticalBoardHelpPencil": "Freihandlinien für Wege oder Bereiche zeichnen.",
+  "tacticalBoardHelpArrow": "Auf dem Feld ziehen, um einen Pfeil für Richtung oder Bewegung zu zeichnen.",
+  "tacticalBoardHelpColorsTitle": "Farben",
+  "tacticalBoardHelpColors": "Farbe für Stift- und Pfeilwerkzeug wählen.",
+  "tacticalBoardHelpUndo": "Letzte Zeichnung oder Markierungsänderung rückgängig machen.",
+  "tacticalBoardHelpClear": "Setzt das Feld auf den Standard zurück und entfernt alle Zeichnungen."
 }

@@ -324,4 +324,58 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get shotSelectionHelp =>
       'Wähle, welche Schlagarten während des Trainings gerufen werden. Lass die Auswahl leer, um alle für die gewählten Ecken verfügbaren Schläge zu nutzen.';
+
+  @override
+  String get singlesLabel => 'Einzel';
+
+  @override
+  String get doublesLabel => 'Doppel';
+
+  @override
+  String get undoLabel => 'Rückgängig';
+
+  @override
+  String get clearBoard => 'Standard wiederherstellen';
+
+  @override
+  String get renamePlayerTitle => 'Spieler umbenennen';
+
+  @override
+  String get toolPencil => 'Stift';
+
+  @override
+  String get toolArrow => 'Pfeil';
+
+  @override
+  String get toolMarker => 'Spieler hinzufügen';
+
+  @override
+  String get tacticalBoardHelpMarkersTitle => 'Spielermarkierungen';
+
+  @override
+  String get tacticalBoardHelpMarkers =>
+      'Markierung ziehen zum Verschieben. Etwa 1 Sekunde gedrückt halten (ohne zu bewegen) zum Umbenennen. Blaue und rote Markierungen stehen für jedes Team.';
+
+  @override
+  String get tacticalBoardHelpPencil =>
+      'Freihandlinien für Wege oder Bereiche zeichnen.';
+
+  @override
+  String get tacticalBoardHelpArrow =>
+      'Auf dem Feld ziehen, um einen Pfeil für Richtung oder Bewegung zu zeichnen.';
+
+  @override
+  String get tacticalBoardHelpColorsTitle => 'Farben';
+
+  @override
+  String get tacticalBoardHelpColors =>
+      'Farbe für Stift- und Pfeilwerkzeug wählen.';
+
+  @override
+  String get tacticalBoardHelpUndo =>
+      'Letzte Zeichnung oder Markierungsänderung rückgängig machen.';
+
+  @override
+  String get tacticalBoardHelpClear =>
+      'Setzt das Feld auf den Standard zurück und entfernt alle Zeichnungen.';
 }

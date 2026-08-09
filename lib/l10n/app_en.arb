@@ -408,5 +408,69 @@
   "@presetNameExists": {
     "description": "Validation error when saving a preset with a duplicate name"
   },
-  "shotSelectionHelp": "Pick which shot types to call during training. Leave empty to use all shots available for the selected corners."
+  "shotSelectionHelp": "Pick which shot types to call during training. Leave empty to use all shots available for the selected corners.",
+  "singlesLabel": "Singles",
+  "@singlesLabel": {
+    "description": "Singles court mode toggle label"
+  },
+  "doublesLabel": "Doubles",
+  "@doublesLabel": {
+    "description": "Doubles court mode toggle label"
+  },
+  "undoLabel": "Undo",
+  "@undoLabel": {
+    "description": "Undo last action"
+  },
+  "clearBoard": "Reset to default",
+  "@clearBoard": {
+    "description": "Reset tactical board by removing all drawings"
+  },
+  "renamePlayerTitle": "Rename player",
+  "@renamePlayerTitle": {
+    "description": "Title of the rename player marker dialog"
+  },
+  "toolPencil": "Pencil",
+  "@toolPencil": {
+    "description": "Freehand drawing tool"
+  },
+  "toolArrow": "Arrow",
+  "@toolArrow": {
+    "description": "Arrow drawing tool"
+  },
+  "toolMarker": "Add player",
+  "@toolMarker": {
+    "description": "Player marker placement tool"
+  },
+  "tacticalBoardHelpMarkersTitle": "Player markers",
+  "@tacticalBoardHelpMarkersTitle": {
+    "description": "Help title for player markers"
+  },
+  "tacticalBoardHelpMarkers": "Drag a marker to move it. Press and hold for about 1 second without moving to rename it. Blue and red markers represent each team.",
+  "@tacticalBoardHelpMarkers": {
+    "description": "Help text for player markers"
+  },
+  "tacticalBoardHelpPencil": "Draw freehand lines to show paths or areas.",
+  "@tacticalBoardHelpPencil": {
+    "description": "Help text for pencil tool"
+  },
+  "tacticalBoardHelpArrow": "Drag on the court to draw an arrow showing direction or movement.",
+  "@tacticalBoardHelpArrow": {
+    "description": "Help text for arrow tool"
+  },
+  "tacticalBoardHelpColorsTitle": "Colors",
+  "@tacticalBoardHelpColorsTitle": {
+    "description": "Help title for stroke color picker"
+  },
+  "tacticalBoardHelpColors": "Tap a color to choose the stroke color for pencil and arrow tools.",
+  "@tacticalBoardHelpColors": {
+    "description": "Help text for stroke color picker"
+  },
+  "tacticalBoardHelpUndo": "Undo the last drawing or marker change.",
+  "@tacticalBoardHelpUndo": {
+    "description": "Help text for undo button"
+  },
+  "tacticalBoardHelpClear": "Reset the court to default by removing all drawings.",
+  "@tacticalBoardHelpClear": {
+    "description": "Help text for clear board button"
+  }
 }

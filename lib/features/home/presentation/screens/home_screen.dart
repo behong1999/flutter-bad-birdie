@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import '../../../../core/extensions/l10n_extension.dart';
+import '../../../../core/extensions/navigator_extension.dart';
 import '../../../footwork/presentation/screens/setup_screen.dart';
 import '../../../settings/presentation/screens/settings_screen.dart';
+import '../../../tactical_board/presentation/screens/tactical_board_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
@@ -16,9 +18,7 @@ class HomeScreen extends StatelessWidget {
           IconButton(
             icon: const Icon(Icons.settings_outlined),
             tooltip: context.l10n.settings,
-            onPressed: () => Navigator.of(context).push(
-              MaterialPageRoute<void>(builder: (_) => const SettingsScreen()),
-            ),
+            onPressed: () => context.push<void>(const SettingsScreen()),
           ),
         ],
       ),
@@ -72,14 +72,7 @@ class HomeScreen extends StatelessWidget {
             title: context.l10n.footworkTraining,
             description: context.l10n.footworkDescription,
             color: Theme.of(context).colorScheme.primary,
-            onTap: () {
-              Navigator.push(
-                context,
-                MaterialPageRoute<void>(
-                  builder: (context) => const SetupScreen(),
-                ),
-              );
-            },
+            onTap: () => context.push<void>(const SetupScreen()),
           ),
           _buildFeatureCard(
             context,
@@ -87,7 +80,7 @@ class HomeScreen extends StatelessWidget {
             title: context.l10n.tacticalBoard,
             description: context.l10n.tacticalDescription,
             color: Theme.of(context).colorScheme.secondary,
-            comingSoon: true,
+            onTap: () => context.push<void>(const TacticalBoardScreen()),
           ),
           _buildFeatureCard(
             context,

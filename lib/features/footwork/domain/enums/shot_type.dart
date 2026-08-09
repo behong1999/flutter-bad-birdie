@@ -7,9 +7,21 @@ enum ShotType {
   kill,
   drive;
 
-  static const Set<ShotType> _frontCourt = {ShotType.lift, ShotType.block, ShotType.kill};
-  static const Set<ShotType> _midCourt = {ShotType.block, ShotType.kill, ShotType.drive};
-  static const Set<ShotType> _backCourt = {ShotType.clear, ShotType.drop, ShotType.smash};
+  static const Set<ShotType> _frontCourt = {
+    ShotType.lift,
+    ShotType.block,
+    ShotType.kill,
+  };
+  static const Set<ShotType> _midCourt = {
+    ShotType.block,
+    ShotType.kill,
+    ShotType.drive,
+  };
+  static const Set<ShotType> _backCourt = {
+    ShotType.clear,
+    ShotType.drop,
+    ShotType.smash,
+  };
 
   static Set<ShotType> zoneAllowed(int corner) => switch (corner) {
     1 || 2 || 3 => _frontCourt,

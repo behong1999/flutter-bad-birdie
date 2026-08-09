@@ -25,7 +25,8 @@ class TrainingPreset {
     speed: (json['speed'] as num).toDouble(),
     restSeconds: json['restSeconds'] as int,
     useRingtone: json['useRingtone'] as bool,
-    selectedShots: (json['selectedShots'] as List<dynamic>?)
+    selectedShots:
+        (json['selectedShots'] as List<dynamic>?)
             ?.map((e) => ShotType.values.byName(e as String))
             .toSet() ??
         const {},
