@@ -452,6 +452,18 @@ abstract class AppLocalizations {
   /// **'Exit'**
   String get exitLabel;
 
+  /// Enter fullscreen training view for a larger direction pad
+  ///
+  /// In en, this message translates to:
+  /// **'Full screen'**
+  String get enterFullscreen;
+
+  /// Leave fullscreen training view and show settings panel
+  ///
+  /// In en, this message translates to:
+  /// **'Exit full screen'**
+  String get exitFullscreen;
+
   /// Direction label shown under current shot name
   ///
   /// In en, this message translates to:
@@ -668,7 +680,7 @@ abstract class AppLocalizations {
   /// **'Undo'**
   String get undoLabel;
 
-  /// Reset tactical board by removing all drawings
+  /// Reset tactical board to default markers and remove all drawings
   ///
   /// In en, this message translates to:
   /// **'Reset to default'**
@@ -743,7 +755,7 @@ abstract class AppLocalizations {
   /// Help text for clear board button
   ///
   /// In en, this message translates to:
-  /// **'Reset the court to default by removing all drawings.'**
+  /// **'Reset player markers to their default positions and remove all drawings.'**
   String get tacticalBoardHelpClear;
 }
 

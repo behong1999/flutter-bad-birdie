@@ -1,5 +1,6 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import '../../../../core/layout/responsive_center.dart';
 import '../../../../l10n/app_localizations.dart';
 import '../../domain/models/board_element.dart';
 import '../../domain/models/draw_tool.dart';
@@ -98,12 +99,30 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
     setState(() => _elements = _history.removeLast());
   }
 
+  bool get _hasChangesFromDefault {
+    if (_currentStroke != null || _arrowStart != null) return true;
+    if (_elements.any((e) => e is! PlayerMarker)) return true;
+
+    final defaults = {for (final m in _defaultMarkers) m.id: m};
+    final markers = _elements.whereType<PlayerMarker>();
+    if (markers.length != _defaultMarkers.length) return true;
+
+    for (final marker in markers) {
+      final defaultMarker = defaults[marker.id];
+      if (defaultMarker == null) return true;
+      if (marker.position != defaultMarker.position ||
+          marker.label != defaultMarker.label) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   void _clearBoard() {
-    final hasDrawings = _elements.any((e) => e is! PlayerMarker);
-    if (!hasDrawings) return;
+    if (!_hasChangesFromDefault) return;
     _saveHistory();
     setState(() {
-      _elements = _elements.whereType<PlayerMarker>().toList();
+      _elements = [..._defaultMarkers];
       _currentStroke = null;
       _arrowStart = null;
       _arrowCurrent = null;
@@ -316,73 +335,79 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
           ),
         ],
       ),
-      body: Column(
-        children: [
-          Expanded(
-            child: Center(
-              child: AspectRatio(
-                aspectRatio: _courtAspectRatio,
-                child: LayoutBuilder(
-                  builder: (context, constraints) {
-                    _courtSize = constraints.biggest;
-                    return Stack(
-                      children: [
-                        const CustomPaint(
-                          size: Size.infinite,
-                          painter: CourtPainter(
-                            lineColor: Colors.white,
-                            courtColor: Color(0xFF1B5E20),
-                          ),
-                        ),
-                        RawGestureDetector(
-                          behavior: HitTestBehavior.opaque,
-                          gestures: {
-                            LongPressGestureRecognizer: _longPressFactory(),
-                            PanGestureRecognizer: _panFactory(),
-                          },
-                          child: CustomPaint(
-                            size: Size.infinite,
-                            painter: BoardPainter(
-                              elements: _elements,
-                              currentStroke: _currentStroke,
-                              arrowPreviewStart: _arrowStart,
-                              arrowPreviewEnd: _arrowCurrent,
-                              previewColor: _color,
+      body: ResponsiveCenter(
+        maxWidth: 960,
+        child: Column(
+          children: [
+            Expanded(
+              child: Center(
+                child: ConstrainedBox(
+                  constraints: const BoxConstraints(maxHeight: 720),
+                  child: AspectRatio(
+                    aspectRatio: _courtAspectRatio,
+                    child: LayoutBuilder(
+                      builder: (context, constraints) {
+                        _courtSize = constraints.biggest;
+                        return Stack(
+                          children: [
+                            const CustomPaint(
+                              size: Size.infinite,
+                              painter: CourtPainter(
+                                lineColor: Colors.white,
+                                courtColor: Color(0xFF1B5E20),
+                              ),
                             ),
-                          ),
-                        ),
-                        ..._markers.map((marker) {
-                          const r = 18.0;
-                          final px = marker.position.dx * _courtSize.width;
-                          final py = marker.position.dy * _courtSize.height;
-                          return Positioned(
-                            left: px - r,
-                            top: py - r,
-                            child: _MarkerToken(marker: marker, radius: r),
-                          );
-                        }),
-                      ],
-                    );
-                  },
+                            RawGestureDetector(
+                              behavior: HitTestBehavior.opaque,
+                              gestures: {
+                                LongPressGestureRecognizer: _longPressFactory(),
+                                PanGestureRecognizer: _panFactory(),
+                              },
+                              child: CustomPaint(
+                                size: Size.infinite,
+                                painter: BoardPainter(
+                                  elements: _elements,
+                                  currentStroke: _currentStroke,
+                                  arrowPreviewStart: _arrowStart,
+                                  arrowPreviewEnd: _arrowCurrent,
+                                  previewColor: _color,
+                                ),
+                              ),
+                            ),
+                            ..._markers.map((marker) {
+                              const r = 18.0;
+                              final px = marker.position.dx * _courtSize.width;
+                              final py = marker.position.dy * _courtSize.height;
+                              return Positioned(
+                                left: px - r,
+                                top: py - r,
+                                child: _MarkerToken(marker: marker, radius: r),
+                              );
+                            }),
+                          ],
+                        );
+                      },
+                    ),
+                  ),
                 ),
               ),
             ),
-          ),
-          BoardToolbar(
-            activeTool: _tool,
-            activeColor: _color,
-            canUndo: _history.isNotEmpty,
-            strokeColors: _strokeColors,
-            onToolSelected: (tool) => setState(() {
-              _tool = tool;
-              _arrowStart = null;
-              _arrowCurrent = null;
-            }),
-            onColorSelected: (color) => setState(() => _color = color),
-            onUndo: _undo,
-            onClear: _clearBoard,
-          ),
-        ],
+            BoardToolbar(
+              activeTool: _tool,
+              activeColor: _color,
+              canUndo: _history.isNotEmpty,
+              strokeColors: _strokeColors,
+              onToolSelected: (tool) => setState(() {
+                _tool = tool;
+                _arrowStart = null;
+                _arrowCurrent = null;
+              }),
+              onColorSelected: (color) => setState(() => _color = color),
+              onUndo: _undo,
+              onClear: _clearBoard,
+            ),
+          ],
+        ),
       ),
     );
   }

@@ -215,6 +215,12 @@ class AppLocalizationsEn extends AppLocalizations {
   String get exitLabel => 'Exit';
 
   @override
+  String get enterFullscreen => 'Full screen';
+
+  @override
+  String get exitFullscreen => 'Exit full screen';
+
+  @override
   String get directionLabel => 'Direction';
 
   @override
@@ -374,5 +380,5 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get tacticalBoardHelpClear =>
-      'Reset the court to default by removing all drawings.';
+      'Reset player markers to their default positions and remove all drawings.';
 }

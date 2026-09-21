@@ -265,6 +265,14 @@
   "@exitLabel": {
     "description": "Exit training button label"
   },
+  "enterFullscreen": "Full screen",
+  "@enterFullscreen": {
+    "description": "Enter fullscreen training view for a larger direction pad"
+  },
+  "exitFullscreen": "Exit full screen",
+  "@exitFullscreen": {
+    "description": "Leave fullscreen training view and show settings panel"
+  },
   "directionLabel": "Direction",
   "@directionLabel": {
     "description": "Direction label shown under current shot name"
@@ -423,7 +431,7 @@
   },
   "clearBoard": "Reset to default",
   "@clearBoard": {
-    "description": "Reset tactical board by removing all drawings"
+    "description": "Reset tactical board to default markers and remove all drawings"
   },
   "renamePlayerTitle": "Rename player",
   "@renamePlayerTitle": {
@@ -469,7 +477,7 @@
   "@tacticalBoardHelpUndo": {
     "description": "Help text for undo button"
   },
-  "tacticalBoardHelpClear": "Reset the court to default by removing all drawings.",
+  "tacticalBoardHelpClear": "Reset player markers to their default positions and remove all drawings.",
   "@tacticalBoardHelpClear": {
     "description": "Help text for clear board button"
   }

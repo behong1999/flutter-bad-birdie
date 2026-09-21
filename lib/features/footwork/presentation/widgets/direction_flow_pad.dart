@@ -7,17 +7,33 @@ class DirectionFlowPad extends StatelessWidget {
     required this.activeCue,
     required this.currentShot,
     required this.pulseIn,
+    this.maxSize,
     super.key,
   });
 
   final DirectionCue activeCue;
   final int currentShot;
   final bool pulseIn;
+  final double? maxSize;
 
   @override
   Widget build(BuildContext context) {
-    final screenWidth = MediaQuery.of(context).size.width;
-    final padSize = (screenWidth * 0.9).clamp(200.0, 400.0);
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        final fallback = MediaQuery.sizeOf(context).width * 0.9;
+        final fromConstraints = constraints.hasBoundedWidth &&
+                constraints.hasBoundedHeight
+            ? constraints.biggest.shortestSide
+            : fallback;
+        final available = fromConstraints > 0 ? fromConstraints : fallback;
+        final padSize = available.clamp(200.0, maxSize ?? 700.0);
+        return _buildPad(context, padSize);
+      },
+    );
+  }
+
+  Widget _buildPad(BuildContext context, double padSize) {
+    final scale = padSize / 400;
     return SizedBox(
       width: padSize,
       height: padSize,
@@ -48,18 +64,21 @@ class DirectionFlowPad extends StatelessWidget {
                   Icons.north_west,
                   activeCue == DirectionCue.upLeft,
                   cueStrength(DirectionCue.upLeft),
+                  scale,
                 ),
                 _cueArrow(
                   context,
                   Icons.north,
                   activeCue == DirectionCue.up,
                   cueStrength(DirectionCue.up),
+                  scale,
                 ),
                 _cueArrow(
                   context,
                   Icons.north_east,
                   activeCue == DirectionCue.upRight,
                   cueStrength(DirectionCue.upRight),
+                  scale,
                 ),
               ]),
               _directionRow([
@@ -68,6 +87,7 @@ class DirectionFlowPad extends StatelessWidget {
                   Icons.west,
                   activeCue == DirectionCue.left,
                   cueStrength(DirectionCue.left),
+                  scale,
                 ),
                 _centerCue(
                   context,
@@ -76,12 +96,14 @@ class DirectionFlowPad extends StatelessWidget {
                   activeCue,
                   targetStrength,
                   padSize,
+                  scale,
                 ),
                 _cueArrow(
                   context,
                   Icons.east,
                   activeCue == DirectionCue.right,
                   cueStrength(DirectionCue.right),
+                  scale,
                 ),
               ]),
               _directionRow([
@@ -90,18 +112,21 @@ class DirectionFlowPad extends StatelessWidget {
                   Icons.south_west,
                   activeCue == DirectionCue.downLeft,
                   cueStrength(DirectionCue.downLeft),
+                  scale,
                 ),
                 _cueArrow(
                   context,
                   Icons.south,
                   activeCue == DirectionCue.down,
                   cueStrength(DirectionCue.down),
+                  scale,
                 ),
                 _cueArrow(
                   context,
                   Icons.south_east,
                   activeCue == DirectionCue.downRight,
                   cueStrength(DirectionCue.downRight),
+                  scale,
                 ),
               ]),
             ],
@@ -125,6 +150,7 @@ class DirectionFlowPad extends StatelessWidget {
     DirectionCue targetCue,
     double targetStrength,
     double padSize,
+    double scale,
   ) {
     final primary = Theme.of(context).colorScheme.primary;
     final strength = cueStrength.clamp(0.0, 1.0);
@@ -135,9 +161,11 @@ class DirectionFlowPad extends StatelessWidget {
         targetCue != DirectionCue.center &&
         move > 0.01;
 
+    final boxSize = 58 * scale;
+    final dotSize = 12 * scale;
     return SizedBox(
-      width: 58,
-      height: 58,
+      width: boxSize,
+      height: boxSize,
       child: Stack(
         clipBehavior: Clip.none,
         alignment: Alignment.center,
@@ -145,8 +173,8 @@ class DirectionFlowPad extends StatelessWidget {
           AnimatedContainer(
             duration: const Duration(milliseconds: 220),
             curve: Curves.easeOut,
-            width: 34 + (4 * strength),
-            height: 34 + (4 * strength),
+            width: (34 + (4 * strength)) * scale,
+            height: (34 + (4 * strength)) * scale,
             decoration: BoxDecoration(
               shape: BoxShape.circle,
               color: primary.withValues(
@@ -166,8 +194,8 @@ class DirectionFlowPad extends StatelessWidget {
               child: Opacity(
                 opacity: 0.85,
                 child: Container(
-                  width: 12,
-                  height: 12,
+                  width: dotSize,
+                  height: dotSize,
                   decoration: BoxDecoration(
                     color: primary,
                     shape: BoxShape.circle,
@@ -211,6 +239,7 @@ class DirectionFlowPad extends StatelessWidget {
     IconData icon,
     bool active,
     double cueStrength,
+    double scale,
   ) {
     final primary = Theme.of(context).colorScheme.primary;
     final strength = cueStrength.clamp(0.0, 1.0);
@@ -223,7 +252,7 @@ class DirectionFlowPad extends StatelessWidget {
       child: AnimatedContainer(
         duration: const Duration(milliseconds: 220),
         curve: Curves.easeOut,
-        padding: const EdgeInsets.all(6),
+        padding: EdgeInsets.all(6 * scale),
         decoration: BoxDecoration(
           shape: BoxShape.circle,
           color: active
@@ -232,7 +261,7 @@ class DirectionFlowPad extends StatelessWidget {
         ),
         child: Icon(
           icon,
-          size: active ? (46 + (8 * strength)) : 44,
+          size: (active ? (46 + (8 * strength)) : 44) * scale,
           color: active ? primary : Colors.grey[450],
         ),
       ),

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../../../core/extensions/l10n_extension.dart';
+import '../../../../core/layout/responsive_center.dart';
 import '../../../../core/settings/app_settings.dart';
 
 class SettingsScreen extends StatelessWidget {
@@ -11,55 +12,58 @@ class SettingsScreen extends StatelessWidget {
     final settings = context.watch<AppSettings>();
     return Scaffold(
       appBar: AppBar(title: Text(context.l10n.settings), centerTitle: true),
-      body: ListView(
-        padding: const EdgeInsets.symmetric(vertical: 12),
-        children: [
-          _SectionHeader(context.l10n.appearance),
-          RadioGroup<ThemeMode>(
-            groupValue: settings.themeMode,
-            onChanged: (m) {
-              if (m != null) settings.setThemeMode(m);
-            },
-            child: Column(
-              children: [
-                RadioListTile<ThemeMode>(
-                  title: Text(context.l10n.themeSystem),
-                  value: ThemeMode.system,
-                ),
-                RadioListTile<ThemeMode>(
-                  title: Text(context.l10n.themeLight),
-                  value: ThemeMode.light,
-                ),
-                RadioListTile<ThemeMode>(
-                  title: Text(context.l10n.themeDark),
-                  value: ThemeMode.dark,
-                ),
-              ],
+      body: ResponsiveCenter(
+        maxWidth: 560,
+        child: ListView(
+          padding: const EdgeInsets.symmetric(vertical: 12),
+          children: [
+            _SectionHeader(context.l10n.appearance),
+            RadioGroup<ThemeMode>(
+              groupValue: settings.themeMode,
+              onChanged: (m) {
+                if (m != null) settings.setThemeMode(m);
+              },
+              child: Column(
+                children: [
+                  RadioListTile<ThemeMode>(
+                    title: Text(context.l10n.themeSystem),
+                    value: ThemeMode.system,
+                  ),
+                  RadioListTile<ThemeMode>(
+                    title: Text(context.l10n.themeLight),
+                    value: ThemeMode.light,
+                  ),
+                  RadioListTile<ThemeMode>(
+                    title: Text(context.l10n.themeDark),
+                    value: ThemeMode.dark,
+                  ),
+                ],
+              ),
             ),
-          ),
-          const Divider(height: 32),
-          _SectionHeader(context.l10n.language),
-          RadioGroup<Locale?>(
-            groupValue: settings.locale,
-            onChanged: settings.setLocale,
-            child: Column(
-              children: [
-                RadioListTile<Locale?>(
-                  title: Text(context.l10n.themeSystem),
-                  value: null,
-                ),
-                const RadioListTile<Locale?>(
-                  title: Text('English'),
-                  value: Locale('en'),
-                ),
-                const RadioListTile<Locale?>(
-                  title: Text('Deutsch'),
-                  value: Locale('de'),
-                ),
-              ],
+            const Divider(height: 32),
+            _SectionHeader(context.l10n.language),
+            RadioGroup<Locale?>(
+              groupValue: settings.locale,
+              onChanged: settings.setLocale,
+              child: Column(
+                children: [
+                  RadioListTile<Locale?>(
+                    title: Text(context.l10n.themeSystem),
+                    value: null,
+                  ),
+                  const RadioListTile<Locale?>(
+                    title: Text('English'),
+                    value: Locale('en'),
+                  ),
+                  const RadioListTile<Locale?>(
+                    title: Text('Deutsch'),
+                    value: Locale('de'),
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }

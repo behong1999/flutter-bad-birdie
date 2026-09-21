@@ -77,6 +77,23 @@ flutter build appbundle --release
 flutter build apk --release
 ```
 
+### Training speech assets (macOS only)
+
+Footwork training **Speech** mode plays bundled WAV clips (not device TTS), so the voice sounds the same on Android, iOS, web, and desktop.
+
+| Language | Voice | Output folder |
+|---|---|---|
+| English | Samantha | `assets/sounds/shots/en/` |
+| German | Anna | `assets/sounds/shots/de/` |
+
+Regenerate after changing shot labels in `lib/l10n/` or when re-recording cues:
+
+```bash
+./tools/generate_shot_speech.sh
+```
+
+Requires macOS (`say` and `afconvert`). After regenerating, restart the app so Flutter picks up the new assets.
+
 ## 🌍 Localization
 
 Currently supported languages:

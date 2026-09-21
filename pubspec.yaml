@@ -12,7 +12,6 @@ dependencies:
     sdk: flutter
   flutter_localizations:
     sdk: flutter
-  flutter_tts: ^4.2.2
   google_fonts: ^6.2.1
   intl: any
   provider: ^6.1.2
@@ -32,6 +31,8 @@ flutter:
   generate: true
   assets:
     - assets/sounds/
+    - assets/sounds/shots/en/
+    - assets/sounds/shots/de/
     - assets/images/
 
 flutter_launcher_icons:

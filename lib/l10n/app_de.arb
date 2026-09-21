@@ -59,6 +59,8 @@
   "resumeLabel": "Fortsetzen",
   "againLabel": "Erneut",
   "exitLabel": "Beenden",
+  "enterFullscreen": "Vollbild",
+  "exitFullscreen": "Vollbild beenden",
   "directionLabel": "Richtung",
   "trainingCompletedLabel": "Training abgeschlossen",
   "trainingStoppedLabel": "Training gestoppt",
@@ -107,5 +109,5 @@
   "tacticalBoardHelpColorsTitle": "Farben",
   "tacticalBoardHelpColors": "Farbe für Stift- und Pfeilwerkzeug wählen.",
   "tacticalBoardHelpUndo": "Letzte Zeichnung oder Markierungsänderung rückgängig machen.",
-  "tacticalBoardHelpClear": "Setzt das Feld auf den Standard zurück und entfernt alle Zeichnungen."
+  "tacticalBoardHelpClear": "Setzt Spielermarkierungen auf ihre Standardpositionen zurück und entfernt alle Zeichnungen."
 }

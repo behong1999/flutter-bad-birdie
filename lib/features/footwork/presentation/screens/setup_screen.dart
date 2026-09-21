@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../core/extensions/l10n_extension.dart';
+import '../../../../core/layout/adaptive_scroll.dart';
+import '../../../../core/layout/floating_pane.dart';
+import '../../../../core/layout/responsive_breakpoint.dart';
 import '../../data/preset_repository.dart';
 import '../../domain/enums/shot_type.dart';
 import '../../domain/training_preset.dart';
@@ -80,139 +83,9 @@ class _SetupScreenState extends State<SetupScreen> {
           ),
         ],
       ),
-      body: ListView(
-        padding: const EdgeInsets.all(20),
-        children: [
-          Text(
-            context.l10n.chooseCornersTitle,
-            style: Theme.of(
-              context,
-            ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-          ),
-          const SizedBox(height: 8),
-          Text(
-            context.l10n.chooseCornersDescription,
-            style: Theme.of(context).textTheme.bodyMedium?.copyWith(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-            ),
-          ),
-          const SizedBox(height: 16),
-          Center(child: _court()),
-          if (selectedCorners.isNotEmpty) ...[
-            const SizedBox(height: 16),
-            Text(
-              context.l10n.selectedCorners(
-                selectedCorners.length,
-                selectedCorners.join(', '),
-              ),
-              style: TextStyle(
-                color: Theme.of(context).colorScheme.primary,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(height: 24),
-            Row(
-              children: [
-                Text(
-                  context.l10n.trainingSettings,
-                  style: Theme.of(
-                    context,
-                  ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-                ),
-                IconButton(
-                  icon: const Icon(Icons.help_outline),
-                  tooltip: context.l10n.help,
-                  onPressed: _showHelp,
-                ),
-              ],
-            ),
-            const SizedBox(height: 16),
-            GridView.count(
-              crossAxisCount: 2,
-              shrinkWrap: true,
-              physics: const NeverScrollableScrollPhysics(),
-              childAspectRatio: 1.3,
-              children: [
-                _CircularStat(
-                  label: context.l10n.sets,
-                  valueLabel: '${sets.round()}',
-                  value: sets,
-                  min: 1,
-                  max: 10,
-                  onChanged: (v) => setState(() => sets = v.roundToDouble()),
-                ),
-                _CircularStat(
-                  label: context.l10n.shotsPerSet,
-                  valueLabel: '${shots.round()}',
-                  value: shots,
-                  min: 5,
-                  max: 50,
-                  onChanged: (v) => setState(() => shots = v.roundToDouble()),
-                ),
-                _CircularStat(
-                  label: context.l10n.speed,
-                  valueLabel: 'x${speed.toStringAsFixed(1)}',
-                  value: speed,
-                  min: 1,
-                  max: 4,
-                  onChanged: (v) =>
-                      setState(() => speed = (v * 10).round() / 10),
-                ),
-                _CircularStat(
-                  label: context.l10n.restBetweenSets,
-                  valueLabel: '${rest.round()}s',
-                  value: rest,
-                  min: 10,
-                  max: 120,
-                  onChanged: (v) => setState(() => rest = v.roundToDouble()),
-                ),
-              ],
-            ),
-            _shotSelectionSection(context),
-            const SizedBox(height: 8),
-            Text(
-              context.l10n.nextMoveNotification,
-              style: Theme.of(
-                context,
-              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            const SizedBox(height: 14),
-            Row(
-              children: [
-                Expanded(
-                  child: _cornerChip(
-                    Icons.notifications_outlined,
-                    context.l10n.ringtone,
-                    useRingtone,
-                    () => setState(() => useRingtone = true),
-                  ),
-                ),
-                const SizedBox(width: 8),
-                Expanded(
-                  child: _cornerChip(
-                    Icons.record_voice_over_outlined,
-                    context.l10n.speech,
-                    !useRingtone,
-                    () => setState(() => useRingtone = false),
-                  ),
-                ),
-              ],
-            ),
-            const SizedBox(height: 24),
-            FilledButton(
-              style: ButtonStyle(
-                textStyle: WidgetStateProperty.all(
-                  Theme.of(context).textTheme.titleMedium?.copyWith(
-                    fontWeight: FontWeight.bold,
-                    fontSize: 16,
-                  ),
-                ),
-              ),
-              onPressed: _onBeginTraining,
-              child: Text(context.l10n.letsBegin),
-            ),
-          ],
-        ],
+      body: AdaptiveScroll(
+        primary: _courtSection(scrollable: context.isPhoneWidth),
+        secondary: selectedCorners.isEmpty ? null : _settingsSection(),
       ),
     );
   }
@@ -274,11 +147,196 @@ class _SetupScreenState extends State<SetupScreen> {
     ShotType.drive => context.l10n.shotDrive,
   };
 
-  Widget _court() {
+  Widget _courtSection({required bool scrollable}) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Text(
+          context.l10n.chooseCornersTitle,
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 8),
+        Text(
+          context.l10n.chooseCornersDescription,
+          style: Theme.of(context).textTheme.bodyMedium?.copyWith(
+            color: Theme.of(context).colorScheme.onSurfaceVariant,
+          ),
+        ),
+        const SizedBox(height: 16),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final width = fluidSize(
+              maxWidth: constraints.maxWidth,
+              maxHeight: constraints.maxHeight.isFinite
+                  ? constraints.maxHeight
+                  : 560,
+              widthFactor: 0.95,
+              heightFactor: 0.85,
+              min: 260,
+              max: context.responsiveValue(
+                phone: 360,
+                tablet: 440,
+                desktop: 480,
+              ),
+            );
+            return Center(child: _court(width: width));
+          },
+        ),
+        if (scrollable && selectedCorners.isNotEmpty) ...[
+          const SizedBox(height: 16),
+          _selectedCornersLabel(),
+        ],
+      ],
+    );
+  }
+
+  Widget _settingsSection() {
+    final content = Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        if (!context.isPhoneWidth) ...[
+          _selectedCornersLabel(),
+          const SizedBox(height: 24),
+        ],
+        Row(
+          children: [
+            Text(
+              context.l10n.trainingSettings,
+              style: Theme.of(
+                context,
+              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
+            ),
+            IconButton(
+              icon: const Icon(Icons.help_outline),
+              tooltip: context.l10n.help,
+              onPressed: _showHelp,
+            ),
+          ],
+        ),
+        const SizedBox(height: 16),
+        LayoutBuilder(
+          builder: (context, constraints) {
+            final crossAxisCount = constraints.maxWidth >= 520 ? 4 : 2;
+            return GridView.count(
+              crossAxisCount: crossAxisCount,
+              shrinkWrap: true,
+              physics: const NeverScrollableScrollPhysics(),
+              childAspectRatio: 1.3,
+              children: [
+                _CircularStat(
+                  label: context.l10n.sets,
+                  valueLabel: '${sets.round()}',
+                  value: sets,
+                  min: 1,
+                  max: 10,
+                  onChanged: (v) => setState(() => sets = v.roundToDouble()),
+                ),
+                _CircularStat(
+                  label: context.l10n.shotsPerSet,
+                  valueLabel: '${shots.round()}',
+                  value: shots,
+                  min: 5,
+                  max: 50,
+                  onChanged: (v) => setState(() => shots = v.roundToDouble()),
+                ),
+                _CircularStat(
+                  label: context.l10n.speed,
+                  valueLabel: 'x${speed.toStringAsFixed(1)}',
+                  value: speed,
+                  min: 1,
+                  max: 4,
+                  onChanged: (v) =>
+                      setState(() => speed = (v * 10).round() / 10),
+                ),
+                _CircularStat(
+                  label: context.l10n.restBetweenSets,
+                  valueLabel: '${rest.round()}s',
+                  value: rest,
+                  min: 10,
+                  max: 120,
+                  onChanged: (v) => setState(() => rest = v.roundToDouble()),
+                ),
+              ],
+            );
+          },
+        ),
+        _shotSelectionSection(context),
+        const SizedBox(height: 8),
+        Text(
+          context.l10n.nextMoveNotification,
+          style: Theme.of(
+            context,
+          ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+        ),
+        const SizedBox(height: 14),
+        Row(
+          children: [
+            Expanded(
+              child: _cornerChip(
+                Icons.notifications_outlined,
+                context.l10n.ringtone,
+                useRingtone,
+                () => setState(() => useRingtone = true),
+              ),
+            ),
+            const SizedBox(width: 8),
+            Expanded(
+              child: _cornerChip(
+                Icons.record_voice_over_outlined,
+                context.l10n.speech,
+                !useRingtone,
+                () => setState(() => useRingtone = false),
+              ),
+            ),
+          ],
+        ),
+        const SizedBox(height: 24),
+        FilledButton(
+          style: ButtonStyle(
+            textStyle: WidgetStateProperty.all(
+              Theme.of(
+                context,
+              ).textTheme.titleMedium?.copyWith(fontWeight: FontWeight.bold),
+            ),
+          ),
+          onPressed: _onBeginTraining,
+          child: Text(context.l10n.letsBegin),
+        ),
+      ],
+    );
+
+    if (context.isPhoneWidth) return content;
+
+    return Padding(
+      padding: const EdgeInsets.only(top: 8),
+      child: FloatingPane(child: content),
+    );
+  }
+
+  Widget _selectedCornersLabel() {
+    return Text(
+      context.l10n.selectedCorners(
+        selectedCorners.length,
+        selectedCorners.join(', '),
+      ),
+      style: TextStyle(
+        color: Theme.of(context).colorScheme.primary,
+        fontWeight: FontWeight.w600,
+      ),
+    );
+  }
+
+  Widget _court({required double width}) {
+    final height = width * 350 / 300;
+    final cornerSize = width * 56 / 300;
+    final iconSize = width * 26 / 300;
+    final centerRadius = width * 28 / 300;
     final cs = Theme.of(context).colorScheme;
     return Container(
-      width: 300,
-      height: 350,
+      width: width,
+      height: height,
       decoration: BoxDecoration(
         border: Border.all(color: cs.primary, width: 3),
         borderRadius: BorderRadius.circular(8),
@@ -293,19 +351,67 @@ class _SetupScreenState extends State<SetupScreen> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 _courtRow([
-                  _corner(1, Icons.north_west, context.l10n.frontLeft),
-                  _corner(2, Icons.north, context.l10n.frontCenter),
-                  _corner(3, Icons.north_east, context.l10n.frontRight),
+                  _corner(
+                    1,
+                    Icons.north_west,
+                    context.l10n.frontLeft,
+                    cornerSize,
+                    iconSize,
+                  ),
+                  _corner(
+                    2,
+                    Icons.north,
+                    context.l10n.frontCenter,
+                    cornerSize,
+                    iconSize,
+                  ),
+                  _corner(
+                    3,
+                    Icons.north_east,
+                    context.l10n.frontRight,
+                    cornerSize,
+                    iconSize,
+                  ),
                 ]),
                 _courtRow([
-                  _corner(4, Icons.west, context.l10n.midLeft),
-                  _centerMarker(),
-                  _corner(6, Icons.east, context.l10n.midRight),
+                  _corner(
+                    4,
+                    Icons.west,
+                    context.l10n.midLeft,
+                    cornerSize,
+                    iconSize,
+                  ),
+                  _centerMarker(centerRadius),
+                  _corner(
+                    6,
+                    Icons.east,
+                    context.l10n.midRight,
+                    cornerSize,
+                    iconSize,
+                  ),
                 ]),
                 _courtRow([
-                  _corner(7, Icons.south_west, context.l10n.backLeft),
-                  _corner(8, Icons.south, context.l10n.backCenter),
-                  _corner(9, Icons.south_east, context.l10n.backRight),
+                  _corner(
+                    7,
+                    Icons.south_west,
+                    context.l10n.backLeft,
+                    cornerSize,
+                    iconSize,
+                  ),
+                  _corner(
+                    8,
+                    Icons.south,
+                    context.l10n.backCenter,
+                    cornerSize,
+                    iconSize,
+                  ),
+                  _corner(
+                    9,
+                    Icons.south_east,
+                    context.l10n.backRight,
+                    cornerSize,
+                    iconSize,
+                  ),
                 ]),
               ],
             ),
@@ -322,16 +428,22 @@ class _SetupScreenState extends State<SetupScreen> {
     );
   }
 
-  Widget _centerMarker() {
+  Widget _centerMarker(double radius) {
     final cs = Theme.of(context).colorScheme;
     return CircleAvatar(
-      radius: 28,
+      radius: radius,
       backgroundColor: cs.secondary,
-      child: Icon(Icons.person, color: cs.onSecondary, size: 24),
+      child: Icon(Icons.person, color: cs.onSecondary, size: radius * 0.85),
     );
   }
 
-  Widget _corner(int n, IconData icon, String semanticsLabel) {
+  Widget _corner(
+    int n,
+    IconData icon,
+    String semanticsLabel,
+    double size,
+    double iconSize,
+  ) {
     final on = selectedCorners.contains(n);
     final cs = Theme.of(context).colorScheme;
     final fg = on ? cs.onPrimary : cs.primary;
@@ -348,14 +460,14 @@ class _SetupScreenState extends State<SetupScreen> {
           }
         }),
         child: Container(
-          width: 56,
-          height: 56,
+          width: size,
+          height: size,
           decoration: BoxDecoration(
             color: on ? cs.primary : cs.surface,
             shape: BoxShape.circle,
             border: Border.all(color: on ? cs.primary : cs.outline),
           ),
-          child: Icon(icon, size: 26, color: fg),
+          child: Icon(icon, size: iconSize, color: fg),
         ),
       ),
     );
@@ -568,7 +680,7 @@ class _CircularStat extends StatelessWidget {
     final cs = Theme.of(context).colorScheme;
     return LayoutBuilder(
       builder: (context, constraints) {
-        final dim = constraints.biggest.shortestSide.clamp(110.0, 140.0);
+        final dim = constraints.biggest.shortestSide.clamp(110.0, 160.0);
         return Stack(
           alignment: Alignment.center,
           children: [

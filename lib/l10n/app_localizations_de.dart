@@ -215,6 +215,12 @@ class AppLocalizationsDe extends AppLocalizations {
   String get exitLabel => 'Beenden';
 
   @override
+  String get enterFullscreen => 'Vollbild';
+
+  @override
+  String get exitFullscreen => 'Vollbild beenden';
+
+  @override
   String get directionLabel => 'Richtung';
 
   @override
@@ -377,5 +383,5 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tacticalBoardHelpClear =>
-      'Setzt das Feld auf den Standard zurück und entfernt alle Zeichnungen.';
+      'Setzt Spielermarkierungen auf ihre Standardpositionen zurück und entfernt alle Zeichnungen.';
 }
