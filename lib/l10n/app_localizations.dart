@@ -542,6 +542,18 @@ abstract class AppLocalizations {
   /// **'Load Preset'**
   String get loadPreset;
 
+  /// Help text for the load preset icon in setup
+  ///
+  /// In en, this message translates to:
+  /// **'In the top bar, tap this icon to open saved presets. Select one to apply corners, shots, speed, rest time, and notification mode.'**
+  String get loadPresetHelp;
+
+  /// Help text for the save preset icon in setup
+  ///
+  /// In en, this message translates to:
+  /// **'In the top bar, tap this icon to store your current setup as a preset. Give it a name so you can reload the same configuration later.'**
+  String get savePresetHelp;
+
   /// Presets list title
   ///
   /// In en, this message translates to:

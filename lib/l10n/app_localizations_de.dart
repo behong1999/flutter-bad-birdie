@@ -260,6 +260,14 @@ class AppLocalizationsDe extends AppLocalizations {
   String get loadPreset => 'Voreinstellung laden';
 
   @override
+  String get loadPresetHelp =>
+      'Tippe in der oberen Leiste auf dieses Symbol, um gespeicherte Voreinstellungen zu öffnen. Wähle eine aus, um Ecken, Schläge, Tempo, Pausenzeit und Benachrichtigung zu übernehmen.';
+
+  @override
+  String get savePresetHelp =>
+      'Tippe in der oberen Leiste auf dieses Symbol, um deine aktuelle Konfiguration als Voreinstellung zu speichern. Gib ihr einen Namen, damit du sie später wieder laden kannst.';
+
+  @override
   String get presets => 'Voreinstellungen';
 
   @override

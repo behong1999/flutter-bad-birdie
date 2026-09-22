@@ -74,6 +74,8 @@
   "skipLabel": "Überspringen",
   "savePreset": "Voreinstellung speichern",
   "loadPreset": "Voreinstellung laden",
+  "loadPresetHelp": "Tippe in der oberen Leiste auf dieses Symbol, um gespeicherte Voreinstellungen zu öffnen. Wähle eine aus, um Ecken, Schläge, Tempo, Pausenzeit und Benachrichtigung zu übernehmen.",
+  "savePresetHelp": "Tippe in der oberen Leiste auf dieses Symbol, um deine aktuelle Konfiguration als Voreinstellung zu speichern. Gib ihr einen Namen, damit du sie später wieder laden kannst.",
   "presets": "Voreinstellungen",
   "noPresetsYet": "Noch keine Voreinstellungen gespeichert. Tippe auf das Speichern-Symbol, um eine hinzuzufügen.",
   "presetNameLabel": "Name der Voreinstellung",

@@ -260,6 +260,14 @@ class AppLocalizationsEn extends AppLocalizations {
   String get loadPreset => 'Load Preset';
 
   @override
+  String get loadPresetHelp =>
+      'In the top bar, tap this icon to open saved presets. Select one to apply corners, shots, speed, rest time, and notification mode.';
+
+  @override
+  String get savePresetHelp =>
+      'In the top bar, tap this icon to store your current setup as a preset. Give it a name so you can reload the same configuration later.';
+
+  @override
   String get presets => 'Presets';
 
   @override

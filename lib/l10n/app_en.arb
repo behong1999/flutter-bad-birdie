@@ -325,6 +325,14 @@
   "@loadPreset": {
     "description": "Load preset button/tooltip"
   },
+  "loadPresetHelp": "In the top bar, tap this icon to open saved presets. Select one to apply corners, shots, speed, rest time, and notification mode.",
+  "@loadPresetHelp": {
+    "description": "Help text for the load preset icon in setup"
+  },
+  "savePresetHelp": "In the top bar, tap this icon to store your current setup as a preset. Give it a name so you can reload the same configuration later.",
+  "@savePresetHelp": {
+    "description": "Help text for the save preset icon in setup"
+  },
   "presets": "Presets",
   "@presets": {
     "description": "Presets list title"

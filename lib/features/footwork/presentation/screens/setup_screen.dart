@@ -1,7 +1,6 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
-import 'package:sleek_circular_slider/sleek_circular_slider.dart';
 import 'package:uuid/uuid.dart';
 import '../../../../core/extensions/l10n_extension.dart';
 import '../../../../core/layout/adaptive_scroll.dart';
@@ -10,6 +9,7 @@ import '../../../../core/layout/responsive_breakpoint.dart';
 import '../../data/preset_repository.dart';
 import '../../domain/enums/shot_type.dart';
 import '../../domain/training_preset.dart';
+import '../widgets/circular_stat.dart';
 import '../widgets/preset_list_sheet.dart';
 import '../widgets/save_preset_dialog.dart';
 import 'training_screen.dart';
@@ -71,6 +71,11 @@ class _SetupScreenState extends State<SetupScreen> {
         title: Text(context.l10n.footworkTraining),
         centerTitle: true,
         actions: [
+          IconButton(
+            icon: const Icon(Icons.help_outline),
+            tooltip: context.l10n.help,
+            onPressed: _showHelp,
+          ),
           IconButton(
             icon: const Icon(Icons.bookmark_outline),
             tooltip: context.l10n.loadPreset,
@@ -200,20 +205,11 @@ class _SetupScreenState extends State<SetupScreen> {
           _selectedCornersLabel(),
           const SizedBox(height: 24),
         ],
-        Row(
-          children: [
-            Text(
-              context.l10n.trainingSettings,
-              style: Theme.of(
-                context,
-              ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
-            ),
-            IconButton(
-              icon: const Icon(Icons.help_outline),
-              tooltip: context.l10n.help,
-              onPressed: _showHelp,
-            ),
-          ],
+        Text(
+          context.l10n.trainingSettings,
+          style: Theme.of(
+            context,
+          ).textTheme.titleLarge?.copyWith(fontWeight: FontWeight.bold),
         ),
         const SizedBox(height: 16),
         LayoutBuilder(
@@ -225,7 +221,7 @@ class _SetupScreenState extends State<SetupScreen> {
               physics: const NeverScrollableScrollPhysics(),
               childAspectRatio: 1.3,
               children: [
-                _CircularStat(
+                CircularStat(
                   label: context.l10n.sets,
                   valueLabel: '${sets.round()}',
                   value: sets,
@@ -233,7 +229,7 @@ class _SetupScreenState extends State<SetupScreen> {
                   max: 10,
                   onChanged: (v) => setState(() => sets = v.roundToDouble()),
                 ),
-                _CircularStat(
+                CircularStat(
                   label: context.l10n.shotsPerSet,
                   valueLabel: '${shots.round()}',
                   value: shots,
@@ -241,7 +237,7 @@ class _SetupScreenState extends State<SetupScreen> {
                   max: 50,
                   onChanged: (v) => setState(() => shots = v.roundToDouble()),
                 ),
-                _CircularStat(
+                CircularStat(
                   label: context.l10n.speed,
                   valueLabel: 'x${speed.toStringAsFixed(1)}',
                   value: speed,
@@ -250,7 +246,7 @@ class _SetupScreenState extends State<SetupScreen> {
                   onChanged: (v) =>
                       setState(() => speed = (v * 10).round() / 10),
                 ),
-                _CircularStat(
+                CircularStat(
                   label: context.l10n.restBetweenSets,
                   valueLabel: '${rest.round()}s',
                   value: rest,
@@ -529,6 +525,18 @@ class _SetupScreenState extends State<SetupScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
+              _helpLine(
+                ctx,
+                context.l10n.loadPreset,
+                context.l10n.loadPresetHelp,
+                icon: Icons.bookmark_outline,
+              ),
+              _helpLine(
+                ctx,
+                context.l10n.savePreset,
+                context.l10n.savePresetHelp,
+                icon: Icons.save_outlined,
+              ),
               _helpLine(ctx, context.l10n.sets, context.l10n.setsHelp),
               _helpLine(ctx, context.l10n.shotsPerSet, context.l10n.shotsHelp),
               _helpLine(ctx, context.l10n.speed, context.l10n.speedHelp),
@@ -560,19 +568,32 @@ class _SetupScreenState extends State<SetupScreen> {
     );
   }
 
-  Widget _helpLine(BuildContext ctx, String title, String body) {
+  Widget _helpLine(
+    BuildContext ctx,
+    String title,
+    String body, {
+    IconData? icon,
+  }) {
+    final colorScheme = Theme.of(ctx).colorScheme;
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 12),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+          Row(
+            children: [
+              Text(title, style: const TextStyle(fontWeight: FontWeight.bold)),
+              if (icon != null) ...[
+                const SizedBox(width: 8),
+                Icon(icon, size: 22, color: colorScheme.onSurface),
+              ],
+            ],
+          ),
+          const SizedBox(height: 4),
           Text(
             body,
-            style: TextStyle(
-              color: Theme.of(context).colorScheme.onSurfaceVariant,
-              height: 1.3,
-            ),
+            style: TextStyle(color: colorScheme.onSurfaceVariant, height: 1.3),
           ),
         ],
       ),
@@ -654,85 +675,6 @@ class _SetupScreenState extends State<SetupScreen> {
           useRingtone: useRingtone,
         ),
       ),
-    );
-  }
-}
-
-class _CircularStat extends StatelessWidget {
-  const _CircularStat({
-    required this.label,
-    required this.valueLabel,
-    required this.value,
-    required this.min,
-    required this.max,
-    required this.onChanged,
-  });
-
-  final String label;
-  final String valueLabel;
-  final double value;
-  final double min;
-  final double max;
-  final ValueChanged<double> onChanged;
-
-  @override
-  Widget build(BuildContext context) {
-    final cs = Theme.of(context).colorScheme;
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        final dim = constraints.biggest.shortestSide.clamp(110.0, 160.0);
-        return Stack(
-          alignment: Alignment.center,
-          children: [
-            SleekCircularSlider(
-              min: min,
-              max: max,
-              initialValue: value,
-              onChange: onChanged,
-              appearance: CircularSliderAppearance(
-                size: dim,
-                startAngle: 130,
-                angleRange: 280,
-                customWidths: CustomSliderWidths(
-                  trackWidth: 6,
-                  progressBarWidth: 10,
-                  handlerSize: 8,
-                ),
-                customColors: CustomSliderColors(
-                  trackColor: cs.surfaceContainerHighest,
-                  progressBarColor: cs.primary,
-                  dotColor: cs.onSurface,
-                  hideShadow: true,
-                ),
-                infoProperties: InfoProperties(
-                  topLabelText: '',
-                  modifier: (_) => '',
-                ),
-              ),
-            ),
-            IgnorePointer(
-              child: Column(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  Text(
-                    label,
-                    style: Theme.of(context).textTheme.labelSmall?.copyWith(
-                      color: cs.onSurfaceVariant,
-                    ),
-                  ),
-                  Text(
-                    valueLabel,
-                    style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-                      fontWeight: FontWeight.bold,
-                      color: cs.primary,
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ],
-        );
-      },
     );
   }
 }
