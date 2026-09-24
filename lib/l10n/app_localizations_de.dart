@@ -188,7 +188,7 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get notificationHelp =>
-      '• Klingelton: Einfache Pieptöne\n• Sprache: Sprachansagen der Eckennummern (\"Ecke 1\", \"Ecke 3\", etc.)';
+      '• Klingelton: Einfache Pieptöne\n• Sprache: Sprachansagen des Schlagnamens (\"Clear\", \"Smash\", etc.)';
 
   @override
   String get gotIt => 'Verstanden!';

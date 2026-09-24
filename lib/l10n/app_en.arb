@@ -229,7 +229,7 @@
   "@restHelp": {
     "description": "Help text for rest"
   },
-  "notificationHelp": "• Ringtone: Simple beep sounds\n• Speech: Voice calls out corner numbers (\"Corner 1\", \"Corner 3\", etc.)",
+  "notificationHelp": "• Ringtone: Simple beep sounds\n• Speech: Voice calls out the shot name (\"Clear\", \"Smash\", etc.)",
   "@notificationHelp": {
     "description": "Help text for notification modes"
   },

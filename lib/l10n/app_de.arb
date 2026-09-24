@@ -50,7 +50,7 @@
   "shotsHelp": "Wie viele Eckenbewegungen in jedem Satz. Mehr Schläge = längeres Training pro Satz.",
   "speedHelp": "Wie schnell die Eckenaufrufe kommen:\n• 1,0x = Anfänger (langsam)\n• 2,5x = Fortgeschritten\n• 4,0x = Profi (sehr schnell)",
   "restHelp": "Erholungszeit zwischen jedem Satz. Nutze diese Zeit, um zu Atem zu kommen und dich auf den nächsten Satz vorzubereiten.",
-  "notificationHelp": "• Klingelton: Einfache Pieptöne\n• Sprache: Sprachansagen der Eckennummern (\"Ecke 1\", \"Ecke 3\", etc.)",
+  "notificationHelp": "• Klingelton: Einfache Pieptöne\n• Sprache: Sprachansagen des Schlagnamens (\"Clear\", \"Smash\", etc.)",
   "gotIt": "Verstanden!",
   "trainingStartingSoon": "Trainingseinheit startet bald! 🏸",
   "shotsLabel": "Schläge",

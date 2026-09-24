@@ -188,7 +188,7 @@ class AppLocalizationsEn extends AppLocalizations {
 
   @override
   String get notificationHelp =>
-      '• Ringtone: Simple beep sounds\n• Speech: Voice calls out corner numbers (\"Corner 1\", \"Corner 3\", etc.)';
+      '• Ringtone: Simple beep sounds\n• Speech: Voice calls out the shot name (\"Clear\", \"Smash\", etc.)';
 
   @override
   String get gotIt => 'Got it!';

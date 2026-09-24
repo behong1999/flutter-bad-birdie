@@ -401,7 +401,7 @@ abstract class AppLocalizations {
   /// Help text for notification modes
   ///
   /// In en, this message translates to:
-  /// **'• Ringtone: Simple beep sounds\n• Speech: Voice calls out corner numbers (\"Corner 1\", \"Corner 3\", etc.)'**
+  /// **'• Ringtone: Simple beep sounds\n• Speech: Voice calls out the shot name (\"Clear\", \"Smash\", etc.)'**
   String get notificationHelp;
 
   /// Help dialog close button
