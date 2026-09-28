@@ -46,9 +46,9 @@ class HomeScreen extends StatelessWidget {
                         Icon(
                           Icons.sports_tennis,
                           size: context.responsiveValue(
-                            phone: 32.0,
-                            tablet: 36.0,
-                            desktop: 40.0,
+                            phone: 32,
+                            tablet: 36,
+                            desktop: 40,
                           ),
                           color: Theme.of(context).colorScheme.primary,
                         ),

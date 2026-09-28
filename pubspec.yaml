@@ -33,6 +33,7 @@ flutter:
     - assets/sounds/
     - assets/sounds/shots/en/
     - assets/sounds/shots/de/
+    - assets/sounds/shots/vi/
     - assets/images/
 
 flutter_launcher_icons:

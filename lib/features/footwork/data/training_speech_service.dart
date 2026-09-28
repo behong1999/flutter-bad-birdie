@@ -6,8 +6,13 @@ import '../domain/enums/shot_type.dart';
 class TrainingSpeechService {
   const TrainingSpeechService._();
 
-  static String _languageFolder(String localeTag) =>
-      localeTag.split('-').first.toLowerCase() == 'de' ? 'de' : 'en';
+  static String _languageFolder(String localeTag) {
+    return switch (localeTag.split('-').first.toLowerCase()) {
+      'de' => 'de',
+      'vi' => 'vi',
+      _ => 'en',
+    };
+  }
 
   static String assetPathFor(ShotType shot, {required String localeTag}) {
     final lang = _languageFolder(localeTag);

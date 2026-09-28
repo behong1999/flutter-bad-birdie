@@ -99,9 +99,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
     final completed = _currentShot >= _totalShots && _totalShots > 0;
     final useTwoPane = context.isTabletOrDesktop && !_isFullscreen;
     final padding = context.responsiveValue(
-      phone: 16.0,
-      tablet: 20.0,
-      desktop: 24.0,
+      phone: 16,
+      tablet: 20,
+      desktop: 24,
     );
 
     return Scaffold(
@@ -130,10 +130,10 @@ class _TrainingScreenState extends State<TrainingScreen> {
           ),
         ),
         SizedBox(
-          width: context.responsiveValue(phone: 24.0, tablet: 24.0, desktop: 32.0),
+          width: context.responsiveValue(phone: 24, tablet: 24, desktop: 32),
         ),
         SizedBox(
-          width: context.responsiveValue(phone: 320.0, tablet: 340.0, desktop: 360.0),
+          width: context.responsiveValue(phone: 320, tablet: 340, desktop: 360),
           child: Center(
             child: _buildFloatingControlPane(context, includeSettings: true),
           ),
@@ -319,7 +319,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
     final heightBudget = maxHeight - labelReserve;
     final widthBudget = maxWidth.isFinite ? maxWidth * 0.9 : heightBudget;
 
-    if (heightBudget <= 0) return 180.0;
+    if (heightBudget <= 0) return 180;
 
     return min(heightBudget, widthBudget).clamp(180.0, 700.0);
   }

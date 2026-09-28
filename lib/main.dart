@@ -36,7 +36,11 @@ class BadBirdieApp extends StatelessWidget {
             GlobalWidgetsLocalizations.delegate,
             GlobalCupertinoLocalizations.delegate,
           ],
-          supportedLocales: const [Locale('en'), Locale('de')],
+          supportedLocales: const [
+            Locale('en'),
+            Locale('de'),
+            Locale('vi'),
+          ],
           home: const HomeScreen(),
         ),
       ),

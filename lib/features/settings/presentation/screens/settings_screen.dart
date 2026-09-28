@@ -59,6 +59,10 @@ class SettingsScreen extends StatelessWidget {
                     title: Text('Deutsch'),
                     value: Locale('de'),
                   ),
+                  const RadioListTile<Locale?>(
+                    title: Text('Tiếng Việt'),
+                    value: Locale('vi'),
+                  ),
                 ],
               ),
             ),

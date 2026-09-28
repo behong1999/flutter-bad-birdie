@@ -6,7 +6,7 @@ A comprehensive badminton training app built with Flutter, designed to help badm
 
 ### Current (v1.0.0)
 - ✅ **Beautiful Material 3 Design** - Modern, clean interface
-- ✅ **Multi-language Support** - English and German
+- ✅ **Multi-language Support** - English, German, and Vietnamese
 - ✅ **Professional UI** - Badminton-themed with smooth animations
 - ✅ **Cross-platform** - Built with Flutter
 
@@ -85,6 +85,7 @@ Footwork training **Speech** mode plays bundled WAV clips (not device TTS), so t
 |---|---|---|
 | English | Samantha | `assets/sounds/shots/en/` |
 | German | Anna | `assets/sounds/shots/de/` |
+| Vietnamese | Linh | `assets/sounds/shots/vi/` |
 
 Regenerate after changing shot labels in `lib/l10n/` or when re-recording cues:
 
@@ -99,6 +100,7 @@ Requires macOS (`say` and `afconvert`). After regenerating, restart the app so F
 Currently supported languages:
 - 🇺🇸 English
 - 🇩🇪 German (Deutsch)
+- 🇻🇳 Vietnamese (Tiếng Việt)
 
 To add more languages, create new `.arb` files in `lib/l10n/`.
 
