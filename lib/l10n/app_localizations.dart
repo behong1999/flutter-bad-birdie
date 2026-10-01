@@ -694,6 +694,12 @@ abstract class AppLocalizations {
   /// **'Undo'**
   String get undoLabel;
 
+  /// Redo last undone action
+  ///
+  /// In en, this message translates to:
+  /// **'Redo'**
+  String get redoLabel;
+
   /// Reset tactical board to default markers and remove all drawings
   ///
   /// In en, this message translates to:
@@ -771,6 +777,90 @@ abstract class AppLocalizations {
   /// In en, this message translates to:
   /// **'Reset player markers to their default positions and remove all drawings.'**
   String get tacticalBoardHelpClear;
+
+  /// Help text for sequence mode
+  ///
+  /// In en, this message translates to:
+  /// **'Record board positions as numbered steps and play them back as an animation. The current board is saved as Step 1 when you enter sequence mode. Tap Add Step to save each new position. Tap a step chip to load it. Press Play to animate through all steps.'**
+  String get tacticalBoardHelpSequence;
+
+  /// Learning hub screen title
+  ///
+  /// In en, this message translates to:
+  /// **'Learning Hub'**
+  String get learningHubTitle;
+
+  /// Coaching resource category
+  ///
+  /// In en, this message translates to:
+  /// **'Coaching'**
+  String get categoryCoaching;
+
+  /// Tactics resource category
+  ///
+  /// In en, this message translates to:
+  /// **'Tactics'**
+  String get categoryTactics;
+
+  /// Fitness resource category
+  ///
+  /// In en, this message translates to:
+  /// **'Fitness'**
+  String get categoryFitness;
+
+  /// Pro matches resource category
+  ///
+  /// In en, this message translates to:
+  /// **'Pro Matches'**
+  String get categoryProMatches;
+
+  /// Button to open an external link
+  ///
+  /// In en, this message translates to:
+  /// **'Open'**
+  String get openLink;
+
+  /// Toggle button to enter/exit step-sequence mode on the tactical board
+  ///
+  /// In en, this message translates to:
+  /// **'Sequence'**
+  String get sequenceMode;
+
+  /// Save current board state as a new sequence frame
+  ///
+  /// In en, this message translates to:
+  /// **'Add Step'**
+  String get addStep;
+
+  /// Start playing through all sequence frames
+  ///
+  /// In en, this message translates to:
+  /// **'Play'**
+  String get playSequence;
+
+  /// Stop sequence playback
+  ///
+  /// In en, this message translates to:
+  /// **'Stop'**
+  String get stopSequence;
+
+  /// Label for a sequence frame chip
+  ///
+  /// In en, this message translates to:
+  /// **'Step {n}'**
+  String stepLabel(int n);
+
+  /// Empty state hint shown in the sequence bar
+  ///
+  /// In en, this message translates to:
+  /// **'Draw something, then tap Add Step to record a frame.'**
+  String get sequenceEmpty;
+
+  /// Confirmation message when exiting sequence mode with steps recorded
+  ///
+  /// In en, this message translates to:
+  /// **'Exit sequence mode? All recorded steps will be discarded.'**
+  String get sequenceExitConfirm;
 }
 
 class _AppLocalizationsDelegate

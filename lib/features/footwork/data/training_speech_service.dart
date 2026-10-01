@@ -34,8 +34,6 @@ class TrainingSpeechService {
     required String localeTag,
   }) async {
     await player.stop();
-    await player.play(
-      AssetSource(assetPathFor(shot, localeTag: localeTag)),
-    );
+    await player.play(AssetSource(assetPathFor(shot, localeTag: localeTag)));
   }
 }

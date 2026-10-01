@@ -437,6 +437,10 @@
   "@undoLabel": {
     "description": "Undo last action"
   },
+  "redoLabel": "Redo",
+  "@redoLabel": {
+    "description": "Redo last undone action"
+  },
   "clearBoard": "Reset to default",
   "@clearBoard": {
     "description": "Reset tactical board to default markers and remove all drawings"
@@ -488,5 +492,38 @@
   "tacticalBoardHelpClear": "Reset player markers to their default positions and remove all drawings.",
   "@tacticalBoardHelpClear": {
     "description": "Help text for clear board button"
-  }
+  },
+  "tacticalBoardHelpSequence": "Record board positions as numbered steps and play them back as an animation. The current board is saved as Step 1 when you enter sequence mode. Tap Add Step to save each new position. Tap a step chip to load it. Press Play to animate through all steps.",
+  "@tacticalBoardHelpSequence": {
+    "description": "Help text for sequence mode"
+  },
+  "learningHubTitle": "Learning Hub",
+  "@learningHubTitle": { "description": "Learning hub screen title" },
+  "categoryCoaching": "Coaching",
+  "@categoryCoaching": { "description": "Coaching resource category" },
+  "categoryTactics": "Tactics",
+  "@categoryTactics": { "description": "Tactics resource category" },
+  "categoryFitness": "Fitness",
+  "@categoryFitness": { "description": "Fitness resource category" },
+  "categoryProMatches": "Pro Matches",
+  "@categoryProMatches": { "description": "Pro matches resource category" },
+  "openLink": "Open",
+  "@openLink": { "description": "Button to open an external link" },
+  "sequenceMode": "Sequence",
+  "@sequenceMode": { "description": "Toggle button to enter/exit step-sequence mode on the tactical board" },
+  "addStep": "Add Step",
+  "@addStep": { "description": "Save current board state as a new sequence frame" },
+  "playSequence": "Play",
+  "@playSequence": { "description": "Start playing through all sequence frames" },
+  "stopSequence": "Stop",
+  "@stopSequence": { "description": "Stop sequence playback" },
+  "stepLabel": "Step {n}",
+  "@stepLabel": {
+    "description": "Label for a sequence frame chip",
+    "placeholders": { "n": { "type": "int" } }
+  },
+  "sequenceEmpty": "Draw something, then tap Add Step to record a frame.",
+  "@sequenceEmpty": { "description": "Empty state hint shown in the sequence bar" },
+  "sequenceExitConfirm": "Exit sequence mode? All recorded steps will be discarded.",
+  "@sequenceExitConfirm": { "description": "Confirmation message when exiting sequence mode with steps recorded" }
 }

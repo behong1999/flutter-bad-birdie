@@ -99,6 +99,20 @@
   "singlesLabel": "Đánh đơn",
   "doublesLabel": "Đánh đôi",
   "undoLabel": "Hoàn tác",
+  "redoLabel": "Làm lại",
+  "learningHubTitle": "Trung tâm học tập",
+  "categoryCoaching": "Kỹ thuật",
+  "categoryTactics": "Chiến thuật",
+  "categoryFitness": "Thể lực",
+  "categoryProMatches": "Trận đấu chuyên nghiệp",
+  "openLink": "Mở",
+  "sequenceMode": "Trình tự",
+  "addStep": "Thêm bước",
+  "playSequence": "Phát",
+  "stopSequence": "Dừng",
+  "stepLabel": "Bước {n}",
+  "sequenceEmpty": "Vẽ gì đó, rồi nhấn Thêm bước để lưu khung hình.",
+  "sequenceExitConfirm": "Thoát chế độ trình tự? Tất cả các bước đã lưu sẽ bị xóa.",
   "clearBoard": "Khôi phục mặc định",
   "renamePlayerTitle": "Đổi tên người chơi",
   "toolPencil": "Bút",
@@ -111,5 +125,6 @@
   "tacticalBoardHelpColorsTitle": "Màu sắc",
   "tacticalBoardHelpColors": "Chạm màu để chọn màu nét cho bút và mũi tên.",
   "tacticalBoardHelpUndo": "Hoàn tác thao tác vẽ hoặc thay đổi điểm đánh dấu gần nhất.",
-  "tacticalBoardHelpClear": "Đặt lại vị trí mặc định của người chơi và xóa mọi nét vẽ."
+  "tacticalBoardHelpClear": "Đặt lại vị trí mặc định của người chơi và xóa mọi nét vẽ.",
+  "tacticalBoardHelpSequence": "Ghi lại các vị trí bảng thành các bước đánh số và phát lại chúng dưới dạng hoạt ảnh. Bảng hiện tại được lưu tự động là Bước 1 khi vào chế độ trình tự. Nhấn Thêm bước để lưu các vị trí tiếp theo. Nhấn vào thẻ bước để tải lại. Nhấn Phát để xem hoạt ảnh."
 }

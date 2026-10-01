@@ -346,6 +346,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get undoLabel => 'Hoàn tác';
 
   @override
+  String get redoLabel => 'Làm lại';
+
+  @override
   String get clearBoard => 'Khôi phục mặc định';
 
   @override
@@ -389,4 +392,50 @@ class AppLocalizationsVi extends AppLocalizations {
   @override
   String get tacticalBoardHelpClear =>
       'Đặt lại vị trí mặc định của người chơi và xóa mọi nét vẽ.';
+
+  @override
+  String get tacticalBoardHelpSequence =>
+      'Ghi lại các vị trí bảng thành các bước đánh số và phát lại chúng dưới dạng hoạt ảnh. Bảng hiện tại được lưu tự động là Bước 1 khi vào chế độ trình tự. Nhấn Thêm bước để lưu các vị trí tiếp theo. Nhấn vào thẻ bước để tải lại. Nhấn Phát để xem hoạt ảnh.';
+
+  @override
+  String get learningHubTitle => 'Trung tâm học tập';
+
+  @override
+  String get categoryCoaching => 'Kỹ thuật';
+
+  @override
+  String get categoryTactics => 'Chiến thuật';
+
+  @override
+  String get categoryFitness => 'Thể lực';
+
+  @override
+  String get categoryProMatches => 'Trận đấu chuyên nghiệp';
+
+  @override
+  String get openLink => 'Mở';
+
+  @override
+  String get sequenceMode => 'Trình tự';
+
+  @override
+  String get addStep => 'Thêm bước';
+
+  @override
+  String get playSequence => 'Phát';
+
+  @override
+  String get stopSequence => 'Dừng';
+
+  @override
+  String stepLabel(int n) {
+    return 'Bước $n';
+  }
+
+  @override
+  String get sequenceEmpty => 'Vẽ gì đó, rồi nhấn Thêm bước để lưu khung hình.';
+
+  @override
+  String get sequenceExitConfirm =>
+      'Thoát chế độ trình tự? Tất cả các bước đã lưu sẽ bị xóa.';
 }

@@ -21,8 +21,8 @@ class DirectionFlowPad extends StatelessWidget {
     return LayoutBuilder(
       builder: (context, constraints) {
         final fallback = MediaQuery.sizeOf(context).width * 0.9;
-        final fromConstraints = constraints.hasBoundedWidth &&
-                constraints.hasBoundedHeight
+        final fromConstraints =
+            constraints.hasBoundedWidth && constraints.hasBoundedHeight
             ? constraints.biggest.shortestSide
             : fallback;
         final available = fromConstraints > 0 ? fromConstraints : fallback;

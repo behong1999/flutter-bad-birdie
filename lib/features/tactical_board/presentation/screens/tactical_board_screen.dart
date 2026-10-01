@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/layout/responsive_center.dart';
@@ -8,6 +10,7 @@ import '../painters/board_painter.dart';
 import '../painters/court_painter.dart';
 import '../widgets/board_toolbar.dart';
 import '../widgets/rename_marker_dialog.dart';
+import '../widgets/sequence_bar.dart';
 import '../widgets/tactical_board_help_dialog.dart';
 
 class TacticalBoardScreen extends StatefulWidget {
@@ -68,6 +71,15 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
 
   late var _elements = <BoardElement>[..._defaultMarkers];
   final _history = <List<BoardElement>>[];
+  final _redoStack = <List<BoardElement>>[];
+
+  // ── sequence ──────────────────────────────────────────────────────────────
+  bool _isSequenceMode = false;
+  final _sequence = <List<BoardElement>>[];
+  int? _loadedFrameIndex;
+  bool _isPlaying = false;
+  Timer? _playbackTimer;
+  int _playbackIndex = 0;
 
   FreehandStroke? _currentStroke;
   Offset? _arrowStart;
@@ -84,7 +96,10 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
 
   // ── history ───────────────────────────────────────────────────────────────
 
-  void _saveHistory() => _history.add(List.of(_elements));
+  void _saveHistory() {
+    _history.add(List.of(_elements));
+    _redoStack.clear();
+  }
 
   void _undo() {
     if (_currentStroke != null || _arrowStart != null) {
@@ -96,7 +111,14 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
       return;
     }
     if (_history.isEmpty) return;
+    _redoStack.add(List.of(_elements));
     setState(() => _elements = _history.removeLast());
+  }
+
+  void _redo() {
+    if (_redoStack.isEmpty) return;
+    _history.add(List.of(_elements));
+    setState(() => _elements = _redoStack.removeLast());
   }
 
   bool get _hasChangesFromDefault {
@@ -127,6 +149,100 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
       _arrowStart = null;
       _arrowCurrent = null;
     });
+  }
+
+  @override
+  void dispose() {
+    _playbackTimer?.cancel();
+    super.dispose();
+  }
+
+  // ── sequence methods ──────────────────────────────────────────────────────
+
+  void _enterSequenceMode() {
+    setState(() {
+      _isSequenceMode = true;
+      _sequence
+        ..clear()
+        ..add(List.of(_elements));
+      _loadedFrameIndex = 0;
+    });
+  }
+
+  Future<void> _exitSequenceMode() async {
+    if (_sequence.isNotEmpty) {
+      final confirm = await showDialog<bool>(
+        context: context,
+        builder: (ctx) {
+          final l10n = AppLocalizations.of(ctx)!;
+          return AlertDialog(
+            title: Text(l10n.sequenceMode),
+            content: Text(l10n.sequenceExitConfirm),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(ctx, false),
+                child: Text(l10n.cancel),
+              ),
+              FilledButton(
+                onPressed: () => Navigator.pop(ctx, true),
+                child: Text(l10n.exitLabel),
+              ),
+            ],
+          );
+        },
+      );
+      if (confirm != true || !mounted) return;
+    }
+    _stopPlayback();
+    setState(() {
+      _isSequenceMode = false;
+      _sequence.clear();
+      _loadedFrameIndex = null;
+    });
+  }
+
+  void _addStep() {
+    setState(() {
+      _sequence.add(List.of(_elements));
+      _loadedFrameIndex = _sequence.length - 1;
+    });
+  }
+
+  void _loadFrame(int index) {
+    _stopPlayback();
+    setState(() {
+      _loadedFrameIndex = index;
+      _elements = List.of(_sequence[index]);
+      _history.clear();
+      _redoStack.clear();
+    });
+  }
+
+  void _startPlayback() {
+    if (_sequence.isEmpty) return;
+    _playbackIndex = 0;
+    setState(() {
+      _isPlaying = true;
+      _loadedFrameIndex = 0;
+      _elements = List.of(_sequence[0]);
+    });
+    _playbackTimer = Timer.periodic(const Duration(milliseconds: 1500), (_) {
+      _playbackIndex++;
+      if (_playbackIndex >= _sequence.length) {
+        _stopPlayback();
+        return;
+      }
+      setState(() {
+        _loadedFrameIndex = _playbackIndex;
+        _elements = List.of(_sequence[_playbackIndex]);
+      });
+    });
+  }
+
+  void _stopPlayback() {
+    _playbackTimer?.cancel();
+    _playbackTimer = null;
+    if (_isPlaying) setState(() => _isPlaying = false);
   }
 
   // ── coordinate helpers ────────────────────────────────────────────────────
@@ -329,6 +445,16 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
         centerTitle: true,
         actions: [
           IconButton(
+            icon: Icon(
+              _isSequenceMode ? Icons.movie : Icons.movie_outlined,
+              color: _isSequenceMode
+                  ? Theme.of(context).colorScheme.primary
+                  : null,
+            ),
+            tooltip: l10n.sequenceMode,
+            onPressed: _isSequenceMode ? _exitSequenceMode : _enterSequenceMode,
+          ),
+          IconButton(
             icon: const Icon(Icons.help_outline),
             tooltip: l10n.help,
             onPressed: () => TacticalBoardHelpDialog.show(context),
@@ -357,20 +483,24 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
                                 courtColor: Color(0xFF1B5E20),
                               ),
                             ),
-                            RawGestureDetector(
-                              behavior: HitTestBehavior.opaque,
-                              gestures: {
-                                LongPressGestureRecognizer: _longPressFactory(),
-                                PanGestureRecognizer: _panFactory(),
-                              },
-                              child: CustomPaint(
-                                size: Size.infinite,
-                                painter: BoardPainter(
-                                  elements: _elements,
-                                  currentStroke: _currentStroke,
-                                  arrowPreviewStart: _arrowStart,
-                                  arrowPreviewEnd: _arrowCurrent,
-                                  previewColor: _color,
+                            AbsorbPointer(
+                              absorbing: _isPlaying,
+                              child: RawGestureDetector(
+                                behavior: HitTestBehavior.opaque,
+                                gestures: {
+                                  LongPressGestureRecognizer:
+                                      _longPressFactory(),
+                                  PanGestureRecognizer: _panFactory(),
+                                },
+                                child: CustomPaint(
+                                  size: Size.infinite,
+                                  painter: BoardPainter(
+                                    elements: _elements,
+                                    currentStroke: _currentStroke,
+                                    arrowPreviewStart: _arrowStart,
+                                    arrowPreviewEnd: _arrowCurrent,
+                                    previewColor: _color,
+                                  ),
                                 ),
                               ),
                             ),
@@ -392,10 +522,22 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
                 ),
               ),
             ),
+            if (_isSequenceMode)
+              SequenceBar(
+                frameCount: _sequence.length,
+                loadedFrameIndex: _loadedFrameIndex,
+                isPlaying: _isPlaying,
+                onAddStep: _addStep,
+                onPlay: _startPlayback,
+                onStop: _stopPlayback,
+                onSelectFrame: _loadFrame,
+                onExit: _exitSequenceMode,
+              ),
             BoardToolbar(
               activeTool: _tool,
               activeColor: _color,
               canUndo: _history.isNotEmpty,
+              canRedo: _redoStack.isNotEmpty,
               strokeColors: _strokeColors,
               onToolSelected: (tool) => setState(() {
                 _tool = tool;
@@ -404,6 +546,7 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
               }),
               onColorSelected: (color) => setState(() => _color = color),
               onUndo: _undo,
+              onRedo: _redo,
               onClear: _clearBoard,
             ),
           ],

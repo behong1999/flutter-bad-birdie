@@ -7,10 +7,12 @@ class BoardToolbar extends StatelessWidget {
     required this.activeTool,
     required this.activeColor,
     required this.canUndo,
+    required this.canRedo,
     required this.strokeColors,
     required this.onToolSelected,
     required this.onColorSelected,
     required this.onUndo,
+    required this.onRedo,
     required this.onClear,
     super.key,
   });
@@ -18,10 +20,12 @@ class BoardToolbar extends StatelessWidget {
   final DrawTool activeTool;
   final Color activeColor;
   final bool canUndo;
+  final bool canRedo;
   final List<Color> strokeColors;
   final ValueChanged<DrawTool> onToolSelected;
   final ValueChanged<Color> onColorSelected;
   final VoidCallback onUndo;
+  final VoidCallback onRedo;
   final VoidCallback onClear;
 
   static const _buttonConstraints = BoxConstraints(minWidth: 40, minHeight: 40);
@@ -101,6 +105,14 @@ class BoardToolbar extends StatelessWidget {
                 icon: const Icon(Icons.undo),
                 tooltip: l10n.undoLabel,
                 onPressed: canUndo ? onUndo : null,
+              ),
+              IconButton(
+                constraints: _buttonConstraints,
+                padding: _buttonPadding,
+                iconSize: _iconSize,
+                icon: const Icon(Icons.redo),
+                tooltip: l10n.redoLabel,
+                onPressed: canRedo ? onRedo : null,
               ),
               IconButton(
                 constraints: _buttonConstraints,

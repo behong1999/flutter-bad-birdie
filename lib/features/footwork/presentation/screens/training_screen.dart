@@ -4,9 +4,9 @@ import 'dart:math';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import '../../../../core/extensions/l10n_extension.dart';
-import '../../data/training_speech_service.dart';
 import '../../../../core/layout/floating_pane.dart';
 import '../../../../core/layout/responsive_breakpoint.dart';
+import '../../data/training_speech_service.dart';
 import '../../domain/enums/direction.dart';
 import '../../domain/enums/shot_type.dart';
 import '../widgets/direction_flow_pad.dart';
@@ -98,7 +98,7 @@ class _TrainingScreenState extends State<TrainingScreen> {
   Widget build(BuildContext context) {
     final completed = _currentShot >= _totalShots && _totalShots > 0;
     final useTwoPane = context.isTabletOrDesktop && !_isFullscreen;
-    final padding = context.responsiveValue(
+    final padding = context.responsiveValue<double>(
       phone: 16,
       tablet: 20,
       desktop: 24,
@@ -244,9 +244,9 @@ class _TrainingScreenState extends State<TrainingScreen> {
         child: Text(
           context.l10n.trainingCompletedLabel,
           textAlign: TextAlign.center,
-          style: Theme.of(context).textTheme.headlineSmall?.copyWith(
-            fontWeight: FontWeight.bold,
-          ),
+          style: Theme.of(
+            context,
+          ).textTheme.headlineSmall?.copyWith(fontWeight: FontWeight.bold),
         ),
       );
     }
@@ -268,37 +268,37 @@ class _TrainingScreenState extends State<TrainingScreen> {
               mainAxisAlignment: MainAxisAlignment.center,
               mainAxisSize: MainAxisSize.min,
               children: [
-                  if (_isStarting) ...[
-                    Text(
-                      context.l10n.trainingStartingSoon,
-                      textAlign: TextAlign.center,
-                      style: Theme.of(context).textTheme.titleLarge?.copyWith(
-                        fontWeight: FontWeight.w700,
+                if (_isStarting) ...[
+                  Text(
+                    context.l10n.trainingStartingSoon,
+                    textAlign: TextAlign.center,
+                    style: Theme.of(context).textTheme.titleLarge?.copyWith(
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  AnimatedSwitcher(
+                    duration: const Duration(milliseconds: 220),
+                    child: Text(
+                      '$_startCountdown',
+                      key: ValueKey(_startCountdown),
+                      style: Theme.of(context).textTheme.displayLarge?.copyWith(
+                        fontWeight: FontWeight.bold,
+                        color: Theme.of(context).colorScheme.primary,
                       ),
                     ),
-                    const SizedBox(height: 8),
-                    AnimatedSwitcher(
-                      duration: const Duration(milliseconds: 220),
-                      child: Text(
-                        '$_startCountdown',
-                        key: ValueKey(_startCountdown),
-                        style: Theme.of(context).textTheme.displayLarge?.copyWith(
-                          fontWeight: FontWeight.bold,
-                          color: Theme.of(context).colorScheme.primary,
-                        ),
-                      ),
-                    ),
-                  ] else ...[
-                    DirectionFlowPad(
-                      activeCue: _cueForCorner(_currentCorner),
-                      currentShot: _currentShot,
-                      pulseIn: _pulseIn,
-                      maxSize: maxPadSize,
-                    ),
-                    const SizedBox(height: 12),
-                    _buildShotNameLabel(context),
-                  ],
+                  ),
+                ] else ...[
+                  DirectionFlowPad(
+                    activeCue: _cueForCorner(_currentCorner),
+                    currentShot: _currentShot,
+                    pulseIn: _pulseIn,
+                    maxSize: maxPadSize,
+                  ),
+                  const SizedBox(height: 12),
+                  _buildShotNameLabel(context),
                 ],
+              ],
             ),
           ),
         );

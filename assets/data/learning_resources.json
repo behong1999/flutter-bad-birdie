@@ -1,0 +1,76 @@
+{
+  "resources": [
+    {
+      "title": "Shuttle Life",
+      "url": "https://www.youtube.com/@ShuttleLife",
+      "descriptions": {
+        "en": "Step-by-step technique breakdowns for all skill levels.",
+        "de": "Schritt-für-Schritt Technikanalysen für alle Spielstärken.",
+        "vi": "Phân tích kỹ thuật từng bước cho mọi trình độ."
+      }
+    },
+    {
+      "title": "Tobias Wadenka",
+      "url": "https://www.youtube.com/@tobiaswadenka8435",
+      "descriptions": {
+        "en": "Technical and tactical tutorials from a professional coach and former international player.",
+        "de": "Technik- und Taktiktutorials von einem Profitrainer und ehemaligen Nationalspieler.",
+        "vi": "Hướng dẫn kỹ thuật và chiến thuật từ HLV chuyên nghiệp và cựu tuyển thủ quốc tế."
+      }
+    },
+    {
+      "title": "Badminton Insight",
+      "url": "https://www.youtube.com/@BadmintonInsight",
+      "descriptions": {
+        "en": "Tactical coaching from Greg and Jenny Mairs, former world-ranked professional players.",
+        "de": "Taktikcoaching von Greg und Jenny Mairs, ehemaligen Weltranglisten-Profis.",
+        "vi": "Huấn luyện chiến thuật từ Greg và Jenny Mairs, cựu vận động viên chuyên nghiệp."
+      }
+    },
+    {
+      "title": "Badminton Famly",
+      "url": "https://www.youtube.com/@BadmintonFamly",
+      "descriptions": {
+        "en": "Coaching by Thomas Laybourn — former World Champion, 2× European Gold medallist, and full-time professional coach in Denmark.",
+        "de": "Coaching von Thomas Laybourn — ehemaliger Weltmeister, 2× Europameister und hauptberuflicher Profitrainer in Dänemark.",
+        "vi": "Huấn luyện bởi Thomas Laybourn — cựu vô địch thế giới, 2× huy chương vàng châu Âu và HLV chuyên nghiệp toàn thời gian tại Đan Mạch."
+      }
+    },
+    {
+      "title": "Ding Ding Badminton",
+      "url": "https://www.youtube.com/@dingdingbadminton777",
+      "descriptions": {
+        "en": "Close-up match footage — one of the best views of professional rallies you will find.",
+        "de": "Nahaufnahmen von Matches — einer der besten Blickwinkel auf professionelle Ballwechsel.",
+        "vi": "Quay cận cảnh các trận đấu — góc nhìn tuyệt vời về các pha đấu chuyên nghiệp."
+      }
+    },
+    {
+      "title": "Đỗ Tuấn Đức",
+      "url": "https://www.youtube.com/@DoTuanDucChannel",
+      "descriptions": {
+        "en": "Official channel of Vietnamese professional player Đỗ Tuấn Đức — sharing badminton knowledge for all levels.",
+        "de": "Offizieller Kanal des vietnamesischen Profispielers Đỗ Tuấn Đức — Badmintonwissen für alle Levels.",
+        "vi": "Kênh chính thức của vận động viên Đỗ Tuấn Đức — chia sẻ kiến thức cầu lông cho mọi người."
+      }
+    },
+    {
+      "title": "Zheng Siwei",
+      "url": "https://www.youtube.com/@Zhengsiwei0226",
+      "descriptions": {
+        "en": "Personal diary channel from world number one Zheng Siwei — training, match analysis, and life as a professional.",
+        "de": "Persönlicher Tagebuch-Kanal von Weltranglistenerster Zheng Siwei — Training, Matchanalyse und das Leben als Profi.",
+        "vi": "Kênh nhật ký cá nhân của tay vợt số 1 thế giới Zheng Siwei — tập luyện, phân tích trận đấu và cuộc sống của một VĐV chuyên nghiệp."
+      }
+    },
+    {
+      "title": "Wonderplay",
+      "url": "https://www.youtube.com/@Wonderplay",
+      "descriptions": {
+        "en": "Unique badminton content with Korean legend Lee Yong Dae — unlike anything else in the world.",
+        "de": "Einzigartiger Badminton-Content mit der koreanischen Legende Lee Yong Dae.",
+        "vi": "Nội dung cầu lông độc đáo cùng huyền thoại Hàn Quốc Lee Yong Dae — không nơi nào trên thế giới có."
+      }
+    }
+  ]
+}

@@ -4,6 +4,7 @@ import '../../../../core/extensions/navigator_extension.dart';
 import '../../../../core/layout/responsive_breakpoint.dart';
 import '../../../../core/layout/responsive_center.dart';
 import '../../../footwork/presentation/screens/setup_screen.dart';
+import '../../../learning_hub/presentation/screens/learning_hub_screen.dart';
 import '../../../settings/presentation/screens/settings_screen.dart';
 import '../../../tactical_board/presentation/screens/tactical_board_screen.dart';
 
@@ -103,7 +104,7 @@ class HomeScreen extends StatelessWidget {
                   title: context.l10n.learningHub,
                   description: context.l10n.learningDescription,
                   color: Theme.of(context).colorScheme.tertiary,
-                  comingSoon: true,
+                  onTap: () => context.push<void>(const LearningHubScreen()),
                 ),
               ],
             ),
@@ -207,10 +208,7 @@ class _FeatureGrid extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     if (context.isPhoneWidth) {
-      return Column(
-        spacing: 12,
-        children: children,
-      );
+      return Column(spacing: 12, children: children);
     }
 
     return LayoutBuilder(

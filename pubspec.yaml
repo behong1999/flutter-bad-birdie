@@ -36,6 +36,7 @@ flutter:
     - assets/sounds/shots/de/
     - assets/sounds/shots/vi/
     - assets/images/
+    - assets/data/
 
 flutter_launcher_icons:
   android: true

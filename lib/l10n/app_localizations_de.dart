@@ -349,6 +349,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get undoLabel => 'Rückgängig';
 
   @override
+  String get redoLabel => 'Wiederholen';
+
+  @override
   String get clearBoard => 'Standard wiederherstellen';
 
   @override
@@ -392,4 +395,51 @@ class AppLocalizationsDe extends AppLocalizations {
   @override
   String get tacticalBoardHelpClear =>
       'Setzt Spielermarkierungen auf ihre Standardpositionen zurück und entfernt alle Zeichnungen.';
+
+  @override
+  String get tacticalBoardHelpSequence =>
+      'Zeichne Brettstellungen als nummerierte Schritte auf und spiele sie als Animation ab. Das aktuelle Brett wird beim Öffnen des Sequenzmodus automatisch als Schritt 1 gespeichert. Tippe auf Schritt hinzufügen, um weitere Stellungen aufzuzeichnen. Tippe auf ein Schritt-Chip, um es zu laden. Drücke Abspielen, um alle Schritte zu animieren.';
+
+  @override
+  String get learningHubTitle => 'Lern-Hub';
+
+  @override
+  String get categoryCoaching => 'Coaching';
+
+  @override
+  String get categoryTactics => 'Taktik';
+
+  @override
+  String get categoryFitness => 'Fitness';
+
+  @override
+  String get categoryProMatches => 'Profi-Spiele';
+
+  @override
+  String get openLink => 'Öffnen';
+
+  @override
+  String get sequenceMode => 'Sequenz';
+
+  @override
+  String get addStep => 'Schritt hinzufügen';
+
+  @override
+  String get playSequence => 'Abspielen';
+
+  @override
+  String get stopSequence => 'Stopp';
+
+  @override
+  String stepLabel(int n) {
+    return 'Schritt $n';
+  }
+
+  @override
+  String get sequenceEmpty =>
+      'Zeichne etwas, dann tippe auf Schritt hinzufügen, um einen Frame aufzunehmen.';
+
+  @override
+  String get sequenceExitConfirm =>
+      'Sequenzmodus beenden? Alle aufgezeichneten Schritte werden verworfen.';
 }

@@ -99,6 +99,7 @@
   "singlesLabel": "Einzel",
   "doublesLabel": "Doppel",
   "undoLabel": "Rückgängig",
+  "redoLabel": "Wiederholen",
   "clearBoard": "Standard wiederherstellen",
   "renamePlayerTitle": "Spieler umbenennen",
   "toolPencil": "Stift",
@@ -111,5 +112,19 @@
   "tacticalBoardHelpColorsTitle": "Farben",
   "tacticalBoardHelpColors": "Farbe für Stift- und Pfeilwerkzeug wählen.",
   "tacticalBoardHelpUndo": "Letzte Zeichnung oder Markierungsänderung rückgängig machen.",
-  "tacticalBoardHelpClear": "Setzt Spielermarkierungen auf ihre Standardpositionen zurück und entfernt alle Zeichnungen."
+  "tacticalBoardHelpClear": "Setzt Spielermarkierungen auf ihre Standardpositionen zurück und entfernt alle Zeichnungen.",
+  "tacticalBoardHelpSequence": "Zeichne Brettstellungen als nummerierte Schritte auf und spiele sie als Animation ab. Das aktuelle Brett wird beim Öffnen des Sequenzmodus automatisch als Schritt 1 gespeichert. Tippe auf Schritt hinzufügen, um weitere Stellungen aufzuzeichnen. Tippe auf ein Schritt-Chip, um es zu laden. Drücke Abspielen, um alle Schritte zu animieren.",
+  "learningHubTitle": "Lern-Hub",
+  "categoryCoaching": "Coaching",
+  "categoryTactics": "Taktik",
+  "categoryFitness": "Fitness",
+  "categoryProMatches": "Profi-Spiele",
+  "openLink": "Öffnen",
+  "sequenceMode": "Sequenz",
+  "addStep": "Schritt hinzufügen",
+  "playSequence": "Abspielen",
+  "stopSequence": "Stopp",
+  "stepLabel": "Schritt {n}",
+  "sequenceEmpty": "Zeichne etwas, dann tippe auf Schritt hinzufügen, um einen Frame aufzunehmen.",
+  "sequenceExitConfirm": "Sequenzmodus beenden? Alle aufgezeichneten Schritte werden verworfen."
 }

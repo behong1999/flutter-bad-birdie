@@ -33,11 +33,8 @@ extension ResponsiveContext on BuildContext {
   }
 
   /// Grid column count from breakpoint. Override per layout when needed.
-  int responsiveColumns({
-    int phone = 1,
-    int tablet = 2,
-    int desktop = 2,
-  }) => responsiveValue(phone: phone, tablet: tablet, desktop: desktop);
+  int responsiveColumns({int phone = 1, int tablet = 2, int desktop = 2}) =>
+      responsiveValue(phone: phone, tablet: tablet, desktop: desktop);
 }
 
 /// Computes a fluid size from available space.

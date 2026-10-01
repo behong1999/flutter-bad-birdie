@@ -347,6 +347,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get undoLabel => 'Undo';
 
   @override
+  String get redoLabel => 'Redo';
+
+  @override
   String get clearBoard => 'Reset to default';
 
   @override
@@ -389,4 +392,51 @@ class AppLocalizationsEn extends AppLocalizations {
   @override
   String get tacticalBoardHelpClear =>
       'Reset player markers to their default positions and remove all drawings.';
+
+  @override
+  String get tacticalBoardHelpSequence =>
+      'Record board positions as numbered steps and play them back as an animation. The current board is saved as Step 1 when you enter sequence mode. Tap Add Step to save each new position. Tap a step chip to load it. Press Play to animate through all steps.';
+
+  @override
+  String get learningHubTitle => 'Learning Hub';
+
+  @override
+  String get categoryCoaching => 'Coaching';
+
+  @override
+  String get categoryTactics => 'Tactics';
+
+  @override
+  String get categoryFitness => 'Fitness';
+
+  @override
+  String get categoryProMatches => 'Pro Matches';
+
+  @override
+  String get openLink => 'Open';
+
+  @override
+  String get sequenceMode => 'Sequence';
+
+  @override
+  String get addStep => 'Add Step';
+
+  @override
+  String get playSequence => 'Play';
+
+  @override
+  String get stopSequence => 'Stop';
+
+  @override
+  String stepLabel(int n) {
+    return 'Step $n';
+  }
+
+  @override
+  String get sequenceEmpty =>
+      'Draw something, then tap Add Step to record a frame.';
+
+  @override
+  String get sequenceExitConfirm =>
+      'Exit sequence mode? All recorded steps will be discarded.';
 }

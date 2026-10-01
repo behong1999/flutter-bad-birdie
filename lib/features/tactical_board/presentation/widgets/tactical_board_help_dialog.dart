@@ -58,6 +58,11 @@ class TacticalBoardHelpDialog extends StatelessWidget {
               title: l10n.clearBoard,
               body: l10n.tacticalBoardHelpClear,
             ),
+            _HelpRow(
+              icon: Icons.movie_outlined,
+              title: l10n.sequenceMode,
+              body: l10n.tacticalBoardHelpSequence,
+            ),
           ],
         ),
       ),
