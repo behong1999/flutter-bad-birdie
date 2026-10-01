@@ -25,12 +25,12 @@ class AppTheme {
         surface: surfaceColor,
         error: errorColor,
       ),
-      textTheme: GoogleFonts.poppinsTextTheme(),
+      textTheme: GoogleFonts.beVietnamProTextTheme(),
       appBarTheme: AppBarTheme(
         backgroundColor: primaryColor,
         foregroundColor: Colors.white,
         elevation: 0,
-        titleTextStyle: GoogleFonts.poppins(
+        titleTextStyle: GoogleFonts.beVietnamPro(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: Colors.white,
@@ -44,7 +44,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: GoogleFonts.poppins(
+          textStyle: GoogleFonts.beVietnamPro(
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
@@ -76,12 +76,12 @@ class AppTheme {
         surface: darkSurfaceColor,
         error: errorColor,
       ),
-      textTheme: GoogleFonts.poppinsTextTheme(ThemeData.dark().textTheme),
+      textTheme: GoogleFonts.beVietnamProTextTheme(ThemeData.dark().textTheme),
       appBarTheme: AppBarTheme(
         backgroundColor: darkSurfaceColor,
         foregroundColor: Colors.white,
         elevation: 0,
-        titleTextStyle: GoogleFonts.poppins(
+        titleTextStyle: GoogleFonts.beVietnamPro(
           fontSize: 20,
           fontWeight: FontWeight.w600,
           color: Colors.white,
@@ -95,7 +95,7 @@ class AppTheme {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(12),
           ),
-          textStyle: GoogleFonts.poppins(
+          textStyle: GoogleFonts.beVietnamPro(
             fontSize: 16,
             fontWeight: FontWeight.w600,
           ),
