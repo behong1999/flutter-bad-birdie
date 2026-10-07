@@ -33,6 +33,7 @@ class BoardPainter extends CustomPainter {
         ):
           _paintArrow(canvas, size, start, end, color, strokeWidth);
         case PlayerMarker():
+        case ShuttleMarker():
           break;
       }
     }

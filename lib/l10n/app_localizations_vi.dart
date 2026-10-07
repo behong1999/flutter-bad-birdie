@@ -361,6 +361,9 @@ class AppLocalizationsVi extends AppLocalizations {
   String get toolArrow => 'Mũi tên';
 
   @override
+  String get toolShuttle => 'Cầu';
+
+  @override
   String get toolMarker => 'Thêm người chơi';
 
   @override

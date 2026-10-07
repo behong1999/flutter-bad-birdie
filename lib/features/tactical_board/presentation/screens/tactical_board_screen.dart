@@ -85,6 +85,7 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
   Offset? _arrowStart;
   Offset? _arrowCurrent;
   String? _draggingMarkerId;
+  bool _draggingShuttle = false;
   Offset? _lastDragNorm;
 
   var _tool = DrawTool.pencil;
@@ -93,6 +94,9 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
 
   List<PlayerMarker> get _markers =>
       _elements.whereType<PlayerMarker>().toList();
+
+  ShuttleMarker? get _shuttle =>
+      _elements.whereType<ShuttleMarker>().firstOrNull;
 
   // ── history ───────────────────────────────────────────────────────────────
 
@@ -205,6 +209,11 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
     setState(() {
       _sequence.add(List.of(_elements));
       _loadedFrameIndex = _sequence.length - 1;
+      _elements = _elements
+          .where((e) => e is PlayerMarker || e is ShuttleMarker)
+          .toList();
+      _history.clear();
+      _redoStack.clear();
     });
   }
 
@@ -263,11 +272,30 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
     return null;
   }
 
+  bool _shuttleHit(Offset localPos) {
+    final s = _shuttle;
+    if (s == null) return false;
+    final center = Offset(
+      s.position.dx * _courtSize.width,
+      s.position.dy * _courtSize.height,
+    );
+    return (center - localPos).distance <= _markerHitRadius;
+  }
+
   // ── gestures ──────────────────────────────────────────────────────────────
 
   void _onPanStart(DragStartDetails d) {
     final local = d.localPosition;
     final norm = _normalize(local);
+
+    if (_shuttleHit(local)) {
+      _saveHistory();
+      setState(() {
+        _draggingShuttle = true;
+        _lastDragNorm = norm;
+      });
+      return;
+    }
 
     final hit = _markerAt(local);
     if (hit != null) {
@@ -294,11 +322,31 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
           _arrowStart = norm;
           _arrowCurrent = norm;
         });
+      case DrawTool.shuttle:
+        _saveHistory();
+        setState(() {
+          _elements = [
+            ..._elements.where((e) => e is! ShuttleMarker),
+            ShuttleMarker(position: norm),
+          ];
+          _draggingShuttle = true;
+          _lastDragNorm = norm;
+        });
     }
   }
 
   void _onPanUpdate(DragUpdateDetails d) {
     final norm = _normalize(d.localPosition);
+
+    if (_draggingShuttle) {
+      setState(() {
+        _lastDragNorm = norm;
+        _elements = _elements
+            .map((e) => e is ShuttleMarker ? e.copyWith(position: norm) : e)
+            .toList();
+      });
+      return;
+    }
 
     if (_draggingMarkerId != null) {
       final delta = norm - (_lastDragNorm ?? norm);
@@ -330,10 +378,20 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
         );
       case DrawTool.arrow:
         if (_arrowStart != null) setState(() => _arrowCurrent = norm);
+      case DrawTool.shuttle:
+        break;
     }
   }
 
   void _onPanEnd(DragEndDetails _) {
+    if (_draggingShuttle) {
+      setState(() {
+        _draggingShuttle = false;
+        _lastDragNorm = null;
+      });
+      return;
+    }
+
     if (_draggingMarkerId != null) {
       setState(() {
         _draggingMarkerId = null;
@@ -387,6 +445,8 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
           _arrowStart = null;
           _arrowCurrent = null;
         });
+      case DrawTool.shuttle:
+        break;
     }
   }
 
@@ -429,6 +489,25 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
           ..onStart = _onPanStart
           ..onUpdate = _onPanUpdate
           ..onEnd = _onPanEnd;
+      },
+    );
+  }
+
+  GestureRecognizerFactoryWithHandlers<TapGestureRecognizer> _tapFactory() {
+    return GestureRecognizerFactoryWithHandlers<TapGestureRecognizer>(
+      TapGestureRecognizer.new,
+      (recognizer) {
+        recognizer.onTapUp = (details) {
+          if (_tool != DrawTool.shuttle) return;
+          final norm = _normalize(details.localPosition);
+          _saveHistory();
+          setState(() {
+            _elements = [
+              ..._elements.where((e) => e is! ShuttleMarker),
+              ShuttleMarker(position: norm),
+            ];
+          });
+        };
       },
     );
   }
@@ -490,6 +569,7 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
                                 gestures: {
                                   LongPressGestureRecognizer:
                                       _longPressFactory(),
+                                  TapGestureRecognizer: _tapFactory(),
                                   PanGestureRecognizer: _panFactory(),
                                 },
                                 child: CustomPaint(
@@ -514,6 +594,12 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
                                 child: _MarkerToken(marker: marker, radius: r),
                               );
                             }),
+                            if (_shuttle case final s?)
+                              Positioned(
+                                left: s.position.dx * _courtSize.width - 18,
+                                top: s.position.dy * _courtSize.height - 18,
+                                child: const _ShuttleToken(),
+                              ),
                           ],
                         );
                       },
@@ -550,6 +636,38 @@ class _TacticalBoardScreenState extends State<TacticalBoardScreen> {
               onClear: _clearBoard,
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+class _ShuttleToken extends StatelessWidget {
+  const _ShuttleToken();
+
+  @override
+  Widget build(BuildContext context) {
+    return IgnorePointer(
+      child: Container(
+        width: 36,
+        height: 36,
+        decoration: BoxDecoration(
+          shape: BoxShape.circle,
+          color: Colors.white.withValues(alpha: 0.95),
+          border: Border.all(color: const Color(0xFFFFC107), width: 2.5),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black45,
+              blurRadius: 5,
+              offset: Offset(1, 2),
+            ),
+          ],
+        ),
+        alignment: Alignment.center,
+        child: Image.asset(
+          'assets/images/shuttlecock.png',
+          width: 22,
+          height: 22,
         ),
       ),
     );

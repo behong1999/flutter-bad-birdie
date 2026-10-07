@@ -53,3 +53,12 @@ final class PlayerMarker extends BoardElement {
     color: color,
   );
 }
+
+final class ShuttleMarker extends BoardElement {
+  const ShuttleMarker({required this.position});
+
+  final Offset position;
+
+  ShuttleMarker copyWith({Offset? position}) =>
+      ShuttleMarker(position: position ?? this.position);
+}

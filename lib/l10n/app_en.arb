@@ -457,6 +457,10 @@
   "@toolArrow": {
     "description": "Arrow drawing tool"
   },
+  "toolShuttle": "Shuttle",
+  "@toolShuttle": {
+    "description": "Shuttle placement tool"
+  },
   "toolMarker": "Add player",
   "@toolMarker": {
     "description": "Player marker placement tool"

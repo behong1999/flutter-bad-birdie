@@ -35,6 +35,7 @@ class BoardToolbar extends StatelessWidget {
   String _toolTooltip(DrawTool tool, AppLocalizations l10n) => switch (tool) {
     DrawTool.pencil => l10n.toolPencil,
     DrawTool.arrow => l10n.toolArrow,
+    DrawTool.shuttle => l10n.toolShuttle,
   };
 
   @override
@@ -57,7 +58,11 @@ class BoardToolbar extends StatelessWidget {
                   constraints: _buttonConstraints,
                   padding: _buttonPadding,
                   iconSize: _iconSize,
-                  icon: Icon(tool.icon),
+                  icon: tool == DrawTool.shuttle
+                      ? const ImageIcon(
+                          AssetImage('assets/images/shuttlecock.png'),
+                        )
+                      : Icon(tool.icon),
                   color: active ? cs.primary : cs.onSurfaceVariant,
                   style: active
                       ? IconButton.styleFrom(

@@ -724,6 +724,12 @@ abstract class AppLocalizations {
   /// **'Arrow'**
   String get toolArrow;
 
+  /// Shuttle placement tool
+  ///
+  /// In en, this message translates to:
+  /// **'Shuttle'**
+  String get toolShuttle;
+
   /// Player marker placement tool
   ///
   /// In en, this message translates to:

@@ -364,6 +364,9 @@ class AppLocalizationsDe extends AppLocalizations {
   String get toolArrow => 'Pfeil';
 
   @override
+  String get toolShuttle => 'Federball';
+
+  @override
   String get toolMarker => 'Spieler hinzufügen';
 
   @override

@@ -362,6 +362,9 @@ class AppLocalizationsEn extends AppLocalizations {
   String get toolArrow => 'Arrow';
 
   @override
+  String get toolShuttle => 'Shuttle';
+
+  @override
   String get toolMarker => 'Add player';
 
   @override
