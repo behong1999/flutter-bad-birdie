@@ -127,5 +127,6 @@
   "tacticalBoardHelpColors": "Chạm màu để chọn màu nét cho bút và mũi tên.",
   "tacticalBoardHelpUndo": "Hoàn tác thao tác vẽ hoặc thay đổi điểm đánh dấu gần nhất.",
   "tacticalBoardHelpClear": "Đặt lại vị trí mặc định của người chơi và xóa mọi nét vẽ.",
-  "tacticalBoardHelpSequence": "Ghi lại các vị trí bảng thành các bước đánh số và phát lại chúng dưới dạng hoạt ảnh. Bảng hiện tại được lưu tự động là Bước 1 khi vào chế độ trình tự. Nhấn Thêm bước để lưu các vị trí tiếp theo. Nhấn vào thẻ bước để tải lại. Nhấn Phát để xem hoạt ảnh."
+  "tacticalBoardHelpSequence": "Nhấn biểu tượng phim để vào chế độ trình tự. Bảng hiện tại được lưu tự động là Bước 1. Vẽ mũi tên hoặc đường để minh họa nước đi tiếp theo, rồi nhấn Thêm bước — điểm đánh dấu và cầu giữ nguyên vị trí, tất cả nét vẽ được xóa để bạn vẽ lại cho bước mới. Nhấn vào thẻ bước để tải vị trí đó. Nhấn Phát để xem hoạt ảnh. Nhấn × để thoát.",
+  "tacticalBoardHelpShuttle": "Chọn công cụ cầu và nhấn vào bất kỳ vị trí nào trên sân để đặt cầu. Kéo để di chuyển. Cầu giữ nguyên vị trí khi bạn thêm bước mới."
 }

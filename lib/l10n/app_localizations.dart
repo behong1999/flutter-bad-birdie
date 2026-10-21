@@ -787,8 +787,14 @@ abstract class AppLocalizations {
   /// Help text for sequence mode
   ///
   /// In en, this message translates to:
-  /// **'Record board positions as numbered steps and play them back as an animation. The current board is saved as Step 1 when you enter sequence mode. Tap Add Step to save each new position. Tap a step chip to load it. Press Play to animate through all steps.'**
+  /// **'Tap the movie icon to enter sequence mode. The current board is saved as Step 1. Draw arrows or lines to show the next move, then tap Add Step — markers and shuttle keep their positions, all drawings are cleared so you can draw the next move cleanly. Tap a step chip to load that position. Press Play to animate through all steps. Tap × to exit.'**
   String get tacticalBoardHelpSequence;
+
+  /// Help text for the shuttle placement tool
+  ///
+  /// In en, this message translates to:
+  /// **'Select the shuttle tool and tap anywhere on the court to place the shuttlecock. Drag it to reposition. The shuttle stays in place when you add a sequence step.'**
+  String get tacticalBoardHelpShuttle;
 
   /// Learning hub screen title
   ///

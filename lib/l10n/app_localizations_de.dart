@@ -401,7 +401,11 @@ class AppLocalizationsDe extends AppLocalizations {
 
   @override
   String get tacticalBoardHelpSequence =>
-      'Zeichne Brettstellungen als nummerierte Schritte auf und spiele sie als Animation ab. Das aktuelle Brett wird beim Öffnen des Sequenzmodus automatisch als Schritt 1 gespeichert. Tippe auf Schritt hinzufügen, um weitere Stellungen aufzuzeichnen. Tippe auf ein Schritt-Chip, um es zu laden. Drücke Abspielen, um alle Schritte zu animieren.';
+      'Tippe auf das Film-Symbol, um den Sequenzmodus zu öffnen. Das aktuelle Brett wird automatisch als Schritt 1 gespeichert. Zeichne Pfeile oder Linien für den nächsten Zug, dann tippe auf Schritt hinzufügen — Markierungen und Federball bleiben an ihrer Position, alle Zeichnungen werden gelöscht. Tippe auf einen Schritt-Chip, um ihn zu laden. Drücke Abspielen, um alle Schritte zu animieren. Tippe × zum Beenden.';
+
+  @override
+  String get tacticalBoardHelpShuttle =>
+      'Wähle das Federball-Werkzeug und tippe auf eine beliebige Stelle auf dem Feld, um den Federball zu platzieren. Ziehen zum Verschieben. Der Federball bleibt beim Hinzufügen eines Schritts an seiner Position.';
 
   @override
   String get learningHubTitle => 'Lern-Hub';

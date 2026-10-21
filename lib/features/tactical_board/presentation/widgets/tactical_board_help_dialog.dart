@@ -29,37 +29,44 @@ class TacticalBoardHelpDialog extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             _HelpRow(
-              icon: Icons.person_pin_circle_outlined,
+              icon: const Icon(Icons.person_pin_circle_outlined),
               title: l10n.tacticalBoardHelpMarkersTitle,
               body: l10n.tacticalBoardHelpMarkers,
             ),
             _HelpRow(
-              icon: DrawTool.pencil.icon,
+              icon: Icon(DrawTool.pencil.icon),
               title: l10n.toolPencil,
               body: l10n.tacticalBoardHelpPencil,
             ),
             _HelpRow(
-              icon: DrawTool.arrow.icon,
+              icon: Icon(DrawTool.arrow.icon),
               title: l10n.toolArrow,
               body: l10n.tacticalBoardHelpArrow,
             ),
             _HelpRow(
-              icon: Icons.palette_outlined,
+              icon: const ImageIcon(
+                AssetImage('assets/images/shuttlecock.png'),
+              ),
+              title: l10n.toolShuttle,
+              body: l10n.tacticalBoardHelpShuttle,
+            ),
+            _HelpRow(
+              icon: const Icon(Icons.palette_outlined),
               title: l10n.tacticalBoardHelpColorsTitle,
               body: l10n.tacticalBoardHelpColors,
             ),
             _HelpRow(
-              icon: Icons.undo,
+              icon: const Icon(Icons.undo),
               title: l10n.undoLabel,
               body: l10n.tacticalBoardHelpUndo,
             ),
             _HelpRow(
-              icon: Icons.delete_sweep_outlined,
+              icon: const Icon(Icons.delete_sweep_outlined),
               title: l10n.clearBoard,
               body: l10n.tacticalBoardHelpClear,
             ),
             _HelpRow(
-              icon: Icons.movie_outlined,
+              icon: const Icon(Icons.movie_outlined),
               title: l10n.sequenceMode,
               body: l10n.tacticalBoardHelpSequence,
             ),
@@ -79,7 +86,7 @@ class TacticalBoardHelpDialog extends StatelessWidget {
 class _HelpRow extends StatelessWidget {
   const _HelpRow({required this.icon, required this.title, required this.body});
 
-  final IconData icon;
+  final Widget icon;
   final String title;
   final String body;
 
@@ -93,7 +100,10 @@ class _HelpRow extends StatelessWidget {
       child: Row(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Icon(icon, size: 20, color: cs.primary),
+          IconTheme(
+            data: IconThemeData(size: 20, color: cs.primary),
+            child: icon,
+          ),
           const SizedBox(width: 12),
           Expanded(
             child: Column(
